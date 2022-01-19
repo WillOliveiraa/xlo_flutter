@@ -15,6 +15,15 @@ class AdEntity extends Equatable {
     required this.images,
   });
 
+  bool get isValidTitle => title.isNotEmpty;
+
+  bool get isValidDescription =>
+      description.isNotEmpty && description.length > 10;
+
+  bool get isValidPrice => price > 0;
+
+  bool get isValidImages => images.isNotEmpty;
+
   @override
   List<Object> get props => [images];
 }
