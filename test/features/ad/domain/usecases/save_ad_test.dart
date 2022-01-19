@@ -1,27 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:xlo_flutter/core/errors/failure.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
-
-abstract class SaveAdUseCase {
-  Future<Either<Failure, Unit>> call(AdEntity adEntity);
-}
-
-class SaveAdUseCaseImp implements SaveAdUseCase {
-  final SaveAdRespository _repository;
-
-  SaveAdUseCaseImp(this._repository);
-
-  @override
-  Future<Either<Failure, Unit>> call(AdEntity adEntity) async {
-    return await _repository.saveAd(adEntity);
-  }
-}
-
-abstract class SaveAdRespository {
-  Future<Either<Failure, Unit>> saveAd(AdEntity adEntity);
-}
+import 'package:xlo_flutter/features/ad/domain/errors/error_save_ad.dart';
+import 'package:xlo_flutter/features/ad/domain/repositories/save_ad_repository.dart';
+import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase_imp.dart';
 
 class SaveAdRepositoryMock extends Mock implements SaveAdRespository {}
 
@@ -42,5 +25,14 @@ void main() {
     final result = (await usecase(adEntity)).fold((l) => null, (r) => r);
 
     expect(result, unit);
+  });
+
+  test('should return a error', () async {
+    when(() => repository.saveAd(adEntity))
+        .thenAnswer((_) async => Left(ErrorSaveAd()));
+
+    final result = (await usecase(adEntity)).fold(id, id);
+
+    expect(result, isA<ErrorSaveAd>());
   });
 }
