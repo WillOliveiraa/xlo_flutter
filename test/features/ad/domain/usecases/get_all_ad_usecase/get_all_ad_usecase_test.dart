@@ -1,37 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:xlo_flutter/core/errors/failure.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
-
-abstract class GetAllAdsUseCase {
-  Future<Either<Failure, List<AdEntity>?>> call(String adId);
-}
-
-class GetAllAdsUseCaseImp implements GetAllAdsUseCase {
-  final GetAllAdsRepository _repository;
-
-  GetAllAdsUseCaseImp(this._repository);
-
-  @override
-  Future<Either<Failure, List<AdEntity>?>> call(String adId) async {
-    return await _repository.getAllAds(adId);
-  }
-}
-
-abstract class GetAllAdsRepository {
-  Future<Either<Failure, List<AdEntity>?>> getAllAds(String adId);
-}
+import 'package:xlo_flutter/features/ad/domain/errors/error_get_all_ads.dart';
+import 'package:xlo_flutter/features/ad/domain/repositories/get_all_ads_repository.dart';
+import 'package:xlo_flutter/features/ad/domain/usecases/get_all_ad_usecase/get_all_ad_usecase.dart';
 
 class GetAllAdsRepositoryMock extends Mock implements GetAllAdsRepository {}
-
-class ErrorGetAllAds extends Failure {
-  @override
-  String? get message => 'Ocorreu um erro ao tentar obter os anúncios';
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
-}
 
 void main() {
   final repository = GetAllAdsRepositoryMock();
@@ -44,22 +19,20 @@ void main() {
       images: [''],
     ),
   ];
-  final adId = 'adId';
 
   test('should get all ads', () async {
-    when(() => repository.getAllAds(adId))
-        .thenAnswer((_) async => Right(adList));
+    when(() => repository.getAllAds()).thenAnswer((_) async => Right(adList));
 
-    final result = (await usecase(adId)).fold((l) => null, (r) => r);
+    final result = (await usecase()).fold((l) => null, (r) => r);
 
     expect(result, isA<List<AdEntity>>());
   });
 
   test('should return a ErrorGetAllAds', () async {
-    when(() => repository.getAllAds(adId))
+    when(() => repository.getAllAds())
         .thenAnswer((_) async => Left(ErrorGetAllAds()));
 
-    final result = (await usecase(adId)).fold(id, id);
+    final result = (await usecase()).fold(id, id);
 
     expect(result, isA<ErrorGetAllAds>());
   });
