@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_save_ad.dart';
 import 'package:xlo_flutter/features/ad/domain/repositories/save_ad_repository.dart';
-import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase_imp.dart';
+import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 
 class SaveAdRepositoryMock extends Mock implements SaveAdRespository {}
 
@@ -27,7 +27,7 @@ void main() {
     expect(result, unit);
   });
 
-  test('should return a error', () async {
+  test('should return a ErrorSaveAd', () async {
     when(() => repository.saveAd(adEntity))
         .thenAnswer((_) async => Left(ErrorSaveAd()));
 
