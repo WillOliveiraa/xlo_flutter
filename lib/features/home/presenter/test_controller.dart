@@ -1,7 +1,6 @@
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_ad_usecase/get_all_ad_usecase.dart';
-
-import 'features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
+import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 
 class TestController {
   final SaveAdUseCaseImp _saveAdUseCase;

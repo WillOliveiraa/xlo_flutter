@@ -1,11 +1,10 @@
 import 'package:get_it/get_it.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_flutter/features/ad/data/datasources/get_all_ads_datasource.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/get_all_ads_repository_imp.dart';
 import 'package:xlo_flutter/features/ad/domain/repositories/get_all_ads_repository.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_ad_usecase/get_all_ad_usecase.dart';
 import 'package:xlo_flutter/features/ad/external/get_all_ads_datasource.dart';
-import 'package:xlo_flutter/test_controller.dart';
+import 'package:xlo_flutter/features/home/presenter/test_controller.dart';
 import 'package:xlo_flutter/features/ad/data/datasources/save_ad_datasource.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/save_ad_repository_imp.dart';
 import 'package:xlo_flutter/features/ad/domain/repositories/save_ad_repository.dart';
@@ -16,13 +15,6 @@ final i = GetIt.instance;
 
 class ContainerInjection {
   static void setup() {
-    Parse().initialize(
-      'dmsYAP5lUL3FwxpGVjPTC0JKkwS7lbcIIsNzVIUz',
-      'https://parseapi.back4app.com',
-      clientKey: 'nDoBf3jB1uQ2qdcDu72r5wuh7Xy4oxsN0UdSfC1Z',
-      autoSendSessionId: true,
-      debug: true,
-    );
     i.registerLazySingleton<SaveAdDatasource>(() => SaveAdDatasourceImp());
     i.registerLazySingleton<GetAllAdsDatasource>(
         () => GetAllAdsDatasourceImp());
