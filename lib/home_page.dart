@@ -17,7 +17,8 @@ class HomePage extends StatelessWidget {
         child: TextButton(
           child: Text('Test'),
           onPressed: () {
-            controller.saveAd();
+            // controller.saveAd();
+            controller.getAllAds();
           },
         ),
       ),
