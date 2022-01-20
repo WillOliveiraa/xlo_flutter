@@ -8,7 +8,7 @@ abstract class SaveAdUseCase {
 }
 
 class SaveAdUseCaseImp implements SaveAdUseCase {
-  final SaveAdRespository _repository;
+  final SaveAdRepository _repository;
 
   SaveAdUseCaseImp(this._repository);
 

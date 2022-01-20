@@ -6,7 +6,7 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_save_ad.dart';
 import 'package:xlo_flutter/features/ad/domain/repositories/save_ad_repository.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 
-class SaveAdRepositoryMock extends Mock implements SaveAdRespository {}
+class SaveAdRepositoryMock extends Mock implements SaveAdRepository {}
 
 void main() {
   final repository = SaveAdRepositoryMock();
