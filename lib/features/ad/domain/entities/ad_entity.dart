@@ -24,6 +24,8 @@ class AdEntity extends Equatable {
 
   bool get isValidImages => images.isNotEmpty;
 
+  set title(String value) => title = value;
+
   @override
   List<Object> get props => [images];
 }

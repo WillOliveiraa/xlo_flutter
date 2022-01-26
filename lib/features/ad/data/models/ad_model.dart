@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_flutter/features/ad/data/utils/table_keys.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 
-class AdModel extends AdEntity {
+// ignore: must_be_immutable
+class AdModel extends AdEntity with ChangeNotifier {
   final String? id;
 
   AdModel({
@@ -52,6 +54,17 @@ class AdModel extends AdEntity {
       // createdAt: object.createdAt,
       views: object.get<int>(keyAdViews, defaultValue: 0),
     );
+  }
+
+  factory AdModel.createAd({
+    required String title,
+    required String description,
+    required num price,
+    int? views,
+    required List<dynamic> images,
+  }) {
+    return AdModel(
+        title: title, description: description, price: price, images: images);
   }
 
   String toJson() => json.encode(toMap());

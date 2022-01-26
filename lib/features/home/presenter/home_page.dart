@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 
-import 'test_controller.dart';
+import 'home_controller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final TestController controller;
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,6 @@ class HomePage extends StatelessWidget {
         child: TextButton(
           child: Text('Test'),
           onPressed: () {
-            // controller.saveAd();
             controller.getAllAds();
           },
         ),

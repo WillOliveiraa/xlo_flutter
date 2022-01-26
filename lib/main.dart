@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
-import 'core/base/base_page.dart';
-import 'core/injection/container_injection.dart';
+import 'app_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   _parseInitialize();
-  ContainerInjection.setup();
-  runApp(MyApp());
+  runApp(AppWidget());
 }
 
 Future<void> _parseInitialize() async {
@@ -19,28 +17,4 @@ Future<void> _parseInitialize() async {
     autoSendSessionId: true,
     debug: true,
   );
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'XLO',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.purple,
-        scaffoldBackgroundColor: Colors.purple,
-        // appBarTheme: const AppBarTheme(elevation: 0),
-      ),
-      // home: HomePage(controller: i.get<TestController>()),
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case '/':
-          default:
-            return MaterialPageRoute(
-                builder: (_) => BasePage(), settings: settings);
-        }
-      },
-    );
-  }
 }

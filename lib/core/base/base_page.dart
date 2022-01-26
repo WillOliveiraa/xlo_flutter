@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:xlo_flutter/core/injection/container_injection.dart';
+import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
+import 'package:xlo_flutter/features/ad/presenter/ad_page.dart';
 import 'package:xlo_flutter/features/home/presenter/home_page.dart';
-import 'package:xlo_flutter/features/home/presenter/test_controller.dart';
+import 'package:xlo_flutter/features/home/presenter/home_controller.dart';
 
 import 'base_controller.dart';
 
@@ -22,12 +23,25 @@ class _BasePageState extends State<BasePage> {
       create: (_) => BaseController(pageController),
       child: PageView(
         controller: pageController,
-        // physics: const NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
-          HomePage(controller: i.get<TestController>()),
-          Scaffold(body: Container(color: Colors.red)),
-          Scaffold(body: Container(color: Colors.blue)),
-          Scaffold(body: Container(color: Colors.green)),
+          HomePage(controller: context.read<HomeController>()),
+          AdPage(),
+          Scaffold(
+            appBar: AppBar(title: Text('Chat')),
+            drawer: CustomDrawer(),
+            body: Container(color: Colors.blue),
+          ),
+          Scaffold(
+            appBar: AppBar(title: Text('Favorites')),
+            drawer: CustomDrawer(),
+            body: Container(color: Colors.pink),
+          ),
+          Scaffold(
+            appBar: AppBar(title: Text('My Account')),
+            drawer: CustomDrawer(),
+            body: Container(color: Colors.green),
+          ),
         ],
       ),
     );
