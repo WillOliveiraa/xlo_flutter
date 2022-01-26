@@ -2,38 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 
 class AdController extends ChangeNotifier {
-  String? title;
-  String? description;
-  num? price;
-  List<dynamic> images = [];
+  String? _title;
+  String? _description;
+  num? _price;
+  List<dynamic> _images = [];
+
+  bool _loading = false;
+
+  bool get loading => _loading;
+
+  set loading(bool value) {
+    _loading = value;
+    notifyListeners();
+  }
 
   AdModel get adModel => AdModel.createAd(
-        title: title ?? '',
-        description: description ?? '',
-        price: price ?? 0,
-        images: images,
+        title: _title ?? '',
+        description: _description ?? '',
+        price: _price ?? 0,
+        images: _images,
       );
 
   void setTitle(String value) {
-    title = value;
+    _title = value;
     notifyListeners();
   }
 
   String? get titleError {
-    if (title == null || adModel.isValidTitle) {
+    if (_title == null || adModel.isValidTitle) {
       return null;
-    } else if (title!.isEmpty) {
+    } else if (_title!.isEmpty) {
       return 'Campo obrigatório';
     } else {
-      return 'Titulo muito curto';
+      return 'Título muito curto';
     }
   }
 
   bool get isValid => adModel.isValidTitle;
 
-  Function? get saveAdPressed => isValid ? saveAd : null;
+  Function? get saveAdPressed => isValid && !loading ? saveAd : null;
 
   Future<void> saveAd() async {
-    print(adModel.title);
+    loading = true;
+    await Future.delayed(Duration(seconds: 2));
+    print(adModel);
+    loading = false;
   }
 }

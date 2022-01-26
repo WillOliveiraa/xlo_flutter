@@ -10,6 +10,7 @@ import 'package:xlo_flutter/features/ad/domain/usecases/get_all_ad_usecase/get_a
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 import 'package:xlo_flutter/features/ad/external/get_all_ads_datasource.dart';
 import 'package:xlo_flutter/features/ad/external/save_ad_datasource_imp.dart';
+import 'package:xlo_flutter/features/ad/presenter/ad_controller.dart';
 import 'package:xlo_flutter/features/home/presenter/home_controller.dart';
 
 import 'core/base/base_page.dart';
@@ -30,7 +31,9 @@ class AppWidget extends StatelessWidget {
         Provider<GetAllAdsUseCaseImp>(
             create: (context) => GetAllAdsUseCaseImp(context.read())),
         ChangeNotifierProvider(
-            create: (context) => HomeController(context.read(), context.read()))
+            create: (context) =>
+                HomeController(context.read(), context.read())),
+        ChangeNotifierProvider(create: (_) => AdController()),
       ],
       child: MaterialApp(
         title: 'XLO',

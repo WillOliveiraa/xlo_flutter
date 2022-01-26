@@ -71,4 +71,9 @@ class AdModel extends AdEntity with ChangeNotifier {
 
   factory AdModel.fromJson(String source) =>
       AdModel.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'AdModel(title: $title, description: $description, price: $price, views: $views, images: $images)';
+  }
 }

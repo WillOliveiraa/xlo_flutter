@@ -15,7 +15,7 @@ class AdEntity extends Equatable {
     required this.images,
   });
 
-  bool get isValidTitle => title.isNotEmpty;
+  bool get isValidTitle => title.isNotEmpty && title.length > 6;
 
   bool get isValidDescription =>
       description.isNotEmpty && description.length > 10;
