@@ -11,8 +11,8 @@ const keyCategoryDescription = 'description';
 
 const keyAdTable = 'Ad';
 const keyAdId = 'objectId';
-const keyAdTitle = 'Title';
-const keyAdDescription = 'Description';
+const keyAdTitle = 'title';
+const keyAdDescription = 'description';
 const keyAdHidePhone = 'hidePhone';
 const keyAdPrice = 'price';
 const keyAdStatus = 'status';

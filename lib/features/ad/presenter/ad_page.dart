@@ -34,6 +34,28 @@ class AdPage extends StatelessWidget {
                   errorText: adController.titleError,
                 ),
                 onChanged: adController.setTitle,
+                enabled: !adController.loading,
+              );
+            }),
+            SizedBox(height: 10),
+            Consumer<AdController>(builder: (_, adController, child) {
+              return TextFormField(
+                decoration: InputDecoration(
+                  errorText: adController.descriptionError,
+                ),
+                onChanged: adController.setDescription,
+                enabled: !adController.loading,
+              );
+            }),
+            SizedBox(height: 10),
+            Consumer<AdController>(builder: (_, adController, child) {
+              return TextFormField(
+                decoration: InputDecoration(
+                  errorText: adController.priceError,
+                ),
+                keyboardType: TextInputType.number,
+                onChanged: adController.setPrice,
+                enabled: !adController.loading,
               );
             }),
             SizedBox(height: 20),

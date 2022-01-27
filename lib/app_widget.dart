@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:xlo_flutter/features/ad/data/datasources/get_all_ads_datasource.dart';
 import 'package:xlo_flutter/features/ad/data/datasources/save_ad_datasource.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/get_all_ads_repository_imp.dart';
@@ -31,11 +32,12 @@ class AppWidget extends StatelessWidget {
         Provider<GetAllAdsUseCaseImp>(
             create: (context) => GetAllAdsUseCaseImp(context.read())),
         ChangeNotifierProvider(
-            create: (context) =>
-                HomeController(context.read(), context.read())),
-        ChangeNotifierProvider(create: (_) => AdController()),
+            create: (context) => HomeController(context.read())),
+        ChangeNotifierProvider<AdController>(
+            create: (context) => AdController(context.read())),
       ],
       child: MaterialApp(
+        builder: asuka.builder,
         title: 'XLO',
         debugShowCheckedModeBanner: false,
         // theme: ThemeData(

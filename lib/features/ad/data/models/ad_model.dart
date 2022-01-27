@@ -60,11 +60,16 @@ class AdModel extends AdEntity with ChangeNotifier {
     required String title,
     required String description,
     required num price,
-    int? views,
+    int? views = 0,
     required List<dynamic> images,
   }) {
     return AdModel(
-        title: title, description: description, price: price, images: images);
+      title: title,
+      description: description,
+      price: price,
+      images: images,
+      views: views,
+    );
   }
 
   String toJson() => json.encode(toMap());
