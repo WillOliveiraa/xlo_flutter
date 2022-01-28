@@ -5,5 +5,5 @@ class ErrorSignInWithEmail extends Failure {
   String? get message => 'Erro ao tentar salvar o usuário';
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [message];
 }

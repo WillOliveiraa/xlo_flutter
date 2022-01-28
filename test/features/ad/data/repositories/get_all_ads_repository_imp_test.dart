@@ -30,7 +30,7 @@ void main() {
 
   test('should return a ErrorGetAllAds', () async {
     when(() => datasource.getAllAds())
-        .thenAnswer((_) async => Left(ErrorGetAllAds()));
+        .thenThrow((_) async => Left(ErrorGetAllAds()));
 
     final result = (await respository.getAllAds()).fold(id, id);
 

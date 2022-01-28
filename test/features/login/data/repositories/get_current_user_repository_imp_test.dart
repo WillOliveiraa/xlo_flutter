@@ -1,32 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:xlo_flutter/features/login/domain/entities/user_entity.dart';
+import 'package:xlo_flutter/features/login/data/datasources/get_current_user_datasource.dart';
+import 'package:xlo_flutter/features/login/data/models/user_model.dart';
+import 'package:xlo_flutter/features/login/data/repositories/get_current_user_repository_imp.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
 import 'package:xlo_flutter/features/login/domain/errors/error_get_current_user.dart';
-import 'package:xlo_flutter/features/login/domain/repositories/get_current_user_repository.dart';
 
 class GetCurrentUserDatasourceMock extends Mock
     implements GetCurrentUserDatasource {}
-
-class GetCurrentUserRepositoryImp implements GetCurrentUserRepository {
-  final GetCurrentUserDatasource _datasource;
-
-  GetCurrentUserRepositoryImp(this._datasource);
-
-  @override
-  Future<Either<Failure, UserEntity>> getCurrentUser() async {
-    try {
-      return await _datasource.getCurrentUser();
-    } catch (e) {
-      return Left(ErrorGetCurrentUser());
-    }
-  }
-}
-
-abstract class GetCurrentUserDatasource {
-  Future<Either<Failure, UserModel>> getCurrentUser();
-}
 
 void main() {
   final datasource = GetCurrentUserDatasourceMock();
@@ -56,23 +38,4 @@ void main() {
     expect(result, isA<ErrorGetCurrentUser>());
     verify(() => datasource.getCurrentUser()).called(1);
   });
-}
-
-class UserModel extends UserEntity {
-  final String? id;
-
-  UserModel({
-    this.id,
-    required String name,
-    required String email,
-    required String password,
-    String? phone,
-    UserType type = UserType.PARTICULAR,
-  }) : super(
-          name: name,
-          email: email,
-          password: password,
-          phone: phone,
-          type: type,
-        );
 }

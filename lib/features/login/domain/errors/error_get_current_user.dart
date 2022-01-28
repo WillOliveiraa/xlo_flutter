@@ -5,5 +5,5 @@ class ErrorGetCurrentUser extends Failure {
   String? get message => 'Ocorreu um erro ao tentar obter os anúncios';
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [message];
 }
