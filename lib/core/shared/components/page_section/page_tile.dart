@@ -15,15 +15,15 @@ class PageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).primaryColor;
     return ListTile(
       title: Text(
         label,
         style: TextStyle(
-            color: highlighted ? Colors.purple : Colors.black54,
+            color: highlighted ? color : Colors.black54,
             fontWeight: FontWeight.w700),
       ),
-      leading:
-          Icon(iconData, color: highlighted ? Colors.purple : Colors.black54),
+      leading: Icon(iconData, color: highlighted ? color : Colors.black54),
       onTap: onTap,
     );
   }

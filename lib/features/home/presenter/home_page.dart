@@ -36,7 +36,11 @@ class _HomePageState extends State<HomePage> {
           itemCount: homeController.ads.length,
           itemBuilder: (_, index) {
             final ad = homeController.ads[index];
-            return ListTile(title: Text(ad.title));
+            return ListTile(
+              title: Text(ad.title),
+              subtitle: Text(ad.description),
+              trailing: Text(ad.price.toString()),
+            );
           },
         );
       }),
