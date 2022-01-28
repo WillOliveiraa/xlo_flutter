@@ -15,6 +15,13 @@ void main() {
               description: 'description',
               price: 0,
               images: ['']).isValidTitle,
+          false);
+      expect(
+          AdEntity(
+              title: 'New ad test',
+              description: 'description',
+              price: 0,
+              images: ['']).isValidTitle,
           true);
 
       // description

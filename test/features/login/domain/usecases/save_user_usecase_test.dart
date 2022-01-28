@@ -22,6 +22,9 @@ void main() {
     final result = (await usecase(email, password)).fold((l) => null, (r) => r);
 
     expect(result, unit);
+    verify(() => repository.signInWithEmail(email: email, password: password))
+        .called(1);
+    verifyNoMoreInteractions(repository);
   });
 
   test('should return a ErrorSignInWithEmail', () async {
@@ -31,5 +34,8 @@ void main() {
     final result = (await usecase(email, password)).fold(id, id);
 
     expect(result, isA<ErrorSignInWithEmail>());
+    verify(() => repository.signInWithEmail(email: email, password: password))
+        .called(1);
+    verifyNoMoreInteractions(repository);
   });
 }
