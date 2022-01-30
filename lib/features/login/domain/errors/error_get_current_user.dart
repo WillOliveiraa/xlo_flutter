@@ -1,8 +1,9 @@
 import 'package:xlo_flutter/core/errors/failure.dart';
 
 class ErrorGetCurrentUser extends Failure {
-  @override
-  String? get message => 'Ocorreu um erro ao tentar obter os anúncios';
+  final String? message;
+
+  ErrorGetCurrentUser({this.message});
 
   @override
   List<Object?> get props => [message];
