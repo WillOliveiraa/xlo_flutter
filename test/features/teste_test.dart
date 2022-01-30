@@ -1,16 +1,10 @@
-import 'package:dartz/dartz.dart';
+// import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+// import 'package:mocktail/mocktail.dart';
 
-// class SignUpUserRepositoryMock extends Mock implements SignUpUserRepository {}
+// class SignUpUserDatasourceMock extends Mock implements SignUpUserDatasource {}
 
 void main() {
-  // final userEntity = UserEntity(
-  //   name: 'Will Oliveira',
-  //   email: 'will@teste.com',
-  //   password: '123123',
-  // );
-
   test('should sign up user', () async {});
 
   test('should return a ErrorSignUpUser', () async {});
