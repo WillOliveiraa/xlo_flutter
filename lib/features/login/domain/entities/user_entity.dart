@@ -6,7 +6,7 @@ class UserEntity {
   final String name;
   final String email;
   final String? phone;
-  final String password;
+  final String? password;
   final UserType type;
 
   UserEntity({
@@ -21,5 +21,5 @@ class UserEntity {
 
   bool get isValidEmail => validator.isEmail(email);
 
-  bool get isValidPassword => password.isNotEmpty && password.length > 4;
+  bool get isValidPassword => password != null && password!.length > 4;
 }

@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
+import 'package:xlo_flutter/features/login/domain/entities/user_entity.dart';
 import 'package:xlo_flutter/features/login/domain/repositories/sign_in_with_email_repository.dart';
 
 abstract class SignInWithEmailUseCase {
-  Future<Either<Failure, Unit>> call(String email, String password);
+  Future<Either<Failure, UserEntity>> call(String email, String password);
 }
 
 class SignInWithEmailUseCaseImp implements SignInWithEmailUseCase {
@@ -12,7 +13,8 @@ class SignInWithEmailUseCaseImp implements SignInWithEmailUseCase {
   SignInWithEmailUseCaseImp(this._repository);
 
   @override
-  Future<Either<Failure, Unit>> call(String email, String password) async {
+  Future<Either<Failure, UserEntity>> call(
+      String email, String password) async {
     return await _repository.signInWithEmail(email: email, password: password);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
 import 'package:xlo_flutter/features/login/data/datasources/sign_in_with_email_datasource.dart';
+import 'package:xlo_flutter/features/login/data/models/user_model.dart';
 import 'package:xlo_flutter/features/login/data/repositories/sign_in_with_email_repository_imp.dart';
 import 'package:xlo_flutter/features/login/domain/errors/error_sign_in_with_email.dart';
 
@@ -12,31 +13,37 @@ class SignInWithEmailDatasourceMock extends Mock
 void main() {
   final datasource = SignInWithEmailDatasourceMock();
   final repository = SignInWithEmailRepositoryImp(datasource);
-  String email = 'will@teste.com';
-  String password = '123123';
+  final user = UserModel(
+    id: 'jklj231s',
+    name: 'Will Oliveira',
+    email: 'will@teste.com',
+    password: '123123',
+  );
 
   test('should sign in with email', () async {
-    when(() => datasource.signInWithEmail(email: email, password: password))
-        .thenAnswer((_) async => Right(unit));
+    when(() => datasource.signInWithEmail(
+        email: user.email,
+        password: user.password!)).thenAnswer((_) async => Right(user));
 
-    final result =
-        await repository.signInWithEmail(email: email, password: password);
+    final result = await repository.signInWithEmail(
+        email: user.email, password: user.password!);
 
-    expect(result, isA<Right<Failure, Unit>>());
-    verify(() => datasource.signInWithEmail(email: email, password: password))
-        .called(1);
+    expect(result, isA<Right<Failure, UserModel>>());
+    verify(() => datasource.signInWithEmail(
+        email: user.email, password: user.password!)).called(1);
   });
 
   test('should return a ErrorSignInWithEmail', () async {
-    when(() => datasource.signInWithEmail(email: email, password: password))
-        .thenThrow(ErrorSignInWithEmail());
+    when(() => datasource.signInWithEmail(
+        email: user.email,
+        password: user.password!)).thenThrow(ErrorSignInWithEmail());
 
-    final result =
-        (await repository.signInWithEmail(email: email, password: password))
-            .fold(id, id);
+    final result = (await repository.signInWithEmail(
+            email: user.email, password: user.password!))
+        .fold(id, id);
 
     expect(result, isA<ErrorSignInWithEmail>());
-    verify(() => datasource.signInWithEmail(email: email, password: password))
-        .called(1);
+    verify(() => datasource.signInWithEmail(
+        email: user.email, password: user.password!)).called(1);
   });
 }
