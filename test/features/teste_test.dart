@@ -1,12 +1,17 @@
-// import 'package:dartz/dartz.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-// import 'package:mocktail/mocktail.dart';
+import 'package:mocktail/mocktail.dart';
 
-// class SignInWithEmailDatasourceMock extends Mock
-//     implements SignInWithEmailDatasource {}
+// class SignUpUserRepositoryMock extends Mock implements SignUpUserRepository {}
 
 void main() {
-  test('should sign in with email', () async {});
+  // final userEntity = UserEntity(
+  //   name: 'Will Oliveira',
+  //   email: 'will@teste.com',
+  //   password: '123123',
+  // );
 
-  test('should return a ErrorSignInWithEmail', () async {});
+  test('should sign up user', () async {});
+
+  test('should return a ErrorSignUpUser', () async {});
 }
