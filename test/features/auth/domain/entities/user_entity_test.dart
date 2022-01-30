@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:xlo_flutter/features/login/domain/entities/user_entity.dart';
+import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
 
 void main() {
   group('should check if fields is valid or not', () {

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
-import 'package:xlo_flutter/features/login/domain/entities/user_entity.dart';
-import 'package:xlo_flutter/features/login/domain/repositories/get_current_user_repository.dart';
+import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
+import 'package:xlo_flutter/features/auth/domain/repositories/get_current_user_repository.dart';
 
 abstract class GetCurrentUser {
   Future<Either<Failure, UserEntity>> call();

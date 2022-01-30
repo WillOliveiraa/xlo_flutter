@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
-import 'package:xlo_flutter/features/login/data/models/user_model.dart';
+import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
 abstract class SignInWithEmailDatasource {
   Future<Either<Failure, UserModel>> signInWithEmail(

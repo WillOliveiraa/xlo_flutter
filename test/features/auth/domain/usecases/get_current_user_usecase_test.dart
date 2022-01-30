@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:xlo_flutter/features/login/domain/entities/user_entity.dart';
-import 'package:xlo_flutter/features/login/domain/errors/error_get_current_user.dart';
-import 'package:xlo_flutter/features/login/domain/repositories/get_current_user_repository.dart';
-import 'package:xlo_flutter/features/login/domain/usecases/get_current_user_usecase.dart';
+import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
+import 'package:xlo_flutter/features/auth/domain/errors/error_get_current_user.dart';
+import 'package:xlo_flutter/features/auth/domain/repositories/get_current_user_repository.dart';
+import 'package:xlo_flutter/features/auth/domain/usecases/get_current_user_usecase.dart';
 
 class GetCurrentUserRepositoryMock extends Mock
     implements GetCurrentUserRepository {}

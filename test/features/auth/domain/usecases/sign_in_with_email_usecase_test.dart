@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:xlo_flutter/features/login/domain/entities/user_entity.dart';
-import 'package:xlo_flutter/features/login/domain/errors/error_sign_in_with_email.dart';
-import 'package:xlo_flutter/features/login/domain/repositories/sign_in_with_email_repository.dart';
-import 'package:xlo_flutter/features/login/domain/usecases/sign_in_with_email_usecase.dart';
+import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
+import 'package:xlo_flutter/features/auth/domain/errors/error_sign_in_with_email.dart';
+import 'package:xlo_flutter/features/auth/domain/repositories/sign_in_with_email_repository.dart';
+import 'package:xlo_flutter/features/auth/domain/usecases/sign_in_with_email_usecase.dart';
 
 class SignInWithEmailRepositoryMock extends Mock
     implements SignInWithEmailRepository {}

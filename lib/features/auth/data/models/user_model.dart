@@ -1,6 +1,6 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_flutter/features/ad/data/utils/table_keys.dart';
-import 'package:xlo_flutter/features/login/domain/entities/user_entity.dart';
+import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   final String? id;

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
-import 'package:xlo_flutter/features/login/domain/entities/user_entity.dart';
-import 'package:xlo_flutter/features/login/domain/repositories/sign_in_with_email_repository.dart';
+import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
+import 'package:xlo_flutter/features/auth/domain/repositories/sign_in_with_email_repository.dart';
 
 abstract class SignInWithEmailUseCase {
   Future<Either<Failure, UserEntity>> call(String email, String password);
