@@ -25,8 +25,8 @@ class _BasePageState extends State<BasePage> {
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
-          HomePage(controller: context.read<HomeController>()),
           AdPage(),
+          HomePage(controller: context.read<HomeController>()),
           Scaffold(
             appBar: AppBar(title: Text('Chat')),
             drawer: CustomDrawer(),

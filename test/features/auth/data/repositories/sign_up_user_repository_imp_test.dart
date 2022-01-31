@@ -17,6 +17,7 @@ void main() {
       name: 'Will Oliveira',
       email: 'will@teste.com',
       password: '123123',
+      passwordConf: '123123',
       phone: '123123123123123');
   final userModel = UserModel(
     name: signUpUserEntity.name,

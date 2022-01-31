@@ -1,4 +1,5 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+
 import 'package:xlo_flutter/features/ad/data/utils/table_keys.dart';
 import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
 
@@ -31,5 +32,10 @@ class UserModel extends UserEntity {
       type: UserType.values[parseUser.get(keyUserType)],
       createdAt: parseUser.get(keyUserCreatedAt),
     );
+  }
+
+  @override
+  String toString() {
+    return 'UserModel(name: $name, email: $email, phone: $phone, password: $password, type: $type)';
   }
 }

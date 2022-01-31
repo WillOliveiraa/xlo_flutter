@@ -15,6 +15,14 @@ import 'package:xlo_flutter/features/ad/presenter/ad_controller.dart';
 import 'package:xlo_flutter/features/home/presenter/home_controller.dart';
 
 import 'core/base/base_page.dart';
+import 'features/auth/data/datasources/sign_up_user_datasource.dart';
+import 'features/auth/data/repositories/sign_up_user_repository_imp.dart';
+import 'features/auth/domain/repositories/sign_up_user_repository.dart';
+import 'features/auth/domain/usecases/sign_up_user_usecase.dart';
+import 'features/auth/external/sign_up_user_datasource_imp.dart';
+import 'features/auth/presenter/login/login_page.dart';
+import 'features/auth/presenter/sign_up_user/sign_up_user_controller.dart';
+import 'features/auth/presenter/sign_up_user/sign_up_user_page.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -22,8 +30,14 @@ class AppWidget extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<SaveAdDatasource>(create: (_) => SaveAdDatasourceImp()),
+        Provider<SignUpUserDatasource>(
+            create: (_) => SignUpUserDatasourceImp()),
         Provider<SaveAdRepository>(
             create: (context) => SaveAdRepositoryImp(context.read())),
+        Provider<SignUpUserRepository>(
+            create: (context) => SignUpUserRepositoryImp(context.read())),
+        Provider<SignUpUserUseCaseImp>(
+            create: (context) => SignUpUserUseCaseImp(context.read())),
         Provider<SaveAdUseCaseImp>(
             create: (context) => SaveAdUseCaseImp(context.read())),
         Provider<GetAllAdsDatasource>(create: (_) => GetAllAdsDatasourceImp()),
@@ -35,6 +49,8 @@ class AppWidget extends StatelessWidget {
             create: (context) => HomeController(context.read())),
         ChangeNotifierProvider<AdController>(
             create: (context) => AdController(context.read())),
+        ChangeNotifierProvider<SignUpUserController>(
+            create: (context) => SignUpUserController(context.read())),
       ],
       child: MaterialApp(
         builder: asuka.builder,
@@ -47,6 +63,10 @@ class AppWidget extends StatelessWidget {
         // ),
         onGenerateRoute: (settings) {
           switch (settings.name) {
+            case '/login':
+              return MaterialPageRoute(builder: (_) => LoginPage());
+            case '/signup':
+              return MaterialPageRoute(builder: (_) => SignUpUserPage());
             case '/':
             default:
               return MaterialPageRoute(
