@@ -108,7 +108,7 @@ class SignUpUserController extends ChangeNotifier {
       userModel.isValidPassword &&
       userModel.isValidPasswordsAreTheSame;
 
-  Function? get saveAdPressed => isValid && !loading ? _signUpUser : null;
+  Function? get signUpPressed => isValid && !loading ? _signUpUser : null;
 
   Future<void> _signUpUser() async {
     loading = true;

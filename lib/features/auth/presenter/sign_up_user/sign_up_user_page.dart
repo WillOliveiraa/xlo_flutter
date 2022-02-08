@@ -136,13 +136,13 @@ class SignUpUserPage extends StatelessWidget {
                           }),
                           const SizedBox(height: 16),
                           Consumer<SignUpUserController>(
-                              builder: (_, adController, child) {
+                              builder: (_, signUpController, child) {
                             return SizedBox(
                               height: 44,
                               child: ElevatedButton(
-                                onPressed:
-                                    adController.saveAdPressed as Function()?,
-                                child: adController.loading
+                                onPressed: signUpController.signUpPressed
+                                    as Function()?,
+                                child: signUpController.loading
                                     ? const CircularProgressIndicator(
                                         valueColor: AlwaysStoppedAnimation(
                                             Colors.white))

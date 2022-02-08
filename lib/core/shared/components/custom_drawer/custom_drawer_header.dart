@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xlo_flutter/core/shared/router/routers.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
   const CustomDrawerHeader({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class CustomDrawerHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/login');
+        Navigator.of(context).pushNamed(signInRouter);
       },
       child: Container(
         // color: Colors.purple,

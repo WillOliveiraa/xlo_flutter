@@ -23,6 +23,20 @@ class UserModel extends UserEntity {
           type: type,
         );
 
+  factory UserModel.signInWithEmail({
+    String? name,
+    required String email,
+    required String password,
+    String? passwordConf,
+    String? phone,
+  }) {
+    return UserModel(
+      name: name!,
+      email: email,
+      password: password,
+    );
+  }
+
   factory UserModel.fromParse(ParseUser parseUser) {
     return UserModel(
       id: parseUser.objectId,

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:xlo_flutter/core/shared/router/routers.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+import 'sign_in_controller.dart';
+
+class SignInPage extends StatelessWidget {
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).accentColor;
+
     return Scaffold(
       appBar: AppBar(title: const Text('Entrar')),
       body: Container(
@@ -41,13 +46,19 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          // errorText: adController.titleError,
-                          ),
-                      // onChanged: adController.setTitle,
-                      // enabled: !adController.loading,
-                    ),
+                    Consumer<SignInController>(
+                        builder: (_, signInController, child) {
+                      return TextFormField(
+                        enabled: !signInController.loading,
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            isDense: true,
+                            errorText: signInController.emailError),
+                        onChanged: signInController.setEmail,
+                        keyboardType: TextInputType.emailAddress,
+                        autocorrect: false,
+                      );
+                    }),
                     const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.only(left: 3, bottom: 4),
@@ -74,27 +85,35 @@ class LoginPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          // errorText: adController.titleError,
-                          ),
-                      // onChanged: adController.setTitle,
-                      // enabled: !adController.loading,
-                    ),
-                    SizedBox(
-                      height: 44,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text('Sign Up'),
-                        // onPressed: adController.saveAdPressed as Function()?,
-                        // child: adController.loading
-                        //     ? const CircularProgressIndicator(
-                        //         valueColor:
-                        //             AlwaysStoppedAnimation(Colors.white))
-                        //     : const Text('Salvar',
-                        //         style: TextStyle(fontSize: 18.0)),
-                      ),
-                    ),
+                    Consumer<SignInController>(
+                        builder: (_, signInController, child) {
+                      return TextFormField(
+                        enabled: !signInController.loading,
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            isDense: true,
+                            errorText: signInController.passwordError),
+                        obscureText: true,
+                        onChanged: signInController.setPassword,
+                      );
+                    }),
+                    const SizedBox(height: 20),
+                    Consumer<SignInController>(
+                        builder: (_, signInController, child) {
+                      return SizedBox(
+                        height: 44,
+                        child: ElevatedButton(
+                          onPressed:
+                              signInController.loginPressed as Function()?,
+                          child: signInController.loading
+                              ? const CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.white))
+                              : const Text('Entrar',
+                                  style: TextStyle(fontSize: 18.0)),
+                        ),
+                      );
+                    }),
                     const Divider(color: Colors.black26),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -105,7 +124,7 @@ class LoginPage extends StatelessWidget {
                               style: TextStyle(fontSize: 16)),
                           GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pushNamed('/signup');
+                              Navigator.of(context).pushNamed(signUpRouter);
                             },
                             child: Text(
                               'Cadastre-se',
