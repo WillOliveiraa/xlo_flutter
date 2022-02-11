@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/sign_up_user_controller.dart';
 
 import 'components/field_title.dart';
 
-class SignUpUserPage extends StatelessWidget {
+class SignUpUserPage extends StatefulWidget {
   const SignUpUserPage({Key? key}) : super(key: key);
 
+  @override
+  State<SignUpUserPage> createState() => _SignUpUserPageState();
+}
+
+class _SignUpUserPageState
+    extends ModularState<SignUpUserPage, SignUpUserController> {
   @override
   Widget build(BuildContext context) {
     // ignore: deprecated_member_use
@@ -46,16 +53,15 @@ class SignUpUserPage extends StatelessWidget {
                             title: 'Apelido',
                             subtitle: 'Como aparecerá em seus anúncios.',
                           ),
-                          Consumer<SignUpUserController>(
-                              builder: (_, signUpController, child) {
+                          Observer(builder: (_) {
                             return TextFormField(
-                              enabled: !signUpController.loading,
+                              enabled: !controller.loading,
                               decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
                                   isDense: true,
                                   hintText: 'Exemplo: João S.',
-                                  errorText: signUpController.nameError),
-                              onChanged: signUpController.setName,
+                                  errorText: controller.nameError),
+                              onChanged: controller.setName,
                             );
                           }),
                           const SizedBox(height: 16),
@@ -63,16 +69,15 @@ class SignUpUserPage extends StatelessWidget {
                             title: 'E-mail',
                             subtitle: 'Enviaremos um e-mail de confirmação.',
                           ),
-                          Consumer<SignUpUserController>(
-                              builder: (_, signUpController, child) {
+                          Observer(builder: (_) {
                             return TextFormField(
-                              enabled: !signUpController.loading,
+                              enabled: !controller.loading,
                               decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
                                   isDense: true,
                                   hintText: 'Exemplo: joao@gmail.com',
-                                  errorText: signUpController.emailError),
-                              onChanged: signUpController.setEmail,
+                                  errorText: controller.emailError),
+                              onChanged: controller.setEmail,
                               keyboardType: TextInputType.emailAddress,
                               autocorrect: false,
                             );
@@ -82,17 +87,16 @@ class SignUpUserPage extends StatelessWidget {
                             title: 'Celular',
                             subtitle: 'Proteja sua conta.',
                           ),
-                          Consumer<SignUpUserController>(
-                              builder: (_, signUpController, child) {
+                          Observer(builder: (_) {
                             return TextFormField(
-                              enabled: !signUpController.loading,
+                              enabled: !controller.loading,
                               decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
                                   isDense: true,
                                   hintText: 'Exemplo: (99) 99999-9999',
-                                  errorText: signUpController.phoneError),
+                                  errorText: controller.phoneError),
                               keyboardType: TextInputType.phone,
-                              onChanged: signUpController.setPhone,
+                              onChanged: controller.setPhone,
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly,
                                 TelefoneInputFormatter()
@@ -105,16 +109,15 @@ class SignUpUserPage extends StatelessWidget {
                             subtitle:
                                 'Use letras, números e caracteres especiais.',
                           ),
-                          Consumer<SignUpUserController>(
-                              builder: (_, signUpController, child) {
+                          Observer(builder: (_) {
                             return TextFormField(
-                              enabled: !signUpController.loading,
+                              enabled: !controller.loading,
                               decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
                                   isDense: true,
-                                  errorText: signUpController.passwordError),
+                                  errorText: controller.passwordError),
                               obscureText: true,
-                              onChanged: signUpController.setPassword,
+                              onChanged: controller.setPassword,
                             );
                           }),
                           const SizedBox(height: 16),
@@ -122,28 +125,25 @@ class SignUpUserPage extends StatelessWidget {
                             title: 'Confirmar Senha',
                             subtitle: 'Repita a Senha',
                           ),
-                          Consumer<SignUpUserController>(
-                              builder: (_, signUpController, child) {
+                          Observer(builder: (_) {
                             return TextFormField(
-                              enabled: !signUpController.loading,
+                              enabled: !controller.loading,
                               decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
                                   isDense: true,
-                                  errorText:
-                                      signUpController.passwordErrorConf),
+                                  errorText: controller.passwordErrorConf),
                               obscureText: true,
-                              onChanged: signUpController.setPasswordConf,
+                              onChanged: controller.setPasswordConf,
                             );
                           }),
                           const SizedBox(height: 16),
-                          Consumer<SignUpUserController>(
-                              builder: (_, signUpController, child) {
+                          Observer(builder: (_) {
                             return SizedBox(
                               height: 44,
                               child: ElevatedButton(
-                                onPressed: signUpController.signUpPressed
-                                    as Function()?,
-                                child: signUpController.loading
+                                onPressed:
+                                    controller.signUpPressed as Function()?,
+                                child: controller.loading
                                     ? const CircularProgressIndicator(
                                         valueColor: AlwaysStoppedAnimation(
                                             Colors.white))

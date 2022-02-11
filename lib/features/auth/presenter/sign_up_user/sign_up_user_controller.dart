@@ -1,23 +1,37 @@
+import 'package:mobx/mobx.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/features/auth/data/models/sign_up_user_model.dart';
 import 'package:xlo_flutter/features/auth/domain/usecases/sign_up_user_usecase.dart';
 
-class SignUpUserController extends ChangeNotifier {
+part 'sign_up_user_controller.g.dart';
+
+class SignUpUserController = _SignUpUserControllerBase
+    with _$SignUpUserController;
+
+abstract class _SignUpUserControllerBase with Store {
   final SignUpUserUseCaseImp _signUpUserUseCase;
 
-  SignUpUserController(this._signUpUserUseCase);
+  _SignUpUserControllerBase(this._signUpUserUseCase);
 
+  @observable
   String? _name;
+  @observable
   String? _email;
+  @observable
   String? _password;
+  @observable
   String? _passwordConf;
+  @observable
   String? _phone;
 
+  @observable
   bool _loading = false;
 
+  // ignore: unnecessary_getters_setters
   bool get loading => _loading;
 
+  @computed
   SignUpUserModel get userModel => SignUpUserModel.signUpUser(
         name: _name ?? '',
         email: _email ?? '',
@@ -26,16 +40,13 @@ class SignUpUserController extends ChangeNotifier {
         phone: _phone ?? '',
       );
 
-  set loading(bool value) {
-    _loading = value;
-    notifyListeners();
-  }
+  // @action
+  set loading(bool value) => _loading = value;
 
-  void setName(String value) {
-    _name = value;
-    notifyListeners();
-  }
+  @action
+  void setName(String value) => _name = value;
 
+  @computed
   String? get nameError {
     if (_name == null || userModel.isValidName) {
       return null;
@@ -44,11 +55,10 @@ class SignUpUserController extends ChangeNotifier {
     }
   }
 
-  void setEmail(String value) {
-    _email = value;
-    notifyListeners();
-  }
+  @action
+  void setEmail(String value) => _email = value;
 
+  @computed
   String? get emailError {
     if (_email == null || userModel.isValidEmail) {
       return null;
@@ -59,11 +69,10 @@ class SignUpUserController extends ChangeNotifier {
     }
   }
 
-  void setPassword(String value) {
-    _password = value;
-    notifyListeners();
-  }
+  @action
+  void setPassword(String value) => _password = value;
 
+  @computed
   String? get passwordError {
     if (_password == null || userModel.isValidPassword) {
       return null;
@@ -72,11 +81,10 @@ class SignUpUserController extends ChangeNotifier {
     }
   }
 
-  void setPasswordConf(String value) {
-    _passwordConf = value;
-    notifyListeners();
-  }
+  @action
+  void setPasswordConf(String value) => _passwordConf = value;
 
+  @computed
   String? get passwordErrorConf {
     if (_passwordConf == null || userModel.isValidPasswordsAreTheSame) {
       return null;
@@ -85,11 +93,10 @@ class SignUpUserController extends ChangeNotifier {
     }
   }
 
-  void setPhone(String value) {
-    _phone = value;
-    notifyListeners();
-  }
+  @action
+  void setPhone(String value) => _phone = value;
 
+  @computed
   String? get phoneError {
     if (_phone == null || userModel.isValidPhone) {
       return null;
@@ -100,6 +107,7 @@ class SignUpUserController extends ChangeNotifier {
     }
   }
 
+  @computed
   bool get isValid =>
       userModel.isValidName &&
       userModel.isValidEmail &&
@@ -107,6 +115,7 @@ class SignUpUserController extends ChangeNotifier {
       userModel.isValidPassword &&
       userModel.isValidPasswordsAreTheSame;
 
+  @computed
   Function? get signUpPressed => isValid && !loading ? _signUpUser : null;
 
   Future<void> _signUpUser() async {

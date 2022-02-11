@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 
 import 'home_controller.dart';
@@ -18,7 +19,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       await Future.delayed(Duration(milliseconds: 900));
-      controller.getAllAds();
+      controller.checkIfNeedToUpdateList();
     });
   }
 
@@ -28,6 +29,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       drawer: CustomDrawer(),
       appBar: AppBar(title: Text('Home')),
       body: Observer(builder: (_) {
+        if (controller.loading)
+          return Center(child: CircularProgressIndDefault());
+
         return ListView.builder(
           itemCount: controller.ads.length,
           itemBuilder: (_, index) {

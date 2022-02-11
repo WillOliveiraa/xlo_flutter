@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
+import 'package:xlo_flutter/features/ad/presenter/ad_controller.dart';
 
-import 'ad_controller.dart';
-
-class AdPage extends StatelessWidget {
+class AdPage extends StatefulWidget {
   AdPage({Key? key}) : super(key: key);
 
-  // AdModel adModel = AdModel(title: '', description: '', price: 0, images: []);
+  @override
+  State<AdPage> createState() => _AdPageState();
+}
 
+class _AdPageState extends ModularState<AdPage, AdController> {
+  // AdModel adModel = AdModel(title: '', description: '', price: 0, images: []);
   @override
   Widget build(BuildContext context) {
     // final primaryColor = Theme.of(context).primaryColor;
@@ -26,43 +30,43 @@ class AdPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Consumer<AdController>(builder: (_, adController, child) {
+            Observer(builder: (_) {
               return TextFormField(
                 decoration: InputDecoration(
-                  errorText: adController.titleError,
+                  errorText: controller.titleError,
                 ),
-                onChanged: adController.setTitle,
-                enabled: !adController.loading,
+                onChanged: controller.setTitle,
+                enabled: !controller.loading,
               );
             }),
             SizedBox(height: 10),
-            Consumer<AdController>(builder: (_, adController, child) {
+            Observer(builder: (_) {
               return TextFormField(
                 decoration: InputDecoration(
-                  errorText: adController.descriptionError,
+                  errorText: controller.descriptionError,
                 ),
-                onChanged: adController.setDescription,
-                enabled: !adController.loading,
+                onChanged: controller.setDescription,
+                enabled: !controller.loading,
               );
             }),
             SizedBox(height: 10),
-            Consumer<AdController>(builder: (_, adController, child) {
+            Observer(builder: (_) {
               return TextFormField(
                 decoration: InputDecoration(
-                  errorText: adController.priceError,
+                  errorText: controller.priceError,
                 ),
                 keyboardType: TextInputType.number,
-                onChanged: adController.setPrice,
-                enabled: !adController.loading,
+                onChanged: controller.setPrice,
+                enabled: !controller.loading,
               );
             }),
             SizedBox(height: 20),
-            Consumer<AdController>(builder: (_, adController, child) {
+            Observer(builder: (_) {
               return SizedBox(
                 height: 44,
                 child: ElevatedButton(
-                  onPressed: adController.saveAdPressed as Function()?,
-                  child: adController.loading
+                  onPressed: controller.saveAdPressed as Function()?,
+                  child: controller.loading
                       ? const CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation(Colors.white))
                       : const Text('Salvar', style: TextStyle(fontSize: 18.0)),

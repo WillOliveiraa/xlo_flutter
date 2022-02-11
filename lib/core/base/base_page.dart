@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
@@ -28,30 +27,28 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
-      return PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          HomeModule(),
-          AdPage(),
-          Scaffold(
-            appBar: AppBar(title: Text('Chat')),
-            drawer: CustomDrawer(),
-            body: Container(color: Colors.blue),
-          ),
-          Scaffold(
-            appBar: AppBar(title: Text('Favorites')),
-            drawer: CustomDrawer(),
-            body: Container(color: Colors.pink),
-          ),
-          Scaffold(
-            appBar: AppBar(title: Text('My Account')),
-            drawer: CustomDrawer(),
-            body: Container(color: Colors.green),
-          ),
-        ],
-      );
-    });
+    return PageView(
+      controller: pageController,
+      physics: const NeverScrollableScrollPhysics(),
+      children: <Widget>[
+        HomeModule(),
+        AdPage(),
+        Scaffold(
+          appBar: AppBar(title: Text('Chat')),
+          drawer: CustomDrawer(),
+          body: Container(color: Colors.blue),
+        ),
+        Scaffold(
+          appBar: AppBar(title: Text('Favorites')),
+          drawer: CustomDrawer(),
+          body: Container(color: Colors.pink),
+        ),
+        Scaffold(
+          appBar: AppBar(title: Text('My Account')),
+          drawer: CustomDrawer(),
+          body: Container(color: Colors.green),
+        ),
+      ],
+    );
   }
 }

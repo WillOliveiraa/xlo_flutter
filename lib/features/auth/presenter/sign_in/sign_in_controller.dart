@@ -1,35 +1,42 @@
+import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:xlo_flutter/core/controllers/auth_controller.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 import 'package:xlo_flutter/features/auth/domain/usecases/sign_in_with_email_usecase.dart';
 
-class SignInController extends ChangeNotifier {
+part 'sign_in_controller.g.dart';
+
+class SignInController = _SignInControllerBase with _$SignInController;
+
+abstract class _SignInControllerBase with Store {
   final SignInWithEmailUseCaseImp _signInWithEmailUseCase;
   final AuthController _authController;
 
-  SignInController(this._signInWithEmailUseCase, this._authController);
+  _SignInControllerBase(this._signInWithEmailUseCase, this._authController);
 
+  @observable
   String? _email;
+  @observable
   String? _password;
 
+  @observable
   bool _loading = false;
 
+  // ignore: unnecessary_getters_setters
   bool get loading => _loading;
 
+  @computed
   UserModel get userModel => UserModel.signInWithEmail(
       email: _email ?? '', password: _password ?? '', name: '');
 
-  set loading(bool value) {
-    _loading = value;
-    notifyListeners();
-  }
+  // @action
+  set loading(bool value) => _loading = value;
 
-  void setEmail(String value) {
-    _email = value;
-    notifyListeners();
-  }
+  @action
+  void setEmail(String value) => _email = value;
 
+  @computed
   String? get emailError {
     if (_email == null || userModel.isValidEmail) {
       return null;
@@ -38,11 +45,10 @@ class SignInController extends ChangeNotifier {
     }
   }
 
-  void setPassword(String value) {
-    _password = value;
-    notifyListeners();
-  }
+  @action
+  void setPassword(String value) => _password = value;
 
+  @computed
   String? get passwordError {
     if (_password == null || userModel.isValidPassword) {
       return null;
@@ -51,8 +57,10 @@ class SignInController extends ChangeNotifier {
     }
   }
 
+  @computed
   bool get isValid => userModel.isValidEmail && userModel.isValidPassword;
 
+  @computed
   Function? get loginPressed => isValid && !loading ? _login : null;
 
   Future<void> _login() async {

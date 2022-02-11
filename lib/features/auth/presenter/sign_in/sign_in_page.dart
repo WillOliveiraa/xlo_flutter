@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 
 import 'sign_in_controller.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends ModularState<SignInPage, SignInController> {
   @override
   Widget build(BuildContext context) {
     // ignore: deprecated_member_use
@@ -47,15 +53,14 @@ class SignInPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Consumer<SignInController>(
-                        builder: (_, signInController, child) {
+                    Observer(builder: (_) {
                       return TextFormField(
-                        enabled: !signInController.loading,
+                        enabled: !controller.loading,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             isDense: true,
-                            errorText: signInController.emailError),
-                        onChanged: signInController.setEmail,
+                            errorText: controller.emailError),
+                        onChanged: controller.setEmail,
                         keyboardType: TextInputType.emailAddress,
                         autocorrect: false,
                       );
@@ -86,27 +91,24 @@ class SignInPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Consumer<SignInController>(
-                        builder: (_, signInController, child) {
+                    Observer(builder: (_) {
                       return TextFormField(
-                        enabled: !signInController.loading,
+                        enabled: !controller.loading,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             isDense: true,
-                            errorText: signInController.passwordError),
+                            errorText: controller.passwordError),
                         obscureText: true,
-                        onChanged: signInController.setPassword,
+                        onChanged: controller.setPassword,
                       );
                     }),
                     const SizedBox(height: 20),
-                    Consumer<SignInController>(
-                        builder: (_, signInController, child) {
+                    Observer(builder: (_) {
                       return SizedBox(
                         height: 44,
                         child: ElevatedButton(
-                          onPressed:
-                              signInController.loginPressed as Function()?,
-                          child: signInController.loading
+                          onPressed: controller.loginPressed as Function()?,
+                          child: controller.loading
                               ? const CircularProgressIndicator(
                                   valueColor:
                                       AlwaysStoppedAnimation(Colors.white))
@@ -125,7 +127,8 @@ class SignInPage extends StatelessWidget {
                               style: TextStyle(fontSize: 16)),
                           GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pushNamed(signUpRouter);
+                              Modular.to
+                                  .pushNamed('$signInRouter$signUpRouter');
                             },
                             child: Text(
                               'Cadastre-se',

@@ -1,27 +1,39 @@
+import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
-class AdController extends ChangeNotifier {
+part 'ad_controller.g.dart';
+
+class AdController = _AdControllerBase with _$AdController;
+
+abstract class _AdControllerBase with Store {
   final SaveAdUseCaseImp _saveAdUseCase;
 
-  AdController(this._saveAdUseCase);
+  _AdControllerBase(this._saveAdUseCase);
 
+  @observable
   String? _title;
+
+  @observable
   String? _description;
+
+  @observable
   num? _price;
+
+  @observable
   List<dynamic> _images = [];
 
+  @observable
   bool _loading = false;
 
+  // ignore: unnecessary_getters_setters
   bool get loading => _loading;
 
-  set loading(bool value) {
-    _loading = value;
-    notifyListeners();
-  }
+  set loading(bool value) => _loading = value;
 
+  @computed
   AdModel get adModel => AdModel.createAd(
         title: _title ?? '',
         description: _description ?? '',
@@ -29,11 +41,10 @@ class AdController extends ChangeNotifier {
         images: _images,
       );
 
-  void setTitle(String value) {
-    _title = value;
-    notifyListeners();
-  }
+  @action
+  void setTitle(String value) => _title = value;
 
+  @computed
   String? get titleError {
     if (_title == null || adModel.isValidTitle) {
       return null;
@@ -44,11 +55,10 @@ class AdController extends ChangeNotifier {
     }
   }
 
-  void setDescription(String value) {
-    _description = value;
-    notifyListeners();
-  }
+  @action
+  void setDescription(String value) => _description = value;
 
+  @computed
   String? get descriptionError {
     if (_description == null || adModel.isValidDescription) {
       return null;
@@ -59,11 +69,10 @@ class AdController extends ChangeNotifier {
     }
   }
 
-  void setPrice(String value) {
-    _price = num.tryParse(value);
-    notifyListeners();
-  }
+  @action
+  void setPrice(String value) => _price = num.tryParse(value);
 
+  @computed
   String? get priceError {
     if (_price == null || adModel.isValidPrice) {
       return null;
@@ -74,8 +83,10 @@ class AdController extends ChangeNotifier {
     }
   }
 
+  @computed
   bool get isValid => adModel.isValidTitle && adModel.isValidDescription;
 
+  @computed
   Function? get saveAdPressed => isValid && !loading ? saveAd : null;
 
   Future<void> saveAd() async {

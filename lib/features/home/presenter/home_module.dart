@@ -8,20 +8,13 @@ import 'package:xlo_flutter/features/home/presenter/home/home_controller.dart';
 import 'home/home_page.dart';
 
 class HomeModule extends WidgetModule {
-  static List<Bind> export = [
+  @override
+  final List<Bind> binds = [
     Bind.singleton((i) => GetAllAdsDatasourceImp()),
     Bind.singleton((i) => GetAllAdsRepositoryImp(i())),
     Bind.singleton((i) => GetAllAdsUseCaseImp(i())),
-    Bind.factory((i) => HomeController(i())),
+    Bind.singleton((i) => HomeController(i())),
   ];
-
-  @override
-  final List<Bind> binds = [];
-
-  // @override
-  // final List<ModularRoute> routes = [
-  //   ChildRoute(Modular.initialRoute, child: (_, args) => HomePage()),
-  // ];
 
   @override
   Widget get view => HomePage();

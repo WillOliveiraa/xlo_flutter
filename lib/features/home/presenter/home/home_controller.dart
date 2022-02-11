@@ -14,8 +14,16 @@ abstract class _HomeControllerBase with Store {
   @observable
   List<AdModel> ads = [];
 
+  @observable
+  bool loading = false;
+
+  void checkIfNeedToUpdateList() {
+    if (ads.isEmpty) getAllAds();
+  }
+
   @action
   Future<void> getAllAds() async {
+    loading = true;
     final response = await _getAllAdsUseCase();
 
     var result = response.fold((l) => l, (r) => r);
@@ -24,5 +32,7 @@ abstract class _HomeControllerBase with Store {
       ads = result;
     else
       print(result);
+
+    loading = false;
   }
 }

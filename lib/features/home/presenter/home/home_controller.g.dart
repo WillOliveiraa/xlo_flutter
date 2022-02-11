@@ -24,6 +24,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_HomeControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
   final _$getAllAdsAsyncAction = AsyncAction('_HomeControllerBase.getAllAds');
 
   @override
@@ -34,7 +49,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   String toString() {
     return '''
-ads: ${ads}
+ads: ${ads},
+loading: ${loading}
     ''';
   }
 }
