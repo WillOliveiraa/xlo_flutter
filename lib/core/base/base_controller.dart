@@ -1,16 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
 
-class BaseController {
-  final PageController _pageController;
+part 'base_controller.g.dart';
 
-  BaseController(this._pageController);
+class BaseController = _BaseControllerBase with _$BaseController;
 
+abstract class _BaseControllerBase with Store {
+  @observable
   int page = 0;
 
-  void setPage(int value) {
-    if (value == page) return;
-
-    page = value;
-    _pageController.jumpToPage(value);
-  }
+  @action
+  void setPage(int value) => page = value;
 }

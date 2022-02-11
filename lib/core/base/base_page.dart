@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/features/ad/presenter/ad_page.dart';
-import 'package:xlo_flutter/features/home/presenter/home_page.dart';
-import 'package:xlo_flutter/features/home/presenter/home_controller.dart';
+import 'package:xlo_flutter/features/home/presenter/home_module.dart';
 
 import 'base_controller.dart';
 
@@ -14,19 +15,26 @@ class BasePage extends StatefulWidget {
   _BasePageState createState() => _BasePageState();
 }
 
-class _BasePageState extends State<BasePage> {
+class _BasePageState extends ModularState<BasePage, BaseController> {
   final PageController pageController = PageController();
 
   @override
+  void initState() {
+    super.initState();
+
+    reaction((_) => controller.page,
+        (page) => pageController.jumpToPage(page as int));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (_) => BaseController(pageController),
-      child: PageView(
+    return Observer(builder: (_) {
+      return PageView(
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
+          HomeModule(),
           AdPage(),
-          HomePage(controller: context.read<HomeController>()),
           Scaffold(
             appBar: AppBar(title: Text('Chat')),
             drawer: CustomDrawer(),
@@ -43,7 +51,7 @@ class _BasePageState extends State<BasePage> {
             body: Container(color: Colors.green),
           ),
         ],
-      ),
-    );
+      );
+    });
   }
 }

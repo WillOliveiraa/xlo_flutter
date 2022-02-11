@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/base/base_controller.dart';
 
 import 'page_tile.dart';
@@ -7,7 +7,7 @@ import 'page_tile.dart';
 class PageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final baseController = context.watch<BaseController>();
+    final baseController = Modular.get<BaseController>();
     return Column(
       children: [
         PageTile(

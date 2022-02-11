@@ -11,6 +11,7 @@ class SignUpUserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     final color = Theme.of(context).accentColor;
     return Scaffold(
       appBar: AppBar(title: const Text('Cadastrar')),

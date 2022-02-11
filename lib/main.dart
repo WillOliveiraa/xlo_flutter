@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:xlo_flutter/app_module.dart';
 
-import 'app_widget.dart';
+import 'app_widget_new.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   _parseInitialize();
-  runApp(AppWidget());
+  runApp(ModularApp(module: AppModule(), child: AppWidget()));
 }
 
 Future<void> _parseInitialize() async {

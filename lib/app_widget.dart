@@ -12,9 +12,9 @@ import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_
 import 'package:xlo_flutter/features/ad/external/get_all_ads_datasource.dart';
 import 'package:xlo_flutter/features/ad/external/save_ad_datasource_imp.dart';
 import 'package:xlo_flutter/features/ad/presenter/ad_controller.dart';
-import 'package:xlo_flutter/features/home/presenter/home_controller.dart';
 
 import 'core/base/base_page.dart';
+import 'core/controllers/auth_controller.dart';
 import 'core/shared/router/routers.dart';
 import 'features/auth/data/datasources/sign_in_with_email_datasource.dart';
 import 'features/auth/data/datasources/sign_up_user_datasource.dart';
@@ -65,12 +65,14 @@ class AppWidget extends StatelessWidget {
             create: (context) => SignUpUserUseCaseImp(context.read())),
 
         // Controllers
-        ChangeNotifierProvider(
-            create: (context) => HomeController(context.read())),
+        ChangeNotifierProvider(create: (context) => AuthController()),
+        // ChangeNotifierProvider(
+        //     create: (context) => HomeController(context.read())),
         ChangeNotifierProvider<AdController>(
             create: (context) => AdController(context.read())),
         ChangeNotifierProvider<SignInController>(
-            create: (context) => SignInController(context.read())),
+            create: (context) =>
+                SignInController(context.read(), context.read())),
         ChangeNotifierProvider<SignUpUserController>(
             create: (context) => SignUpUserController(context.read())),
       ],
