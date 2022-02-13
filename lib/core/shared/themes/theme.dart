@@ -9,7 +9,6 @@ ThemeData buildTheme() {
     appBarTheme: appBarTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primaryColor: AppColors.kPrimaryColor,
-    primarySwatch: Colors.orange,
   );
 }
 

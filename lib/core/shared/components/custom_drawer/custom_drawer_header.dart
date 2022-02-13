@@ -35,55 +35,58 @@ class CustomDrawerHeader extends StatelessWidget {
                   ),
                 );
               }
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Visibility(
-                    visible: authController.isLoggedIn,
-                    child: Text.rich(
-                      // RichText
-                      TextSpan(
-                        text: 'Olá, ',
-                        style: TextStyle(fontSize: 18),
-                        children: [
-                          TextSpan(
-                            text: '${authController.user?.name ?? ''}',
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                        // overflow: TextOverflow.ellipsis,
-                        // maxLines: 2,
+
+              if (authController.isLoggedIn)
+                return Visibility(
+                  visible: authController.isLoggedIn,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text.rich(
+                        // RichText
+                        TextSpan(
+                          text: 'Olá, ',
+                          style: TextStyle(fontSize: 18),
+                          children: [
+                            TextSpan(
+                              text: '${authController.user?.name ?? ''}',
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                          // overflow: TextOverflow.ellipsis,
+                          // maxLines: 2,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+
+              return Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Acesse sua conta agora!',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
-                ],
+                    Text(
+                      'Clique aqui',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
               );
             }),
-            // Expanded(
-            //   child: Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Text(
-            //         'Acesse sua conta agora!',
-            //         style: const TextStyle(
-            //           color: Colors.white,
-            //           fontSize: 16,
-            //           fontWeight: FontWeight.w500,
-            //         ),
-            //       ),
-            //       Text(
-            //         'Clique aqui',
-            //         style: const TextStyle(
-            //           color: Colors.white,
-            //           fontSize: 14,
-            //           fontWeight: FontWeight.w400,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),
