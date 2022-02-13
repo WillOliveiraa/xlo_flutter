@@ -1,7 +1,9 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:xlo_flutter/core/controllers/auth_controller.dart';
+import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
+import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 import 'package:xlo_flutter/features/auth/domain/usecases/sign_in_with_email_usecase.dart';
 
@@ -74,9 +76,7 @@ abstract class _SignInControllerBase with Store {
     }, (user) {
       _authController.setUser(user as UserModel);
       loading = false;
+      Modular.to.popUntil(ModalRoute.withName(homeRouter));
     });
-    // await Future.delayed(Duration(seconds: 2));
-    // Navigator.of(_context).pop();
-    // loading = false;
   }
 }

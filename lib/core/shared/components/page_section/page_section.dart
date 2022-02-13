@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:xlo_flutter/core/base/base_controller.dart';
+import 'package:xlo_flutter/core/pages/base/base_controller.dart';
 
 import 'page_tile.dart';
 
