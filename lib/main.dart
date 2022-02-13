@@ -5,9 +5,9 @@ import 'package:xlo_flutter/app_module.dart';
 
 import 'app_widget_new.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  _parseInitialize();
+  await _parseInitialize();
   runApp(ModularApp(module: AppModule(), child: AppWidget()));
 }
 

@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/core/shared/helpers/money_formatter.dart';
+import 'package:xlo_flutter/core/shared/utils/constants.dart';
 
 import 'home_controller.dart';
 
@@ -28,7 +29,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: CustomDrawer(),
-      appBar: AppBar(title: Text('Home')),
+      appBar: AppBar(title: Text(headerBegin)),
       body: Observer(builder: (_) {
         if (controller.loading)
           return Center(child: CircularProgressIndDefault());

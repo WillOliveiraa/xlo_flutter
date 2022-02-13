@@ -17,9 +17,11 @@ class GetCurrentUserDatasourceImp implements GetCurrentUserDatasource {
 
       if (response!.success)
         return Right(UserModel.fromParse(parseUser));
-      else
+      else {
+        parseUser.logout();
         return Left(ErrorGetCurrentUser(
             message: ParseErrors.getDescription(response.error!.code)));
+      }
     }
     return Left(ErrorGetCurrentUser(message: ParseErrors.getDescription(209)));
   }

@@ -5,12 +5,14 @@ const String appName = "XLO Flutter";
 const String headerHello = "Olá,";
 const String headerExit = "Sair";
 const String headerBegin = "Início";
-const String headerProducts = "Produtos";
+const String headerAds = "Anúncios";
+const String headerInsertAd = "Inserir Anúncio";
 const String headerMyRequests = "Meus Pedidos";
-const String headerStores = "Lojas";
-const String headerUsers = "Usuários";
-const String headerRequests = "Pedidos";
-const String headerSignInOrSignUp = "Entre ou cadastre-se >";
+const String headerChat = "Chat";
+const String headerFavorites = "Favoritos";
+const String headerMyAccount = "Minha Conta";
+const String headerAccessYourAccount = "Acesse sua conta agora!";
+const String headerClickHere = "Clique aqui";
 
 // SIGN_IN
 const String signInEmailError = "E-mail inválido";
