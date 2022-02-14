@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
@@ -67,6 +69,10 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                 keyboardType: TextInputType.number,
                 onChanged: controller.setPrice,
                 enabled: !controller.loading,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  RealInputFormatter(moeda: true)
+                ],
               );
             }),
             SizedBox(height: 20),
