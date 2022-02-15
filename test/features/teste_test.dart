@@ -1,30 +1,30 @@
-import 'package:dartz/dartz.dart';
+// import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+// import 'package:mocktail/mocktail.dart';
 
-// class GetAllCategoriesRepositoryMock extends Mock
-//     implements GetAllCategoriesRepository {}
+// class GetAllCategoriesDatasourceMock extends Mock
+//     implements GetAllCategoriesDatasource {}
 
 void main() {
   test('should get all categories', () async {
-    // when(() => repository.getAllCategories())
+    // when(() => datasource.getAllCategories())
     //     .thenAnswer((_) async => Right(categories));
 
-    // final result = (await usecase()).fold((l) => l, (r) => r);
+    // final result = await repository.getAllCategories();
 
-    // expect(result, isA<List<CategoryEntity>>());
-    // verify(() => repository.getAllCategories()).called(1);
-    // verifyNoMoreInteractions(repository);
+    // expect(result, isA<Right<dynamic, List<CategoryModel>?>>());
+    // verify(() => datasource.getAllCategories()).called(1);
+    // verifyNoMoreInteractions(datasource);
   });
 
   test('should return a ErrorGetAllCategories', () async {
-    // when(() => repository.getAllCategories())
+    // when(() => datasource.getAllCategories())
     //     .thenAnswer((_) async => Left(ErrorGetAllCategories()));
 
-    // final result = (await usecase()).fold(id, id);
+    // final result = (await repository.getAllCategories()).fold(id, id);
 
     // expect(result, isA<ErrorGetAllCategories>());
-    // verify(() => repository.getAllCategories()).called(1);
-    // verifyNoMoreInteractions(repository);
+    // verify(() => datasource.getAllCategories()).called(1);
+    // verifyNoMoreInteractions(datasource);
   });
 }
