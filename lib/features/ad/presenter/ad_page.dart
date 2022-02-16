@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
+import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 import 'package:xlo_flutter/features/ad/presenter/ad_controller.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
 
@@ -13,6 +14,12 @@ class AdPage extends StatefulWidget {
 }
 
 class _AdPageState extends ModularState<AdPage, AdController> {
+  @override
+  void initState() {
+    super.initState();
+    controller.getAllCategories();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +45,7 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                 enabled: !controller.loading,
               );
             }),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             const FieldTitle(
               title: 'Descrição',
               subtitle: 'Escreva a descrição completa do anúncio.',
@@ -54,7 +61,24 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                 enabled: !controller.loading,
               );
             }),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
+            Observer(builder: (_) {
+              return Center(
+                child: DropdownButton<CategoryModel>(
+                  value: controller.category,
+                  onChanged: (value) => controller.setCategory(value),
+                  items: controller.categories
+                      .map<DropdownMenuItem<CategoryModel>>(
+                          (CategoryModel category) {
+                    return DropdownMenuItem<CategoryModel>(
+                      value: category,
+                      child: Text(category.description),
+                    );
+                  }).toList(),
+                ),
+              );
+            }),
+            const SizedBox(height: 10),
             const FieldTitle(
               title: 'Preço',
               subtitle: 'Preço do anúncio.',
@@ -75,7 +99,7 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                 ],
               );
             }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Observer(builder: (_) {
               return SizedBox(
                 height: 44,

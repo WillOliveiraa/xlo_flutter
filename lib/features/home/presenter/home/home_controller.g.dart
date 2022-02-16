@@ -24,6 +24,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$categoriesAtom = Atom(name: '_HomeControllerBase.categories');
+
+  @override
+  List<CategoryModel> get categories {
+    _$categoriesAtom.reportRead();
+    return super.categories;
+  }
+
+  @override
+  set categories(List<CategoryModel> value) {
+    _$categoriesAtom.reportWrite(value, super.categories, () {
+      super.categories = value;
+    });
+  }
+
   final _$loadingAtom = Atom(name: '_HomeControllerBase.loading');
 
   @override
@@ -39,6 +54,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$categoryAtom = Atom(name: '_HomeControllerBase.category');
+
+  @override
+  CategoryModel? get category {
+    _$categoryAtom.reportRead();
+    return super.category;
+  }
+
+  @override
+  set category(CategoryModel? value) {
+    _$categoryAtom.reportWrite(value, super.category, () {
+      super.category = value;
+    });
+  }
+
   final _$getAllAdsAsyncAction = AsyncAction('_HomeControllerBase.getAllAds');
 
   @override
@@ -46,11 +76,35 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$getAllAdsAsyncAction.run(() => super.getAllAds());
   }
 
+  final _$getAllCategoriesAsyncAction =
+      AsyncAction('_HomeControllerBase.getAllCategories');
+
+  @override
+  Future<void> getAllCategories() {
+    return _$getAllCategoriesAsyncAction.run(() => super.getAllCategories());
+  }
+
+  final _$_HomeControllerBaseActionController =
+      ActionController(name: '_HomeControllerBase');
+
+  @override
+  void setCategory(CategoryModel? value) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.setCategory');
+    try {
+      return super.setCategory(value);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 ads: ${ads},
-loading: ${loading}
+categories: ${categories},
+loading: ${loading},
+category: ${category}
     ''';
   }
 }

@@ -13,4 +13,7 @@ class CategoryModel extends CategoryEntity {
       description: object.get<String>(keyCategoryDescription) ?? '',
     );
   }
+
+  @override
+  String toString() => 'CategoryModel(description: $description)';
 }

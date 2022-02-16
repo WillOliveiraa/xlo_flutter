@@ -5,6 +5,7 @@ import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/core/shared/helpers/money_formatter.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
+import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 
 import 'home_controller.dart';
 
@@ -37,25 +38,49 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         return RefreshIndicator(
           color: Theme.of(context).primaryColor,
           onRefresh: () => controller.getAllAds(),
-          child: ListView.builder(
-            itemCount: controller.ads.length,
-            itemBuilder: (_, index) {
-              final ad = controller.ads[index];
-              return ListTile(
-                title: Text(
-                  ad.title,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+          child: Column(
+            children: [
+              Center(
+                child: DropdownButton<CategoryModel>(
+                  value: controller.category,
+                  onChanged: (value) => controller.setCategory(value),
+                  items: controller.categories
+                      .map<DropdownMenuItem<CategoryModel>>(
+                          (CategoryModel category) {
+                    return DropdownMenuItem<CategoryModel>(
+                      value: category,
+                      child: Text(category.description),
+                    );
+                  }).toList(),
                 ),
-                subtitle: Text(ad.description),
-                trailing: Text(
-                  CustomMoneyFormatter.formattedMoney(ad.price),
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w700,
-                  ),
+              ),
+              Container(
+                height: 200,
+                child: ListView.builder(
+                  itemCount: controller.ads.length,
+                  itemBuilder: (_, index) {
+                    final ad = controller.ads[index];
+                    return ListTile(
+                      onTap: () {
+                        print(controller.category);
+                      },
+                      title: Text(
+                        ad.title,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(ad.description),
+                      trailing: Text(
+                        CustomMoneyFormatter.formattedMoney(ad.price),
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
+              ),
+            ],
           ),
         );
       }),

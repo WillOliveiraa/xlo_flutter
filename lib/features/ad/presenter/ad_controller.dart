@@ -1,6 +1,8 @@
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
+import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
+import 'package:xlo_flutter/features/ad/domain/usecases/get_all_categories_usecase/get_all_categories_usecase.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
@@ -10,8 +12,9 @@ class AdController = _AdControllerBase with _$AdController;
 
 abstract class _AdControllerBase with Store {
   final SaveAdUseCaseImp _saveAdUseCase;
+  final GetAllCategoriesUseCaseImp _getAllCategoriesUseCase;
 
-  _AdControllerBase(this._saveAdUseCase);
+  _AdControllerBase(this._saveAdUseCase, this._getAllCategoriesUseCase);
 
   @observable
   String? _title;
@@ -28,10 +31,27 @@ abstract class _AdControllerBase with Store {
   @observable
   bool _loading = false;
 
+  @observable
+  bool _loadingCategories = false;
+
+  @observable
+  List<CategoryModel> categories = [];
+
+  @observable
+  CategoryModel? category;
+
   // ignore: unnecessary_getters_setters
   bool get loading => _loading;
 
   set loading(bool value) => _loading = value;
+
+  // ignore: unnecessary_getters_setters
+  bool get loadingCategories => _loadingCategories;
+
+  set loadingCategories(bool value) => _loadingCategories = value;
+
+  @action
+  void setCategory(CategoryModel? value) => category = value;
 
   @computed
   AdModel get adModel => AdModel.createAd(
@@ -102,5 +122,21 @@ abstract class _AdControllerBase with Store {
       asuka.showSnackBar(SnackBar(content: Text('Anúncio salvo com sucesso!')));
       loading = false;
     });
+  }
+
+  @action
+  Future<void> getAllCategories() async {
+    loadingCategories = true;
+    final response = await _getAllCategoriesUseCase();
+
+    var result = response.fold((l) => l, (r) => r);
+
+    if (result is List<CategoryModel>) {
+      categories = result;
+      // category = categories.first;
+    } else
+      print(result);
+
+    loadingCategories = false;
   }
 }

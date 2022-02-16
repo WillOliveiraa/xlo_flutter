@@ -13,7 +13,7 @@ class AdModule extends WidgetModule {
     Bind.singleton((i) => SaveAdDatasourceImp()),
     Bind.singleton((i) => SaveAdRepositoryImp(i())),
     Bind.singleton((i) => SaveAdUseCaseImp(i())),
-    Bind.singleton((i) => AdController(i())),
+    Bind.singleton((i) => AdController(i(), i())),
   ];
 
   @override

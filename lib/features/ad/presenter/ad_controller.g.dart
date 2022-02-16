@@ -126,8 +126,73 @@ mixin _$AdController on _AdControllerBase, Store {
     });
   }
 
+  final _$_loadingCategoriesAtom =
+      Atom(name: '_AdControllerBase._loadingCategories');
+
+  @override
+  bool get _loadingCategories {
+    _$_loadingCategoriesAtom.reportRead();
+    return super._loadingCategories;
+  }
+
+  @override
+  set _loadingCategories(bool value) {
+    _$_loadingCategoriesAtom.reportWrite(value, super._loadingCategories, () {
+      super._loadingCategories = value;
+    });
+  }
+
+  final _$categoriesAtom = Atom(name: '_AdControllerBase.categories');
+
+  @override
+  List<CategoryModel> get categories {
+    _$categoriesAtom.reportRead();
+    return super.categories;
+  }
+
+  @override
+  set categories(List<CategoryModel> value) {
+    _$categoriesAtom.reportWrite(value, super.categories, () {
+      super.categories = value;
+    });
+  }
+
+  final _$categoryAtom = Atom(name: '_AdControllerBase.category');
+
+  @override
+  CategoryModel? get category {
+    _$categoryAtom.reportRead();
+    return super.category;
+  }
+
+  @override
+  set category(CategoryModel? value) {
+    _$categoryAtom.reportWrite(value, super.category, () {
+      super.category = value;
+    });
+  }
+
+  final _$getAllCategoriesAsyncAction =
+      AsyncAction('_AdControllerBase.getAllCategories');
+
+  @override
+  Future<void> getAllCategories() {
+    return _$getAllCategoriesAsyncAction.run(() => super.getAllCategories());
+  }
+
   final _$_AdControllerBaseActionController =
       ActionController(name: '_AdControllerBase');
+
+  @override
+  void setCategory(CategoryModel? value) {
+    final _$actionInfo = _$_AdControllerBaseActionController.startAction(
+        name: '_AdControllerBase.setCategory');
+    try {
+      return super.setCategory(value);
+    } finally {
+      _$_AdControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setTitle(String value) {
@@ -165,6 +230,8 @@ mixin _$AdController on _AdControllerBase, Store {
   @override
   String toString() {
     return '''
+categories: ${categories},
+category: ${category},
 adModel: ${adModel},
 titleError: ${titleError},
 descriptionError: ${descriptionError},
