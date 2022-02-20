@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
+import 'package:xlo_flutter/features/ad/domain/entities/category_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_save_ad.dart';
 import 'package:xlo_flutter/features/ad/domain/repositories/save_ad_repository.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
@@ -16,6 +17,7 @@ void main() {
     description: 'descrição do anuncio',
     price: 350.00,
     images: [],
+    category: CategoryEntity(description: 'new description'),
   );
 
   test('should save the ad', () async {

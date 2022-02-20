@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
+import 'package:xlo_flutter/core/shared/utils/constants.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 import 'package:xlo_flutter/features/ad/presenter/ad_controller.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
@@ -31,8 +32,8 @@ class _AdPageState extends ModularState<AdPage, AdController> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const FieldTitle(
-              title: 'Título',
-              subtitle: 'Título do anúncio.',
+              title: adTitle,
+              subtitle: adTitleDesc,
             ),
             Observer(builder: (_) {
               return TextFormField(
@@ -47,8 +48,8 @@ class _AdPageState extends ModularState<AdPage, AdController> {
             }),
             const SizedBox(height: 10),
             const FieldTitle(
-              title: 'Descrição',
-              subtitle: 'Escreva a descrição completa do anúncio.',
+              title: adDescription,
+              subtitle: adDescriptionDesc,
             ),
             Observer(builder: (_) {
               return TextFormField(
@@ -62,6 +63,10 @@ class _AdPageState extends ModularState<AdPage, AdController> {
               );
             }),
             const SizedBox(height: 10),
+            const FieldTitle(
+              title: adCategory,
+              subtitle: adCategoryDesc,
+            ),
             Observer(builder: (_) {
               return Center(
                 child: DropdownButton<CategoryModel>(
@@ -80,8 +85,8 @@ class _AdPageState extends ModularState<AdPage, AdController> {
             }),
             const SizedBox(height: 10),
             const FieldTitle(
-              title: 'Preço',
-              subtitle: 'Preço do anúncio.',
+              title: adPrice,
+              subtitle: adPriceDesc,
             ),
             Observer(builder: (_) {
               return TextFormField(
@@ -95,7 +100,7 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                 enabled: !controller.loading,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
-                  RealInputFormatter(moeda: true)
+                  CentavosInputFormatter(moeda: true)
                 ],
               );
             }),
@@ -108,7 +113,7 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                   child: controller.loading
                       ? const CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation(Colors.white))
-                      : const Text('Salvar', style: TextStyle(fontSize: 18.0)),
+                      : const Text(adSave, style: TextStyle(fontSize: 18.0)),
                 ),
               );
             }),

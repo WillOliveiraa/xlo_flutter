@@ -12,7 +12,7 @@ class GetAllCategoriesRepositoryMock extends Mock
 void main() {
   final repository = GetAllCategoriesRepositoryMock();
   final usecase = GetAllCategoriesUseCaseImp(repository);
-  final categories = [CategoryEntity('description of category')];
+  final categories = [CategoryEntity(description: 'description of category')];
 
   test('should get all categories', () async {
     when(() => repository.getAllCategories())

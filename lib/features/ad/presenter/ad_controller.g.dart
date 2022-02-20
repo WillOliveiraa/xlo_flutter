@@ -37,6 +37,13 @@ mixin _$AdController on _AdControllerBase, Store {
       (_$priceErrorComputed ??= Computed<String?>(() => super.priceError,
               name: '_AdControllerBase.priceError'))
           .value;
+  Computed<String?>? _$categoryErrorComputed;
+
+  @override
+  String? get categoryError =>
+      (_$categoryErrorComputed ??= Computed<String?>(() => super.categoryError,
+              name: '_AdControllerBase.categoryError'))
+          .value;
   Computed<bool>? _$isValidComputed;
 
   @override
@@ -157,18 +164,18 @@ mixin _$AdController on _AdControllerBase, Store {
     });
   }
 
-  final _$categoryAtom = Atom(name: '_AdControllerBase.category');
+  final _$_categoryAtom = Atom(name: '_AdControllerBase._category');
 
   @override
-  CategoryModel? get category {
-    _$categoryAtom.reportRead();
-    return super.category;
+  CategoryModel? get _category {
+    _$_categoryAtom.reportRead();
+    return super._category;
   }
 
   @override
-  set category(CategoryModel? value) {
-    _$categoryAtom.reportWrite(value, super.category, () {
-      super.category = value;
+  set _category(CategoryModel? value) {
+    _$_categoryAtom.reportWrite(value, super._category, () {
+      super._category = value;
     });
   }
 
@@ -231,11 +238,11 @@ mixin _$AdController on _AdControllerBase, Store {
   String toString() {
     return '''
 categories: ${categories},
-category: ${category},
 adModel: ${adModel},
 titleError: ${titleError},
 descriptionError: ${descriptionError},
 priceError: ${priceError},
+categoryError: ${categoryError},
 isValid: ${isValid},
 saveAdPressed: ${saveAdPressed}
     ''';

@@ -82,3 +82,14 @@ const String homeTitle = "Título";
 const String homeInvalidTitle = "Título inválido";
 const String homeInvalidImage = "Insira ao menos uma imagem";
 const String homeUpdateSectionError = "Erro ao tentar atualizar os menus";
+
+// Ad
+const String adTitle = "Título";
+const String adTitleDesc = "Título do anúncio";
+const String adDescription = "Descrição";
+const String adDescriptionDesc = "Escreva a descrição completa do anúncio.";
+const String adCategory = "Categoria";
+const String adCategoryDesc = "Escolha uma categoria para o anúncio.";
+const String adPrice = "Preço";
+const String adPriceDesc = "Preço do anúncio.";
+const String adSave = "Salvar";

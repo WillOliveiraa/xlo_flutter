@@ -14,7 +14,11 @@ class SaveAdDatasourceImp implements SaveAdDatasource {
       ..set<String>(keyAdTitle, adEntity.title)
       ..set<String>(keyAdDescription, adEntity.description)
       ..set<num>(keyAdPrice, adEntity.price)
-      ..set<int>(keyAdStatus, adEntity.status.index);
+      ..set<int>(keyAdStatus, adEntity.status.index)
+      ..set<ParseObject>(
+          keyAdCategory,
+          ParseObject(keyCategoryTable)
+            ..set(keyCategoryId, adEntity.category.id));
 
     final result = await ad.save();
 

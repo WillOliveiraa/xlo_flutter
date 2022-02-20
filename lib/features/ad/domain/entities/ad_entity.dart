@@ -1,14 +1,15 @@
-import 'package:equatable/equatable.dart';
+import 'package:xlo_flutter/features/ad/domain/entities/category_entity.dart';
 
 enum AdStatus { PENDING, ACTIVE, SOLD, DELETED }
 
-class AdEntity extends Equatable {
+class AdEntity {
   final String title;
   final String description;
   final num price;
   final int? views;
   final List images;
   final AdStatus status;
+  final CategoryEntity category;
 
   AdEntity({
     required this.title,
@@ -17,6 +18,7 @@ class AdEntity extends Equatable {
     this.views = 0,
     required this.images,
     this.status = AdStatus.PENDING,
+    required this.category,
   });
 
   bool get isValidTitle => title.isNotEmpty && title.length > 6;
@@ -28,8 +30,7 @@ class AdEntity extends Equatable {
 
   bool get isValidImages => images.isNotEmpty;
 
-  set title(String value) => title = value;
+  bool get isValidCategory => category.description.isNotEmpty;
 
-  @override
-  List<Object> get props => [images];
+  set title(String value) => title = value;
 }

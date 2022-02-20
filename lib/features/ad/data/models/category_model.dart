@@ -3,15 +3,17 @@ import 'package:xlo_flutter/core/shared/utils/table_keys.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/category_entity.dart';
 
 class CategoryModel extends CategoryEntity {
-  final String? id;
+  CategoryModel({required String description, String? id})
+      : super(description: description, id: id);
 
-  CategoryModel({required String description, this.id}) : super(description);
-
-  factory CategoryModel.fromParse(ParseObject object) {
-    return CategoryModel(
-      id: object.objectId,
-      description: object.get<String>(keyCategoryDescription) ?? '',
-    );
+  factory CategoryModel.fromParse(ParseObject? object) {
+    if (object != null) {
+      return CategoryModel(
+        id: object.objectId,
+        description: object.get<String>(keyCategoryDescription) ?? '',
+      );
+    }
+    return CategoryModel(description: '');
   }
 
   @override

@@ -4,7 +4,4 @@ class ErrorSignUpUser extends Failure {
   final String? message;
 
   ErrorSignUpUser({this.message});
-
-  @override
-  List<Object?> get props => [message];
 }

@@ -4,7 +4,4 @@ class ErrorGetAllCategories extends Failure {
   final String? message;
 
   ErrorGetAllCategories({this.message});
-
-  @override
-  List<Object?> get props => [message];
 }

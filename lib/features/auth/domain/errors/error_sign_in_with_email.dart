@@ -4,7 +4,4 @@ class ErrorSignInWithEmail extends Failure {
   final String? message;
 
   ErrorSignInWithEmail({this.message});
-
-  @override
-  List<Object?> get props => [message];
 }

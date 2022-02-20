@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
@@ -38,7 +39,9 @@ abstract class _AdControllerBase with Store {
   List<CategoryModel> categories = [];
 
   @observable
-  CategoryModel? category;
+  CategoryModel? _category;
+
+  CategoryModel? get category => _category;
 
   // ignore: unnecessary_getters_setters
   bool get loading => _loading;
@@ -51,7 +54,7 @@ abstract class _AdControllerBase with Store {
   set loadingCategories(bool value) => _loadingCategories = value;
 
   @action
-  void setCategory(CategoryModel? value) => category = value;
+  void setCategory(CategoryModel? value) => _category = value;
 
   @computed
   AdModel get adModel => AdModel.createAd(
@@ -59,6 +62,7 @@ abstract class _AdControllerBase with Store {
         description: _description ?? '',
         price: _price ?? 0,
         images: _images,
+        category: _category ?? CategoryModel(description: ''),
       );
 
   @action
@@ -90,28 +94,37 @@ abstract class _AdControllerBase with Store {
   }
 
   @action
-  void setPrice(String value) => _price = num.tryParse(value);
+  void setPrice(String value) =>
+      _price = UtilBrasilFields.converterMoedaParaDouble(
+          value == '' ? 'R\$ 0,00' : value);
 
   @computed
   String? get priceError {
     if (_price == null || adModel.isValidPrice) {
       return null;
-    } else if (_price! == 0) {
+    } else
       return 'Campo obrigatório';
-    } else {
-      return 'Preço não pode ser zero';
-    }
   }
 
   @computed
-  bool get isValid => adModel.isValidTitle && adModel.isValidDescription;
+  String? get categoryError {
+    if (_category == null || adModel.isValidCategory)
+      return null;
+    else
+      return 'Campo obrigatório';
+  }
+
+  @computed
+  bool get isValid =>
+      adModel.isValidTitle &&
+      adModel.isValidDescription &&
+      adModel.isValidCategory;
 
   @computed
   Function? get saveAdPressed => isValid && !loading ? saveAd : null;
 
   Future<void> saveAd() async {
     loading = true;
-    // await Future.delayed(Duration(seconds: 2));
     final response = await _saveAdUseCase(adModel);
 
     response.fold((failure) {
@@ -133,6 +146,7 @@ abstract class _AdControllerBase with Store {
 
     if (result is List<CategoryModel>) {
       categories = result;
+      categories.insert(0, CategoryModel(description: ''));
       // category = categories.first;
     } else
       print(result);
