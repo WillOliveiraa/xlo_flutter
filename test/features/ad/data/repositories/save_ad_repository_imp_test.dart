@@ -6,6 +6,7 @@ import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/save_ad_repository_imp.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_save_ad.dart';
+import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
 class SaveAdDatasourceMock extends Mock implements SaveAdDatasource {}
 
@@ -18,6 +19,7 @@ void main() {
     price: 350.00,
     images: [],
     category: CategoryModel(description: 'new description'),
+    owner: UserModel(name: '', email: ''),
   );
 
   test('should save a ad', () async {

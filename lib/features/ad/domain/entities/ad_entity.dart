@@ -1,4 +1,5 @@
 import 'package:xlo_flutter/features/ad/domain/entities/category_entity.dart';
+import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
 
 enum AdStatus { PENDING, ACTIVE, SOLD, DELETED }
 
@@ -10,6 +11,7 @@ class AdEntity {
   final List images;
   final AdStatus status;
   final CategoryEntity category;
+  final UserEntity owner;
 
   AdEntity({
     required this.title,
@@ -19,6 +21,7 @@ class AdEntity {
     required this.images,
     this.status = AdStatus.PENDING,
     required this.category,
+    required this.owner,
   });
 
   bool get isValidTitle => title.isNotEmpty && title.length > 6;
@@ -31,6 +34,8 @@ class AdEntity {
   bool get isValidImages => images.isNotEmpty;
 
   bool get isValidCategory => category.description.isNotEmpty;
+
+  bool get isValidOwner => owner.id != null;
 
   set title(String value) => title = value;
 }

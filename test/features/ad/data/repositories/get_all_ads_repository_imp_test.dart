@@ -6,6 +6,7 @@ import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/get_all_ads_repository_imp.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_get_all_ads.dart';
+import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
 class GetAllAdsDatasourceMock extends Mock implements GetAllAdsDatasource {}
 
@@ -19,6 +20,7 @@ void main() {
       price: 350.00,
       images: [''],
       category: CategoryModel(description: 'new description'),
+      owner: UserModel(name: '', email: ''),
     ),
   ];
 

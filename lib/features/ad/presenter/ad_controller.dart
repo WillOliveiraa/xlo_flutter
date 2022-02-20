@@ -1,11 +1,13 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
+import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_categories_usecase/get_all_categories_usecase.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
 part 'ad_controller.g.dart';
 
@@ -14,8 +16,10 @@ class AdController = _AdControllerBase with _$AdController;
 abstract class _AdControllerBase with Store {
   final SaveAdUseCaseImp _saveAdUseCase;
   final GetAllCategoriesUseCaseImp _getAllCategoriesUseCase;
+  final AuthController _authController;
 
-  _AdControllerBase(this._saveAdUseCase, this._getAllCategoriesUseCase);
+  _AdControllerBase(
+      this._saveAdUseCase, this._getAllCategoriesUseCase, this._authController);
 
   @observable
   String? _title;
@@ -58,12 +62,12 @@ abstract class _AdControllerBase with Store {
 
   @computed
   AdModel get adModel => AdModel.createAd(
-        title: _title ?? '',
-        description: _description ?? '',
-        price: _price ?? 0,
-        images: _images,
-        category: _category ?? CategoryModel(description: ''),
-      );
+      title: _title ?? '',
+      description: _description ?? '',
+      price: _price ?? 0,
+      images: _images,
+      category: _category ?? CategoryModel(description: ''),
+      onwer: _getCurrentUser());
 
   @action
   void setTitle(String value) => _title = value;
@@ -118,7 +122,8 @@ abstract class _AdControllerBase with Store {
   bool get isValid =>
       adModel.isValidTitle &&
       adModel.isValidDescription &&
-      adModel.isValidCategory;
+      adModel.isValidCategory &&
+      adModel.isValidOwner;
 
   @computed
   Function? get saveAdPressed => isValid && !loading ? saveAd : null;
@@ -152,5 +157,11 @@ abstract class _AdControllerBase with Store {
       print(result);
 
     loadingCategories = false;
+  }
+
+  UserModel _getCurrentUser() {
+    if (_authController.user != null) return _authController.user!;
+
+    return UserModel(name: 'name', email: 'email');
   }
 }

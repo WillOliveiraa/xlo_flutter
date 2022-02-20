@@ -68,19 +68,17 @@ class _AdPageState extends ModularState<AdPage, AdController> {
               subtitle: adCategoryDesc,
             ),
             Observer(builder: (_) {
-              return Center(
-                child: DropdownButton<CategoryModel>(
-                  value: controller.category,
-                  onChanged: (value) => controller.setCategory(value),
-                  items: controller.categories
-                      .map<DropdownMenuItem<CategoryModel>>(
-                          (CategoryModel category) {
-                    return DropdownMenuItem<CategoryModel>(
-                      value: category,
-                      child: Text(category.description),
-                    );
-                  }).toList(),
-                ),
+              return DropdownButton<CategoryModel>(
+                value: controller.category,
+                onChanged: (value) => controller.setCategory(value),
+                items: controller.categories
+                    .map<DropdownMenuItem<CategoryModel>>(
+                        (CategoryModel category) {
+                  return DropdownMenuItem<CategoryModel>(
+                    value: category,
+                    child: Text(category.description),
+                  );
+                }).toList(),
               );
             }),
             const SizedBox(height: 10),

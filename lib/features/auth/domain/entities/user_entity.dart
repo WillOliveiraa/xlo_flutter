@@ -3,6 +3,7 @@ import 'package:string_validator/string_validator.dart' as validator;
 enum UserType { PARTICULAR, PROFESSIONAL }
 
 class UserEntity {
+  final String? id;
   final String name;
   final String email;
   final String? phone;
@@ -10,6 +11,7 @@ class UserEntity {
   final UserType type;
 
   UserEntity({
+    this.id,
     required this.name,
     required this.email,
     this.phone,

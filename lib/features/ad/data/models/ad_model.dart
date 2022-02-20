@@ -1,6 +1,7 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_flutter/core/shared/utils/table_keys.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
+import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
 import 'category_model.dart';
 
@@ -15,6 +16,7 @@ class AdModel extends AdEntity {
     int? views,
     required List<dynamic> images,
     required CategoryModel category,
+    required UserModel owner,
   }) : super(
           title: title,
           description: description,
@@ -22,6 +24,7 @@ class AdModel extends AdEntity {
           views: views,
           images: images,
           category: category,
+          owner: owner,
         );
 
   Map<String, dynamic> toMap() {
@@ -41,6 +44,7 @@ class AdModel extends AdEntity {
     int? views = 0,
     required List<dynamic> images,
     required CategoryModel category,
+    required UserModel onwer,
   }) {
     return AdModel(
       title: title,
@@ -49,6 +53,7 @@ class AdModel extends AdEntity {
       images: images,
       views: views,
       category: category,
+      owner: onwer,
     );
   }
 
@@ -61,11 +66,12 @@ class AdModel extends AdEntity {
       price: object.get<num>(keyAdPrice) ?? 0,
       views: object.get<int>(keyAdViews, defaultValue: 0),
       category: CategoryModel.fromParse(object.get<ParseObject>(keyAdCategory)),
+      owner: UserModel.fromParse(object.get<ParseUser>(keyAdOwner)!),
     );
   }
 
   @override
   String toString() {
-    return 'AdModel(title: $title, description: $description, price: $price, views: $views, images: $images, category: $category)';
+    return 'AdModel(title: $title, description: $description, price: $price, views: $views, images: $images, category: $category, owner: $owner)';
   }
 }

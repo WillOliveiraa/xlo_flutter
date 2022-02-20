@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/category_entity.dart';
+import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
 void main() {
   group('should check if field is valid or not', () {
@@ -13,6 +14,7 @@ void main() {
             price: 0,
             images: [],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidTitle,
           false);
       expect(
@@ -22,6 +24,7 @@ void main() {
             price: 0,
             images: [''],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidTitle,
           false);
       expect(
@@ -31,6 +34,7 @@ void main() {
             price: 0,
             images: [''],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidTitle,
           true);
 
@@ -42,6 +46,7 @@ void main() {
             price: 0,
             images: [''],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidDescription,
           false);
       expect(
@@ -51,6 +56,7 @@ void main() {
             price: 0,
             images: [''],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidDescription,
           false);
       expect(
@@ -60,6 +66,7 @@ void main() {
             price: 0,
             images: [''],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidDescription,
           true);
 
@@ -71,6 +78,7 @@ void main() {
             price: -1,
             images: [''],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidPrice,
           false);
       expect(
@@ -80,6 +88,7 @@ void main() {
             price: 0,
             images: [''],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidPrice,
           false);
       expect(
@@ -89,6 +98,7 @@ void main() {
             price: 100.00,
             images: [''],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidPrice,
           true);
 
@@ -100,6 +110,7 @@ void main() {
             price: 100.00,
             images: [],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidImages,
           false);
       expect(
@@ -109,6 +120,7 @@ void main() {
             price: 100.00,
             images: [''],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidImages,
           true);
 
@@ -120,6 +132,7 @@ void main() {
             price: 100.00,
             images: [''],
             category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
           ).isValidCategory,
           false);
       expect(
@@ -129,7 +142,30 @@ void main() {
             price: 100.00,
             images: [''],
             category: CategoryEntity(description: 'new category'),
+            owner: UserModel(name: '', email: ''),
           ).isValidCategory,
+          true);
+
+      // owner
+      expect(
+          AdEntity(
+            title: 'New ad',
+            description: 'description',
+            price: 100.00,
+            images: [''],
+            category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: ''),
+          ).isValidOwner,
+          false);
+      expect(
+          AdEntity(
+            title: 'New ad',
+            description: 'description',
+            price: 100.00,
+            images: [''],
+            category: CategoryEntity(description: ''),
+            owner: UserModel(name: '', email: '', id: 'rBgI0dwu98'),
+          ).isValidOwner,
           true);
     });
   });

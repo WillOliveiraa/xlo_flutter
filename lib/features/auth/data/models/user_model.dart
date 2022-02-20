@@ -4,23 +4,23 @@ import 'package:xlo_flutter/core/shared/utils/table_keys.dart';
 import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
-  final String? id;
   final DateTime? createdAt;
 
   UserModel({
-    this.id,
     required String name,
     required String email,
     String? password,
     String? phone,
     UserType type = UserType.PARTICULAR,
     this.createdAt,
+    String? id,
   }) : super(
           name: name,
           email: email,
           password: password,
           phone: phone,
           type: type,
+          id: id,
         );
 
   factory UserModel.signInWithEmail({

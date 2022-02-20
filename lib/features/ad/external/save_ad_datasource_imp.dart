@@ -9,8 +9,16 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_save_ad.dart';
 class SaveAdDatasourceImp implements SaveAdDatasource {
   @override
   Future<Either<Failure, Unit>> saveAd(AdEntity adEntity) async {
+    final _parseUser = await ParseUser.currentUser() as ParseUser;
     final _parseObject = ParseObject(keyAdTable);
-    final ad = _parseObject
+    final ad = _parseObject;
+
+    final parseAcl = ParseACL(owner: _parseUser);
+    parseAcl.setPublicReadAccess(allowed: true);
+    parseAcl.setPublicWriteAccess(allowed: false);
+    _parseObject.setACL(parseAcl);
+
+    _parseObject
       ..set<String>(keyAdTitle, adEntity.title)
       ..set<String>(keyAdDescription, adEntity.description)
       ..set<num>(keyAdPrice, adEntity.price)
@@ -18,7 +26,8 @@ class SaveAdDatasourceImp implements SaveAdDatasource {
       ..set<ParseObject>(
           keyAdCategory,
           ParseObject(keyCategoryTable)
-            ..set(keyCategoryId, adEntity.category.id));
+            ..set(keyCategoryId, adEntity.category.id))
+      ..set<ParseUser>(keyAdOwner, _parseUser);
 
     final result = await ad.save();
 

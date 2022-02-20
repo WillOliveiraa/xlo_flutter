@@ -6,6 +6,7 @@ import 'package:xlo_flutter/features/ad/domain/entities/category_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_get_all_ads.dart';
 import 'package:xlo_flutter/features/ad/domain/repositories/get_all_ads_repository.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_ad_usecase/get_all_ad_usecase.dart';
+import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
 class GetAllAdsRepositoryMock extends Mock implements GetAllAdsRepository {}
 
@@ -19,6 +20,7 @@ void main() {
       price: 350.00,
       images: [''],
       category: CategoryEntity(description: 'new description'),
+      owner: UserModel(name: '', email: ''),
     ),
   ];
 
