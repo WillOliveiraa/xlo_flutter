@@ -44,6 +44,13 @@ mixin _$AdController on _AdControllerBase, Store {
       (_$categoryErrorComputed ??= Computed<String?>(() => super.categoryError,
               name: '_AdControllerBase.categoryError'))
           .value;
+  Computed<String?>? _$imagesErrorComputed;
+
+  @override
+  String? get imagesError =>
+      (_$imagesErrorComputed ??= Computed<String?>(() => super.imagesError,
+              name: '_AdControllerBase.imagesError'))
+          .value;
   Computed<bool>? _$isValidComputed;
 
   @override
@@ -103,21 +110,6 @@ mixin _$AdController on _AdControllerBase, Store {
     });
   }
 
-  final _$_imagesAtom = Atom(name: '_AdControllerBase._images');
-
-  @override
-  List<dynamic> get _images {
-    _$_imagesAtom.reportRead();
-    return super._images;
-  }
-
-  @override
-  set _images(List<dynamic> value) {
-    _$_imagesAtom.reportWrite(value, super._images, () {
-      super._images = value;
-    });
-  }
-
   final _$_loadingAtom = Atom(name: '_AdControllerBase._loading');
 
   @override
@@ -149,18 +141,18 @@ mixin _$AdController on _AdControllerBase, Store {
     });
   }
 
-  final _$categoriesAtom = Atom(name: '_AdControllerBase.categories');
+  final _$_categoriesAtom = Atom(name: '_AdControllerBase._categories');
 
   @override
-  List<CategoryModel> get categories {
-    _$categoriesAtom.reportRead();
-    return super.categories;
+  List<CategoryModel> get _categories {
+    _$_categoriesAtom.reportRead();
+    return super._categories;
   }
 
   @override
-  set categories(List<CategoryModel> value) {
-    _$categoriesAtom.reportWrite(value, super.categories, () {
-      super.categories = value;
+  set _categories(List<CategoryModel> value) {
+    _$_categoriesAtom.reportWrite(value, super._categories, () {
+      super._categories = value;
     });
   }
 
@@ -237,12 +229,12 @@ mixin _$AdController on _AdControllerBase, Store {
   @override
   String toString() {
     return '''
-categories: ${categories},
 adModel: ${adModel},
 titleError: ${titleError},
 descriptionError: ${descriptionError},
 priceError: ${priceError},
 categoryError: ${categoryError},
+imagesError: ${imagesError},
 isValid: ${isValid},
 saveAdPressed: ${saveAdPressed}
     ''';

@@ -62,11 +62,11 @@ class AdModel extends AdEntity {
       id: object.objectId,
       title: object.get<String>(keyAdTitle) ?? '',
       description: object.get<String>(keyAdDescription) ?? '',
-      images: [],
+      images: object.get<List>(keyAdImages)?.map((e) => e.url).toList() ?? [],
       price: object.get<num>(keyAdPrice) ?? 0,
       views: object.get<int>(keyAdViews, defaultValue: 0),
       category: CategoryModel.fromParse(object.get<ParseObject>(keyAdCategory)),
-      owner: UserModel.fromParse(object.get<ParseUser>(keyAdOwner)!),
+      owner: UserModel.fromParseAd(object.get<ParseUser>(keyAdOwner)!),
     );
   }
 

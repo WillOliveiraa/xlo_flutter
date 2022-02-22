@@ -48,6 +48,10 @@ class UserModel extends UserEntity {
     );
   }
 
+  factory UserModel.fromParseAd(ParseUser parseUser) {
+    return UserModel(id: parseUser.objectId, name: '', email: '');
+  }
+
   @override
   String toString() {
     return 'UserModel(name: $name, email: $email, phone: $phone, password: $password, type: $type)';

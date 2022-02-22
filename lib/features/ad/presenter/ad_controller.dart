@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
+import 'package:xlo_flutter/core/pages/base/base_controller.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_categories_usecase/get_all_categories_usecase.dart';
@@ -17,9 +18,10 @@ abstract class _AdControllerBase with Store {
   final SaveAdUseCaseImp _saveAdUseCase;
   final GetAllCategoriesUseCaseImp _getAllCategoriesUseCase;
   final AuthController _authController;
+  final BaseController _baseController;
 
-  _AdControllerBase(
-      this._saveAdUseCase, this._getAllCategoriesUseCase, this._authController);
+  _AdControllerBase(this._saveAdUseCase, this._getAllCategoriesUseCase,
+      this._authController, this._baseController);
 
   @observable
   String? _title;
@@ -30,8 +32,7 @@ abstract class _AdControllerBase with Store {
   @observable
   num? _price;
 
-  @observable
-  List<dynamic> _images = [];
+  ObservableList<dynamic> _images = ObservableList();
 
   @observable
   bool _loading = false;
@@ -40,7 +41,9 @@ abstract class _AdControllerBase with Store {
   bool _loadingCategories = false;
 
   @observable
-  List<CategoryModel> categories = [];
+  List<CategoryModel> _categories = [];
+
+  List<CategoryModel> get categories => _categories;
 
   @observable
   CategoryModel? _category;
@@ -59,6 +62,11 @@ abstract class _AdControllerBase with Store {
 
   @action
   void setCategory(CategoryModel? value) => _category = value;
+
+  // ignore: unnecessary_getters_setters
+  dynamic get images => _images;
+
+  set images(dynamic value) => _images = value;
 
   @computed
   AdModel get adModel => AdModel.createAd(
@@ -119,10 +127,19 @@ abstract class _AdControllerBase with Store {
   }
 
   @computed
+  String? get imagesError {
+    if (_images.length == 0 || adModel.isValidImages)
+      return null;
+    else
+      return 'Insira images';
+  }
+
+  @computed
   bool get isValid =>
       adModel.isValidTitle &&
       adModel.isValidDescription &&
       adModel.isValidCategory &&
+      adModel.isValidImages &&
       adModel.isValidOwner;
 
   @computed
@@ -136,9 +153,11 @@ abstract class _AdControllerBase with Store {
       asuka.showSnackBar(
           SnackBar(content: Text('Erro ao tentar salvar o anúncio')));
       loading = false;
-    }, (_) {
-      asuka.showSnackBar(SnackBar(content: Text('Anúncio salvo com sucesso!')));
+    }, (_) async {
       loading = false;
+      asuka.showSnackBar(SnackBar(content: Text('Anúncio salvo com sucesso!')));
+      await Future.delayed(Duration(seconds: 1));
+      _baseController.setPage(0);
     });
   }
 
@@ -150,8 +169,8 @@ abstract class _AdControllerBase with Store {
     var result = response.fold((l) => l, (r) => r);
 
     if (result is List<CategoryModel>) {
-      categories = result;
-      categories.insert(0, CategoryModel(description: ''));
+      _categories = result;
+      _categories.insert(0, CategoryModel(description: ''));
       // category = categories.first;
     } else
       print(result);
