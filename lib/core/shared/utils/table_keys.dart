@@ -20,6 +20,7 @@ const keyAdDistrict = 'district';
 const keyAdCity = 'city';
 const keyAdPostalCode = 'postalCode';
 const keyAdFederativeUnit = 'federativeUnit';
+const keyAdUfName = 'name';
 const keyAdImages = 'images';
 const keyAdCategory = 'category';
 const keyAdOwner = 'owner';

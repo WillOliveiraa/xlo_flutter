@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/core/pages/base/base_controller.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
+import 'package:xlo_flutter/features/ad/data/models/address_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
+import 'package:xlo_flutter/features/ad/data/models/city_model.dart';
+import 'package:xlo_flutter/features/ad/data/models/uf_model.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_categories_usecase/get_all_categories_usecase.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 import 'package:asuka/asuka.dart' as asuka;
@@ -50,6 +53,8 @@ abstract class _AdControllerBase with Store {
 
   CategoryModel? get category => _category;
 
+  AddressModel? _address;
+
   // ignore: unnecessary_getters_setters
   bool get loading => _loading;
 
@@ -70,12 +75,20 @@ abstract class _AdControllerBase with Store {
 
   @computed
   AdModel get adModel => AdModel.createAd(
-      title: _title ?? '',
-      description: _description ?? '',
-      price: _price ?? 0,
-      images: _images,
-      category: _category ?? CategoryModel(description: ''),
-      onwer: _getCurrentUser());
+        title: _title ?? '',
+        description: _description ?? '',
+        price: _price ?? 0,
+        images: _images,
+        category: _category ?? CategoryModel(description: ''),
+        onwer: _getCurrentUser(),
+        address: _address ??
+            AddressModel(
+              uf: UfModel(initials: '', name: ''),
+              city: CityModel(name: ''),
+              cep: '',
+              district: '',
+            ),
+      );
 
   @action
   void setTitle(String value) => _title = value;

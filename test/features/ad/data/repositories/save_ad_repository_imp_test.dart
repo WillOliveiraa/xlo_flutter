@@ -2,7 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:xlo_flutter/features/ad/data/datasources/save_ad_datasource.dart';
+import 'package:xlo_flutter/features/ad/data/models/address_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
+import 'package:xlo_flutter/features/ad/data/models/city_model.dart';
+import 'package:xlo_flutter/features/ad/data/models/uf_model.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/save_ad_repository_imp.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_save_ad.dart';
@@ -20,6 +23,12 @@ void main() {
     images: [],
     category: CategoryModel(description: 'new description'),
     owner: UserModel(name: '', email: ''),
+    address: AddressModel(
+      uf: UfModel(initials: '', name: ''),
+      city: CityModel(name: ''),
+      cep: '',
+      district: '',
+    ),
   );
 
   test('should save a ad', () async {
