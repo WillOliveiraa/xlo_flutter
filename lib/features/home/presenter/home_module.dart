@@ -5,8 +5,8 @@ import 'package:xlo_flutter/features/ad/data/repositories/get_all_ads_repository
 import 'package:xlo_flutter/features/ad/data/repositories/get_all_categories_repository_imp.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_ad_usecase/get_all_ad_usecase.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_categories_usecase/get_all_categories_usecase.dart';
-import 'package:xlo_flutter/features/ad/external/get_all_ads_datasource.dart';
-import 'package:xlo_flutter/features/ad/external/get_all_categories_datasource.dart';
+import 'package:xlo_flutter/features/ad/external/get_all_ads_datasource_imp.dart';
+import 'package:xlo_flutter/features/ad/external/get_all_categories_datasource_imp.dart';
 import 'package:xlo_flutter/features/home/presenter/home/home_controller.dart';
 import 'home/home_page.dart';
 

@@ -5,7 +5,7 @@ import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_get_all_ads.dart';
 import 'package:xlo_flutter/features/ad/domain/repositories/get_all_ads_repository.dart';
 
-class GetAllAdsRepositoryImp extends GetAllAdsRepository {
+class GetAllAdsRepositoryImp implements GetAllAdsRepository {
   final GetAllAdsDatasource _datasource;
 
   GetAllAdsRepositoryImp(this._datasource);

@@ -5,7 +5,7 @@ import 'package:xlo_flutter/features/ad/data/models/address_model.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_fetch_by_cep.dart';
 import 'package:xlo_flutter/features/ad/domain/repositories/fetch_by_cep_repository.dart';
 
-class FetchByCepRepositoryImp extends FetchByCepRepository {
+class FetchByCepRepositoryImp implements FetchByCepRepository {
   final FetchByCepDatasource _datasource;
 
   FetchByCepRepositoryImp(this._datasource);

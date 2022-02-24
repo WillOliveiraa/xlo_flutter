@@ -10,4 +10,13 @@ class AddressModel extends AddressEntity {
     required String cep,
     required String district,
   }) : super(uf: uf, city: city, cep: cep, district: district);
+
+  factory AddressModel.fromMap(Map<dynamic, dynamic> map) {
+    return AddressModel(
+      uf: UfModel.fromJson(map['uf']),
+      city: CityModel.fromJson(map['city']),
+      cep: map['cep'] ?? '',
+      district: map['district'] ?? '',
+    );
+  }
 }

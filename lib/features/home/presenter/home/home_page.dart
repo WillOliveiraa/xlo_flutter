@@ -63,7 +63,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   ad.title,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                subtitle: Text(ad.description),
+                subtitle: Text(
+                  ad.description,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
                 trailing: Text(
                   CustomMoneyFormatter.formattedMoney(ad.price),
                   style: TextStyle(
