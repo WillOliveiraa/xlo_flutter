@@ -10,6 +10,8 @@ import 'package:xlo_flutter/features/ad/presenter/ad_controller.dart';
 import 'package:xlo_flutter/features/ad/presenter/components/images_field.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
 
+import 'components/cep_field/cep_field.dart';
+
 class AdPage extends StatefulWidget {
   @override
   State<AdPage> createState() => _AdPageState();
@@ -25,7 +27,9 @@ class _AdPageState extends ModularState<AdPage, AdController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Insert')),
+      appBar: AppBar(
+        title: Text('Inserir Anúncio', style: TextStyle(color: Colors.black87)),
+      ),
       drawer: CustomDrawer(),
       body: SingleChildScrollView(
         child: Padding(
@@ -86,6 +90,8 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                 );
               }),
               const SizedBox(height: 10),
+              CepField(controller),
+              const SizedBox(height: 10),
               const FieldTitle(
                 title: adPrice,
                 subtitle: adPriceDesc,
@@ -112,6 +118,9 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                   height: 44,
                   child: ElevatedButton(
                     onPressed: controller.saveAdPressed as Function()?,
+                    style: ElevatedButton.styleFrom(
+                      primary: Theme.of(context).primaryColor,
+                    ),
                     child: controller.loading
                         ? const CircularProgressIndicator(
                             valueColor: AlwaysStoppedAnimation(Colors.white))
@@ -119,6 +128,7 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                   ),
                 );
               }),
+              const SizedBox(height: 10),
             ],
           ),
         ),

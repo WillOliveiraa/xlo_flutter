@@ -11,9 +11,9 @@ class GetAllCitiesRepositoryImp implements GetAllCitiesRepository {
   GetAllCitiesRepositoryImp(this._datasource);
 
   @override
-  Future<Either<Failure, List<CityModel>>> getAllCities() async {
+  Future<Either<Failure, List<CityModel>>> getAllCities(String ufId) async {
     try {
-      return await _datasource.getAllCities();
+      return await _datasource.getAllCities(ufId);
     } catch (e) {
       return Left(ErrorGetAllCities());
     }

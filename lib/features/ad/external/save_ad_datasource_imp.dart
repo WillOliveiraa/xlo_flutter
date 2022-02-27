@@ -33,6 +33,10 @@ class SaveAdDatasourceImp implements SaveAdDatasource {
           keyAdCategory,
           ParseObject(keyCategoryTable)
             ..set(keyCategoryId, adEntity.category.id))
+      ..set<String>(keyAdDistrict, adEntity.address.district)
+      ..set<String>(keyAdCity, adEntity.address.city.name)
+      ..set<String>(keyAdFederativeUnit, adEntity.address.uf.initials)
+      ..set<String>(keyAdPostalCode, adEntity.address.cep)
       ..set<List<ParseFile>>(keyAdImages, parseImages)
       ..set<ParseUser>(keyAdOwner, _parseUser);
 

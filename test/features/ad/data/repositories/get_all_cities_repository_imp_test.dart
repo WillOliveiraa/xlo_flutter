@@ -12,29 +12,30 @@ class GetAllCitiesDatasourceMock extends Mock
 void main() {
   final datasource = GetAllCitiesDatasourceMock();
   final repository = GetAllCitiesRepositoryImp(datasource);
+  final ufId = '123';
   final cities = [
     CityModel(name: 'Terra Boa'),
   ];
 
   test('should get all Cities', () async {
-    when(() => datasource.getAllCities())
+    when(() => datasource.getAllCities(ufId))
         .thenAnswer((_) async => Right(cities));
 
-    final result = await repository.getAllCities();
+    final result = await repository.getAllCities(ufId);
 
     expect(result, isA<Right<dynamic, List<CityModel>>>());
-    verify(() => datasource.getAllCities()).called(1);
+    verify(() => datasource.getAllCities(ufId)).called(1);
     verifyNoMoreInteractions(datasource);
   });
 
   test('should return a ErrorGetAllCities', () async {
-    when(() => datasource.getAllCities())
+    when(() => datasource.getAllCities(ufId))
         .thenAnswer((_) async => Left(ErrorGetAllCities()));
 
-    final result = (await repository.getAllCities()).fold(id, id);
+    final result = (await repository.getAllCities(ufId)).fold(id, id);
 
     expect(result, isA<ErrorGetAllCities>());
-    verify(() => datasource.getAllCities()).called(1);
+    verify(() => datasource.getAllCities(ufId)).called(1);
     verifyNoMoreInteractions(datasource);
   });
 }

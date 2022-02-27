@@ -13,10 +13,10 @@ class AddressModel extends AddressEntity {
 
   factory AddressModel.fromMap(Map<dynamic, dynamic> map) {
     return AddressModel(
-      uf: UfModel.fromJson(map['uf']),
-      city: CityModel.fromJson(map['city']),
+      uf: UfModel(initials: map['uf'], name: ''),
+      city: CityModel(name: map['localidade'] as String),
       cep: map['cep'] ?? '',
-      district: map['district'] ?? '',
+      district: map['bairro'] ?? '',
     );
   }
 }

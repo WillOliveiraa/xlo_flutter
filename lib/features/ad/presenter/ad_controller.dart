@@ -11,6 +11,7 @@ import 'package:xlo_flutter/features/ad/data/models/uf_model.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_categories_usecase/get_all_categories_usecase.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:xlo_flutter/features/ad/presenter/components/cep_field/cep_field_controller.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
 part 'ad_controller.g.dart';
@@ -22,9 +23,10 @@ abstract class _AdControllerBase with Store {
   final GetAllCategoriesUseCaseImp _getAllCategoriesUseCase;
   final AuthController _authController;
   final BaseController _baseController;
+  final CepFieldController _cepFieldController;
 
   _AdControllerBase(this._saveAdUseCase, this._getAllCategoriesUseCase,
-      this._authController, this._baseController);
+      this._authController, this._baseController, this._cepFieldController);
 
   @observable
   String? _title;
@@ -53,7 +55,9 @@ abstract class _AdControllerBase with Store {
 
   CategoryModel? get category => _category;
 
-  AddressModel? _address;
+  // AddressModel? _address;
+
+  // AddressModel? get address => _address;
 
   // ignore: unnecessary_getters_setters
   bool get loading => _loading;
@@ -81,7 +85,7 @@ abstract class _AdControllerBase with Store {
         images: _images,
         category: _category ?? CategoryModel(description: ''),
         onwer: _getCurrentUser(),
-        address: _address ??
+        address: _cepFieldController.address ??
             AddressModel(
               uf: UfModel(initials: '', name: ''),
               city: CityModel(name: ''),

@@ -2,7 +2,7 @@ import 'city_entity.dart';
 import 'uf_entity.dart';
 
 class AddressEntity {
-  final UfEntity uf;
+  UfEntity uf;
   final CityEntity city;
 
   final String cep;

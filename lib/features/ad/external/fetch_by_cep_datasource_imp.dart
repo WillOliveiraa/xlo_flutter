@@ -27,15 +27,7 @@ class FetchByCepDatasourceImp implements FetchByCepDatasource {
         return Left(ErrorFetchByCep(message: 'CEP inválido'));
       }
 
-      // final ufList = await IBGERepository().getUFList();
-
       return Right(AddressModel.fromMap(response.data!));
-      // return AddressModel(
-      //   cep: response.data['cep'] as String,
-      //   district: response.data['bairro'] as String,
-      //   city: CityModel(name: response.data['localidade'] as String),
-      //   uf: ufList.firstWhere((uf) => uf.initials == response.data['uf']),
-      // );
     } catch (e) {
       return Left(
           ErrorFetchByCep(message: 'Ocorreu um erro ao tentar buscar o cep'));

@@ -92,4 +92,6 @@ const String adCategory = "Categoria";
 const String adCategoryDesc = "Escolha uma categoria para o anúncio.";
 const String adPrice = "Preço";
 const String adPriceDesc = "Preço do anúncio.";
+const String adCep = "CEP*";
+const String adCepDesc = "Digite um cep.";
 const String adSave = "Salvar";

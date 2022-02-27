@@ -30,7 +30,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: CustomDrawer(),
-      appBar: AppBar(title: Text(headerBegin)),
+      appBar: AppBar(
+        title: Text(headerBegin, style: TextStyle(color: Colors.black87)),
+      ),
       body: Observer(builder: (_) {
         if (controller.loading)
           return Center(child: CircularProgressIndDefault());
@@ -42,37 +44,55 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             itemCount: controller.ads.length,
             itemBuilder: (_, index) {
               final ad = controller.ads[index];
-              return ListTile(
-                onTap: () {
-                  print(controller.category);
-                },
-                leading: CircleAvatar(
-                  radius: 32,
-                  backgroundColor: Colors.grey[300],
-                  child: ad.images.isNotEmpty
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(32),
-                          child: Image.network(
-                            ad.images.first.toString(),
-                            fit: BoxFit.cover,
+              return Container(
+                // height: 80,
+                // margin: EdgeInsets.all(10),
+                // color: Colors.blue,
+                child: ListTile(
+                  onTap: () {
+                    print(controller.category);
+                  },
+                  leading: Container(
+                    height: double.infinity,
+                    child: CircleAvatar(
+                      radius: 32,
+                      backgroundColor: Colors.grey[300],
+                      child: ad.images.isNotEmpty
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(32),
+                              child: Image.network(
+                                ad.images.first.toString(),
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : SvgPicture.asset('assets/icons/User.svg'),
+                    ),
+                  ),
+                  title: Text(
+                    ad.title,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    ad.description,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                  trailing: Container(
+                    // height: 80,
+                    // color: Colors.red,
+                    height: double.infinity,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          CustomMoneyFormatter.formattedMoney(ad.price),
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.w700,
                           ),
-                        )
-                      : SvgPicture.asset('assets/icons/User.svg'),
-                ),
-                title: Text(
-                  ad.title,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(
-                  ad.description,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                ),
-                trailing: Text(
-                  CustomMoneyFormatter.formattedMoney(ad.price),
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w700,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
