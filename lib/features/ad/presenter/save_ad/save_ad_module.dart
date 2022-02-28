@@ -10,11 +10,11 @@ import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_
 import 'package:xlo_flutter/features/ad/external/fetch_by_cep_datasource_imp.dart';
 import 'package:xlo_flutter/features/ad/external/get_all_ufs_datasource_imp.dart';
 import 'package:xlo_flutter/features/ad/external/save_ad_datasource_imp.dart';
-import 'package:xlo_flutter/features/ad/presenter/ad_controller.dart';
-import 'package:xlo_flutter/features/ad/presenter/ad_page.dart';
-import 'package:xlo_flutter/features/ad/presenter/components/cep_field/cep_field_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_page.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/cep_field_controller.dart';
 
-class AdModule extends WidgetModule {
+class SaveAdModule extends WidgetModule {
   @override
   final List<Bind> binds = [
     // datasources
@@ -34,9 +34,9 @@ class AdModule extends WidgetModule {
 
     // controllers
     Bind.singleton((i) => CepFieldController(i(), i())),
-    Bind.singleton((i) => AdController(i(), i(), i(), i(), i())),
+    Bind.singleton((i) => SaveAdController(i(), i(), i(), i(), i())),
   ];
 
   @override
-  Widget get view => AdPage();
+  Widget get view => SaveAdPage();
 }

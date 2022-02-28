@@ -4,14 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
-import 'package:xlo_flutter/features/ad/presenter/ad_controller.dart';
-import 'package:xlo_flutter/features/ad/presenter/components/cep_field/cep_field_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/cep_field_controller.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
 
 class CepField extends StatefulWidget {
   CepField(this.adController);
 
-  final AdController adController;
+  final SaveAdController adController;
 
   @override
   State<CepField> createState() => _CepFieldState();

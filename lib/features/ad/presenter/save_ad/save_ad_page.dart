@@ -6,18 +6,18 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
-import 'package:xlo_flutter/features/ad/presenter/ad_controller.dart';
-import 'package:xlo_flutter/features/ad/presenter/components/images_field.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/components/images_field.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
 
 import 'components/cep_field/cep_field.dart';
 
-class AdPage extends StatefulWidget {
+class SaveAdPage extends StatefulWidget {
   @override
-  State<AdPage> createState() => _AdPageState();
+  State<SaveAdPage> createState() => _SaveAdPageState();
 }
 
-class _AdPageState extends ModularState<AdPage, AdController> {
+class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
   @override
   void initState() {
     super.initState();

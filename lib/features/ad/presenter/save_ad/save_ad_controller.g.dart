@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ad_controller.dart';
+part of 'save_ad_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,64 +8,64 @@ part of 'ad_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$AdController on _AdControllerBase, Store {
+mixin _$SaveAdController on _SaveAdControllerBase, Store {
   Computed<AdModel>? _$adModelComputed;
 
   @override
   AdModel get adModel =>
       (_$adModelComputed ??= Computed<AdModel>(() => super.adModel,
-              name: '_AdControllerBase.adModel'))
+              name: '_SaveAdControllerBase.adModel'))
           .value;
   Computed<String?>? _$titleErrorComputed;
 
   @override
   String? get titleError =>
       (_$titleErrorComputed ??= Computed<String?>(() => super.titleError,
-              name: '_AdControllerBase.titleError'))
+              name: '_SaveAdControllerBase.titleError'))
           .value;
   Computed<String?>? _$descriptionErrorComputed;
 
   @override
   String? get descriptionError => (_$descriptionErrorComputed ??=
           Computed<String?>(() => super.descriptionError,
-              name: '_AdControllerBase.descriptionError'))
+              name: '_SaveAdControllerBase.descriptionError'))
       .value;
   Computed<String?>? _$priceErrorComputed;
 
   @override
   String? get priceError =>
       (_$priceErrorComputed ??= Computed<String?>(() => super.priceError,
-              name: '_AdControllerBase.priceError'))
+              name: '_SaveAdControllerBase.priceError'))
           .value;
   Computed<String?>? _$categoryErrorComputed;
 
   @override
   String? get categoryError =>
       (_$categoryErrorComputed ??= Computed<String?>(() => super.categoryError,
-              name: '_AdControllerBase.categoryError'))
+              name: '_SaveAdControllerBase.categoryError'))
           .value;
   Computed<String?>? _$imagesErrorComputed;
 
   @override
   String? get imagesError =>
       (_$imagesErrorComputed ??= Computed<String?>(() => super.imagesError,
-              name: '_AdControllerBase.imagesError'))
+              name: '_SaveAdControllerBase.imagesError'))
           .value;
   Computed<bool>? _$isValidComputed;
 
   @override
   bool get isValid => (_$isValidComputed ??= Computed<bool>(() => super.isValid,
-          name: '_AdControllerBase.isValid'))
+          name: '_SaveAdControllerBase.isValid'))
       .value;
   Computed<Function?>? _$saveAdPressedComputed;
 
   @override
   Function? get saveAdPressed => (_$saveAdPressedComputed ??=
           Computed<Function?>(() => super.saveAdPressed,
-              name: '_AdControllerBase.saveAdPressed'))
+              name: '_SaveAdControllerBase.saveAdPressed'))
       .value;
 
-  final _$_titleAtom = Atom(name: '_AdControllerBase._title');
+  final _$_titleAtom = Atom(name: '_SaveAdControllerBase._title');
 
   @override
   String? get _title {
@@ -80,7 +80,7 @@ mixin _$AdController on _AdControllerBase, Store {
     });
   }
 
-  final _$_descriptionAtom = Atom(name: '_AdControllerBase._description');
+  final _$_descriptionAtom = Atom(name: '_SaveAdControllerBase._description');
 
   @override
   String? get _description {
@@ -95,7 +95,7 @@ mixin _$AdController on _AdControllerBase, Store {
     });
   }
 
-  final _$_priceAtom = Atom(name: '_AdControllerBase._price');
+  final _$_priceAtom = Atom(name: '_SaveAdControllerBase._price');
 
   @override
   num? get _price {
@@ -110,7 +110,7 @@ mixin _$AdController on _AdControllerBase, Store {
     });
   }
 
-  final _$_loadingAtom = Atom(name: '_AdControllerBase._loading');
+  final _$_loadingAtom = Atom(name: '_SaveAdControllerBase._loading');
 
   @override
   bool get _loading {
@@ -126,7 +126,7 @@ mixin _$AdController on _AdControllerBase, Store {
   }
 
   final _$_loadingCategoriesAtom =
-      Atom(name: '_AdControllerBase._loadingCategories');
+      Atom(name: '_SaveAdControllerBase._loadingCategories');
 
   @override
   bool get _loadingCategories {
@@ -141,7 +141,7 @@ mixin _$AdController on _AdControllerBase, Store {
     });
   }
 
-  final _$_categoriesAtom = Atom(name: '_AdControllerBase._categories');
+  final _$_categoriesAtom = Atom(name: '_SaveAdControllerBase._categories');
 
   @override
   List<CategoryModel> get _categories {
@@ -156,7 +156,7 @@ mixin _$AdController on _AdControllerBase, Store {
     });
   }
 
-  final _$_categoryAtom = Atom(name: '_AdControllerBase._category');
+  final _$_categoryAtom = Atom(name: '_SaveAdControllerBase._category');
 
   @override
   CategoryModel? get _category {
@@ -172,57 +172,57 @@ mixin _$AdController on _AdControllerBase, Store {
   }
 
   final _$getAllCategoriesAsyncAction =
-      AsyncAction('_AdControllerBase.getAllCategories');
+      AsyncAction('_SaveAdControllerBase.getAllCategories');
 
   @override
   Future<void> getAllCategories() {
     return _$getAllCategoriesAsyncAction.run(() => super.getAllCategories());
   }
 
-  final _$_AdControllerBaseActionController =
-      ActionController(name: '_AdControllerBase');
+  final _$_SaveAdControllerBaseActionController =
+      ActionController(name: '_SaveAdControllerBase');
 
   @override
   void setCategory(CategoryModel? value) {
-    final _$actionInfo = _$_AdControllerBaseActionController.startAction(
-        name: '_AdControllerBase.setCategory');
+    final _$actionInfo = _$_SaveAdControllerBaseActionController.startAction(
+        name: '_SaveAdControllerBase.setCategory');
     try {
       return super.setCategory(value);
     } finally {
-      _$_AdControllerBaseActionController.endAction(_$actionInfo);
+      _$_SaveAdControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setTitle(String value) {
-    final _$actionInfo = _$_AdControllerBaseActionController.startAction(
-        name: '_AdControllerBase.setTitle');
+    final _$actionInfo = _$_SaveAdControllerBaseActionController.startAction(
+        name: '_SaveAdControllerBase.setTitle');
     try {
       return super.setTitle(value);
     } finally {
-      _$_AdControllerBaseActionController.endAction(_$actionInfo);
+      _$_SaveAdControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setDescription(String value) {
-    final _$actionInfo = _$_AdControllerBaseActionController.startAction(
-        name: '_AdControllerBase.setDescription');
+    final _$actionInfo = _$_SaveAdControllerBaseActionController.startAction(
+        name: '_SaveAdControllerBase.setDescription');
     try {
       return super.setDescription(value);
     } finally {
-      _$_AdControllerBaseActionController.endAction(_$actionInfo);
+      _$_SaveAdControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPrice(String value) {
-    final _$actionInfo = _$_AdControllerBaseActionController.startAction(
-        name: '_AdControllerBase.setPrice');
+    final _$actionInfo = _$_SaveAdControllerBaseActionController.startAction(
+        name: '_SaveAdControllerBase.setPrice');
     try {
       return super.setPrice(value);
     } finally {
-      _$_AdControllerBaseActionController.endAction(_$actionInfo);
+      _$_SaveAdControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 

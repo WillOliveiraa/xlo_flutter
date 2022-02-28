@@ -11,21 +11,21 @@ import 'package:xlo_flutter/features/ad/data/models/uf_model.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_categories_usecase/get_all_categories_usecase.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:xlo_flutter/features/ad/presenter/components/cep_field/cep_field_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/cep_field_controller.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
-part 'ad_controller.g.dart';
+part 'save_ad_controller.g.dart';
 
-class AdController = _AdControllerBase with _$AdController;
+class SaveAdController = _SaveAdControllerBase with _$SaveAdController;
 
-abstract class _AdControllerBase with Store {
+abstract class _SaveAdControllerBase with Store {
   final SaveAdUseCaseImp _saveAdUseCase;
   final GetAllCategoriesUseCaseImp _getAllCategoriesUseCase;
   final AuthController _authController;
   final BaseController _baseController;
   final CepFieldController _cepFieldController;
 
-  _AdControllerBase(this._saveAdUseCase, this._getAllCategoriesUseCase,
+  _SaveAdControllerBase(this._saveAdUseCase, this._getAllCategoriesUseCase,
       this._authController, this._baseController, this._cepFieldController);
 
   @observable
