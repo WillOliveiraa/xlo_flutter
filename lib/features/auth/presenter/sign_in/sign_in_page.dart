@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:xlo_flutter/core/shared/components/button_default.dart';
+import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 
 import 'sign_in_controller.dart';
@@ -104,17 +106,13 @@ class _SignInPageState extends ModularState<SignInPage, SignInController> {
                     }),
                     const SizedBox(height: 20),
                     Observer(builder: (_) {
-                      return SizedBox(
-                        height: 44,
-                        child: ElevatedButton(
-                          onPressed: controller.loginPressed as Function()?,
-                          child: controller.loading
-                              ? const CircularProgressIndicator(
-                                  valueColor:
-                                      AlwaysStoppedAnimation(Colors.white))
-                              : const Text('Entrar',
-                                  style: TextStyle(fontSize: 18.0)),
-                        ),
+                      return ButtonDefault(
+                        child: controller.loading
+                            ? const CircularProgressIndDefault(
+                                color: Colors.white)
+                            : const Text('Entrar',
+                                style: TextStyle(fontSize: 18.0)),
+                        onPressed: controller.loginPressed as Function()?,
                       );
                     }),
                     const Divider(color: Colors.black26),

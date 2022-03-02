@@ -9,12 +9,14 @@ ThemeData buildTheme() {
     appBarTheme: appBarTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primaryColor: AppColors.kPrimaryColor,
+    primarySwatch: Colors.purple,
   );
 }
 
 AppBarTheme appBarTheme() {
   return AppBarTheme(
     color: Colors.white,
+    titleTextStyle: TextStyle(color: Colors.black87, fontSize: 18),
     elevation: 0,
     // ignore: deprecated_member_use
     brightness: Brightness.light,

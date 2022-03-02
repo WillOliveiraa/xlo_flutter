@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:xlo_flutter/core/shared/components/button_default.dart';
+import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/sign_up_user_controller.dart';
 
 import 'components/field_title.dart';
@@ -140,13 +142,12 @@ class _SignUpUserPageState
                           Observer(builder: (_) {
                             return SizedBox(
                               height: 44,
-                              child: ElevatedButton(
+                              child: ButtonDefault(
                                 onPressed:
                                     controller.signUpPressed as Function()?,
                                 child: controller.loading
-                                    ? const CircularProgressIndicator(
-                                        valueColor: AlwaysStoppedAnimation(
-                                            Colors.white))
+                                    ? const CircularProgressIndDefault(
+                                        color: Colors.white)
                                     : const Text('Salvar',
                                         style: TextStyle(fontSize: 18.0)),
                               ),

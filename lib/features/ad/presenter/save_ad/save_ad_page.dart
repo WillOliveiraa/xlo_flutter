@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:xlo_flutter/core/shared/components/button_default.dart';
+import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
@@ -28,7 +30,7 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inserir Anúncio', style: TextStyle(color: Colors.black87)),
+        title: Text('Inserir Anúncio'),
       ),
       drawer: CustomDrawer(),
       body: SingleChildScrollView(
@@ -114,18 +116,11 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
               }),
               const SizedBox(height: 20),
               Observer(builder: (_) {
-                return SizedBox(
-                  height: 44,
-                  child: ElevatedButton(
-                    onPressed: controller.saveAdPressed as Function()?,
-                    style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).primaryColor,
-                    ),
-                    child: controller.loading
-                        ? const CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.white))
-                        : const Text(adSave, style: TextStyle(fontSize: 18.0)),
-                  ),
+                return ButtonDefault(
+                  child: controller.loading
+                      ? const CircularProgressIndDefault(color: Colors.white)
+                      : const Text(adSave, style: TextStyle(fontSize: 18.0)),
+                  onPressed: controller.saveAdPressed as Function()?,
                 );
               }),
               const SizedBox(height: 10),

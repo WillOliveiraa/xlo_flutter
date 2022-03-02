@@ -22,6 +22,10 @@ class HomeModule extends WidgetModule {
     Bind.singleton((i) => HomeController(i(), i())),
   ];
 
+  final List<ModularRoute> routes = [
+    ChildRoute(Modular.initialRoute, child: (_, args) => HomePage()),
+  ];
+
   @override
   Widget get view => HomePage();
 }

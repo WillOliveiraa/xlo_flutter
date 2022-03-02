@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:xlo_flutter/core/shared/components/button_default.dart';
 
 class ImageDialog extends StatelessWidget {
   final dynamic image;
@@ -16,10 +17,10 @@ class ImageDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.file(image as File),
-          ElevatedButton(
+          ButtonDefault(
             child: const Text('Excluir'),
-            style: ElevatedButton.styleFrom(
-                primary: Colors.white, onPrimary: Colors.red, elevation: 0),
+            primaryColor: Colors.white,
+            secondColor: Colors.red,
             onPressed: () {
               Navigator.of(context).pop();
               onDelete();

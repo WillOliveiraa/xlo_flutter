@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/core/shared/helpers/money_formatter.dart';
+import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
 
 import 'home_controller.dart';
@@ -31,7 +32,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
-        title: Text(headerBegin, style: TextStyle(color: Colors.black87)),
+        title: Text(headerBegin),
       ),
       body: Observer(builder: (_) {
         if (controller.loading)
@@ -46,7 +47,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               final ad = controller.ads[index];
               return ListTile(
                 onTap: () {
-                  print(controller.category);
+                  Modular.to.pushNamed('$baseRouter$adRouter', arguments: ad);
                 },
                 leading: Container(
                   height: double.infinity,

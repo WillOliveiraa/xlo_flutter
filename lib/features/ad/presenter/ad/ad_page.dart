@@ -1,10 +1,56 @@
+import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:flutter/material.dart';
+import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 
 class AdPage extends StatelessWidget {
-  const AdPage({Key? key}) : super(key: key);
+  const AdPage(this.ad);
 
+  final AdModel ad;
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text('Anúncio'),
+      ),
+      body: Stack(
+        children: [
+          ListView(
+            children: [
+              Container(
+                height: 280,
+                child: Carousel(
+                  images: ad.images
+                      .map((url) => Image.network(url, fit: BoxFit.cover))
+                      .toList(),
+                  dotSize: 4,
+                  dotBgColor: Colors.transparent,
+                  dotColor: Colors.orange,
+                  autoplay: false,
+                  dotSpacing: 15,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // MainPanel(ad),
+                    // Divider(color: Colors.grey[300]),
+                    // DescriptionPanel(ad),
+                    // Divider(color: Colors.grey[300]),
+                    // LocationPanel(ad),
+                    // Divider(color: Colors.grey[300]),
+                    // UserPanel(ad),
+                    // SizedBox(height: ad.status == AdStatus.PENDING ? 16 : 120),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          // BottomBar(ad),
+        ],
+      ),
+    );
   }
 }

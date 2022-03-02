@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:xlo_flutter/core/shared/components/button_default.dart';
 
 class ImageSourceModal extends StatelessWidget {
   ImageSourceModal({required this.onImageSelected});
@@ -39,12 +40,9 @@ class ImageSourceModal extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Theme.of(context).primaryColor,
-                elevation: 0,
-              ),
+            ButtonDefault(
+              primaryColor: Colors.white,
+              secondColor: Theme.of(context).primaryColor,
               child: const Text('Câmera'),
               onPressed: () async {
                 final PickedFile file =
@@ -53,12 +51,9 @@ class ImageSourceModal extends StatelessWidget {
                 imageSelected(file.path, context);
               },
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Theme.of(context).primaryColor,
-                elevation: 0,
-              ),
+            ButtonDefault(
+              primaryColor: Colors.white,
+              secondColor: Theme.of(context).primaryColor,
               child: const Text('Galeria'),
               onPressed: () async {
                 final PickedFile file =
