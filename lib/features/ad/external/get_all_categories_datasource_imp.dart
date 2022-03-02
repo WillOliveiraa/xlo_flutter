@@ -1,4 +1,4 @@
-import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:xlo_flutter/core/shared/utils/table_keys.dart';
