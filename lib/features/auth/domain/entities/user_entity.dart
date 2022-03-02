@@ -9,6 +9,7 @@ class UserEntity {
   final String? phone;
   final String? password;
   final UserType type;
+  final DateTime? createdAt;
 
   UserEntity({
     this.id,
@@ -17,6 +18,7 @@ class UserEntity {
     this.phone,
     required this.password,
     this.type = UserType.PARTICULAR,
+    this.createdAt,
   });
 
   bool get isValidName => name.isNotEmpty;

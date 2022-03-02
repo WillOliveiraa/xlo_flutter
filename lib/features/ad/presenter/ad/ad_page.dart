@@ -2,6 +2,10 @@ import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 
+import 'components/description_panel.dart';
+import 'components/main_panel.dart';
+import 'components/user_panel.dart';
+
 class AdPage extends StatelessWidget {
   const AdPage(this.ad);
 
@@ -35,13 +39,13 @@ class AdPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // MainPanel(ad),
-                    // Divider(color: Colors.grey[300]),
-                    // DescriptionPanel(ad),
+                    MainPanel(ad),
+                    Divider(color: Colors.grey[300]),
+                    DescriptionPanel(ad),
                     // Divider(color: Colors.grey[300]),
                     // LocationPanel(ad),
-                    // Divider(color: Colors.grey[300]),
-                    // UserPanel(ad),
+                    Divider(color: Colors.grey[300]),
+                    UserPanel(ad),
                     // SizedBox(height: ad.status == AdStatus.PENDING ? 16 : 120),
                   ],
                 ),

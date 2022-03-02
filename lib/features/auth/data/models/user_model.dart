@@ -4,15 +4,13 @@ import 'package:xlo_flutter/core/shared/utils/table_keys.dart';
 import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
-  final DateTime? createdAt;
-
   UserModel({
     required String name,
     required String email,
     String? password,
     String? phone,
     UserType type = UserType.PARTICULAR,
-    this.createdAt,
+    final DateTime? createdAt,
     String? id,
   }) : super(
           name: name,
@@ -21,6 +19,7 @@ class UserModel extends UserEntity {
           phone: phone,
           type: type,
           id: id,
+          createdAt: createdAt,
         );
 
   factory UserModel.signInWithEmail({
@@ -49,11 +48,17 @@ class UserModel extends UserEntity {
   }
 
   factory UserModel.fromParseAd(ParseUser parseUser) {
-    return UserModel(id: parseUser.objectId, name: '', email: '');
+    return UserModel(
+      id: parseUser.objectId,
+      name: parseUser.get(keyUserName),
+      email: '',
+      phone: parseUser.get(keyUserPhone),
+      createdAt: parseUser.get(keyUserCreatedAt),
+    );
   }
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, password: $password, type: $type)';
+    return 'UserModel(name: $name, email: $email, phone: $phone, password: $password, type: $type, createdAt: $createdAt)';
   }
 }
