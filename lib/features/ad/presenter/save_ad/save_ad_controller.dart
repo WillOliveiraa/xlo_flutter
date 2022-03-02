@@ -8,6 +8,7 @@ import 'package:xlo_flutter/features/ad/data/models/address_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/city_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/uf_model.dart';
+import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_categories_usecase/get_all_categories_usecase.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
 import 'package:asuka/asuka.dart' as asuka;
@@ -82,6 +83,7 @@ abstract class _SaveAdControllerBase with Store {
         title: _title ?? '',
         description: _description ?? '',
         price: _price ?? 0,
+        status: AdStatus.PENDING,
         images: _images,
         category: _category ?? CategoryModel(description: ''),
         onwer: _getCurrentUser(),

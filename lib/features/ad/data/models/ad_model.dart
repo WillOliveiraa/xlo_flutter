@@ -16,6 +16,7 @@ class AdModel extends AdEntity {
     required String title,
     required String description,
     required num price,
+    required AdStatus status,
     int? views,
     required List<dynamic> images,
     required CategoryModel category,
@@ -27,6 +28,7 @@ class AdModel extends AdEntity {
           title: title,
           description: description,
           price: price,
+          status: status,
           views: views,
           images: images,
           category: category,
@@ -50,6 +52,7 @@ class AdModel extends AdEntity {
     required String title,
     required String description,
     required num price,
+    required AdStatus status,
     int? views = 0,
     required List<dynamic> images,
     required CategoryModel category,
@@ -62,6 +65,7 @@ class AdModel extends AdEntity {
       title: title,
       description: description,
       price: price,
+      status: status,
       images: images,
       views: views,
       category: category,
@@ -77,6 +81,7 @@ class AdModel extends AdEntity {
       id: object.objectId,
       title: object.get<String>(keyAdTitle) ?? '',
       description: object.get<String>(keyAdDescription) ?? '',
+      status: AdStatus.values[object.get<int>(keyAdStatus)!],
       images: object.get<List>(keyAdImages)?.map((e) => e.url).toList() ?? [],
       price: object.get<num>(keyAdPrice) ?? 0,
       views: object.get<int>(keyAdViews, defaultValue: 0),
@@ -98,6 +103,6 @@ class AdModel extends AdEntity {
 
   @override
   String toString() {
-    return 'AdModel(title: $title, description: $description, price: $price, views: $views, images: $images, category: $category, owner: $owner, address: $address)';
+    return 'AdModel(title: $title, description: $description, price: $price, status: $status, views: $views, images: $images, category: $category, owner: $owner, address: $address)';
   }
 }

@@ -8,6 +8,7 @@ import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/city_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/uf_model.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/get_all_ads_repository_imp.dart';
+import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_get_all_ads.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
@@ -21,6 +22,7 @@ void main() {
       title: 'Novo anuncio',
       description: 'descrição do anuncio',
       price: 350.00,
+      status: AdStatus.ACTIVE,
       images: [''],
       category: CategoryModel(description: 'new description'),
       owner: UserModel(name: '', email: ''),

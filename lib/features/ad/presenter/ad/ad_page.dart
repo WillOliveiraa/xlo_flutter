@@ -1,8 +1,11 @@
 import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
+import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 
+import 'components/bottom_bar.dart';
 import 'components/description_panel.dart';
+import 'components/location_panel.dart';
 import 'components/main_panel.dart';
 import 'components/user_panel.dart';
 
@@ -42,17 +45,17 @@ class AdPage extends StatelessWidget {
                     MainPanel(ad),
                     Divider(color: Colors.grey[300]),
                     DescriptionPanel(ad),
-                    // Divider(color: Colors.grey[300]),
-                    // LocationPanel(ad),
+                    Divider(color: Colors.grey[300]),
+                    LocationPanel(ad),
                     Divider(color: Colors.grey[300]),
                     UserPanel(ad),
-                    // SizedBox(height: ad.status == AdStatus.PENDING ? 16 : 120),
+                    SizedBox(height: ad.status == AdStatus.PENDING ? 16 : 120),
                   ],
                 ),
               ),
             ],
           ),
-          // BottomBar(ad),
+          BottomBar(ad),
         ],
       ),
     );

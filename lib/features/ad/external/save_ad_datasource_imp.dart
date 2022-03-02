@@ -27,6 +27,7 @@ class SaveAdDatasourceImp implements SaveAdDatasource {
     _parseObject
       ..set<String>(keyAdTitle, adEntity.title)
       ..set<String>(keyAdDescription, adEntity.description)
+      ..set<bool>(keyAdHidePhone, adEntity.hidePhone!)
       ..set<num>(keyAdPrice, adEntity.price)
       ..set<int>(keyAdStatus, adEntity.status.index)
       ..set<ParseObject>(
