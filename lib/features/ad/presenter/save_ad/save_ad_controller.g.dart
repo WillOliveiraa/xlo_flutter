@@ -186,6 +186,21 @@ mixin _$SaveAdController on _SaveAdControllerBase, Store {
     });
   }
 
+  final _$isUpdateAdAtom = Atom(name: '_SaveAdControllerBase.isUpdateAd');
+
+  @override
+  bool get isUpdateAd {
+    _$isUpdateAdAtom.reportRead();
+    return super.isUpdateAd;
+  }
+
+  @override
+  set isUpdateAd(bool value) {
+    _$isUpdateAdAtom.reportWrite(value, super.isUpdateAd, () {
+      super.isUpdateAd = value;
+    });
+  }
+
   final _$getAllCategoriesAsyncAction =
       AsyncAction('_SaveAdControllerBase.getAllCategories');
 
@@ -255,6 +270,7 @@ mixin _$SaveAdController on _SaveAdControllerBase, Store {
   @override
   String toString() {
     return '''
+isUpdateAd: ${isUpdateAd},
 adModel: ${adModel},
 titleError: ${titleError},
 descriptionError: ${descriptionError},

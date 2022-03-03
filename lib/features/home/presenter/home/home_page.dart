@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobx/mobx.dart';
 import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/core/shared/helpers/money_formatter.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
+import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
 
 import 'home_controller.dart';
 
@@ -19,12 +22,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeController>
     with AutomaticKeepAliveClientMixin {
+  final SaveAdController saveAdController = Modular.get();
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       await Future.delayed(Duration(milliseconds: 900));
       controller.checkIfNeedToUpdateList();
+    });
+
+    autorun((_) {
+      print(saveAdController.isUpdateAd ? 'reloadHome' : '');
+      if (saveAdController.isUpdateAd) {
+        controller.getAllAds();
+      }
     });
   }
 
@@ -80,6 +92,8 @@ class _HomePageState extends ModularState<HomePage, HomeController>
                 title: Text(
                   ad.title,
                   style: TextStyle(fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
                 subtitle: Text(
                   ad.description,
@@ -104,6 +118,11 @@ class _HomePageState extends ModularState<HomePage, HomeController>
         );
       }),
     );
+  }
+
+  void updateItemFromList(List<AdModel> ads, AdModel adModel) {
+    // foods[foods.indexWhere((element) => element.uid == food.uid)] = food;
+    ads[ads.indexWhere((item) => item.id == adModel.id)] = adModel;
   }
 
   @override

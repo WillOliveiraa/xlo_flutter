@@ -18,7 +18,9 @@ import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/c
 
 class SaveAdModule extends Module {
   @override
-  final List<Bind> binds = [
+  final List<Bind> binds = [];
+
+  static List<Bind> export = [
     // datasources
     Bind.singleton((i) => SaveAdDatasourceImp()),
     Bind.singleton((i) => FetchByCepDatasourceImp(i())),
@@ -39,7 +41,7 @@ class SaveAdModule extends Module {
 
     // controllers
     Bind.singleton((i) => CepFieldController(i(), i())),
-    Bind.singleton((i) => SaveAdController(i(), i(), i(), i(), i())),
+    Bind.singleton((i) => SaveAdController(i(), i(), i(), i())),
   ];
 
   final List<ModularRoute> routes = [

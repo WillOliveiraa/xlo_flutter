@@ -10,6 +10,7 @@ class BaseModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.singleton((i) => BaseController()),
+    ...SaveAdModule.export,
   ];
 
   @override

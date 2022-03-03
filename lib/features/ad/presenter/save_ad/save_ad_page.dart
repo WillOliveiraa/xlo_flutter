@@ -27,12 +27,18 @@ class SaveAdPage extends StatefulWidget {
 
 class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
   var numberFormat = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+  var alreadyUpdate = false;
 
   @override
   void initState() {
     super.initState();
     controller.getAllCategories();
     if (widget.ad != null) controller.initializeFields(widget.ad!);
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      // await Future.delayed(Duration(milliseconds: 900));
+      if (widget.ad != null) alreadyUpdate = true;
+    });
   }
 
   @override
@@ -92,7 +98,7 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
                   return Center(child: const CircularProgressIndDefault());
 
                 return DropdownButton<CategoryModel>(
-                  value: widget.ad != null
+                  value: widget.ad != null && !alreadyUpdate
                       ? widget.ad?.category as CategoryModel
                       : controller.category,
                   onChanged: (value) => controller.setCategory(value),

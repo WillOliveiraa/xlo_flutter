@@ -1,8 +1,9 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
-import 'package:xlo_flutter/core/pages/base/base_controller.dart';
+import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/address_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
@@ -23,11 +24,10 @@ abstract class _SaveAdControllerBase with Store {
   final SaveAdUseCaseImp _saveAdUseCase;
   final GetAllCategoriesUseCaseImp _getAllCategoriesUseCase;
   final AuthController _authController;
-  final BaseController _baseController;
   final CepFieldController _cepFieldController;
 
   _SaveAdControllerBase(this._saveAdUseCase, this._getAllCategoriesUseCase,
-      this._authController, this._baseController, this._cepFieldController);
+      this._authController, this._cepFieldController);
 
   @observable
   String? _title;
@@ -86,15 +86,21 @@ abstract class _SaveAdControllerBase with Store {
 
   var numberFormat = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
 
+  @observable
+  bool isUpdateAd = false;
+
+  DateTime? createdAt;
+
   @computed
   AdModel get adModel => AdModel.createAd(
         id: idAd,
         title: _title ?? '',
         description: _description ?? '',
         price: _price ?? 0,
-        status: AdStatus.PENDING,
+        status: AdStatus.ACTIVE,
         hidePhone: _hidePhone,
         images: _images,
+        createdAt: createdAt,
         category: _category ?? CategoryModel(description: ''),
         onwer: _getCurrentUser(),
         address: _cepFieldController.address ??
@@ -135,11 +141,8 @@ abstract class _SaveAdControllerBase with Store {
   }
 
   @action
-  void setPrice(String value) {
-    // _price = UtilBrasilFields.converterMoedaParaDouble(
-    //     value == '' ? 'R\$ 0,00' : value);
-    _price = numberFormat.parse(value);
-  }
+  void setPrice(String value) =>
+      _price = numberFormat.parse(value.replaceAll('R\$', ''));
 
   @computed
   String? get priceError {
@@ -181,14 +184,21 @@ abstract class _SaveAdControllerBase with Store {
     final response = await _saveAdUseCase(adModel);
 
     response.fold((failure) {
-      asuka.showSnackBar(
-          SnackBar(content: Text('Erro ao tentar salvar o anúncio')));
+      asuka.showSnackBar(SnackBar(content: Text(failure.message!)));
       loading = false;
     }, (_) async {
       loading = false;
-      asuka.showSnackBar(SnackBar(content: Text('Anúncio salvo com sucesso!')));
-      await Future.delayed(Duration(seconds: 1));
-      _baseController.setPage(0);
+      asuka.showSnackBar(SnackBar(
+          content: Text(idAd != null
+              ? 'Anúncio atualizado com sucesso!'
+              : 'Anúncio salvo com sucesso!')));
+      // await Future.delayed(Duration(seconds: 2));
+      // loading = false;
+      if (idAd != null) {
+        isUpdateAd = true;
+        Modular.to.pop();
+      } else
+        Modular.to.popUntil(ModalRoute.withName(baseRouter));
     });
   }
 
@@ -221,6 +231,8 @@ abstract class _SaveAdControllerBase with Store {
     setTitle(ad.title);
     setDescription(ad.description);
     setPrice(numberFormat.format(ad.price));
+    createdAt = ad.createdAt;
+    setHidePhone(ad.hidePhone);
 
     if (ad.isValidAddress) {
       _cepFieldController.setInitializeField(true);

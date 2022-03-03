@@ -48,7 +48,7 @@ class SaveAdDatasourceImp implements SaveAdDatasource {
     if (result.success)
       return Right(unit);
     else
-      return Left(ErrorSaveAd());
+      return Left(ErrorSaveAd(message: 'Erro ao tentar salvar o anúncio'));
   }
 
   Future<List<ParseFile>> _saveImages(List images) async {
@@ -67,7 +67,7 @@ class SaveAdDatasourceImp implements SaveAdDatasource {
 
           parseImages.add(parseFile);
         } else {
-          final parseFile = ParseFile(null);
+          final parseFile = ParseFile(File(''));
           parseFile.name = path.basename(image as String);
           parseFile.url = image;
 
