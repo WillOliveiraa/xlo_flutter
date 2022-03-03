@@ -16,7 +16,7 @@ class BaseModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, args) => BasePage()),
     ChildRoute(homeRouter, child: (_, args) => HomeModule()),
-    ChildRoute(saveAdRouter, child: (_, args) => SaveAdModule()),
+    ModuleRoute(saveAdRouter, module: SaveAdModule()),
     ModuleRoute(adRouter, module: AdModule()),
   ];
 }

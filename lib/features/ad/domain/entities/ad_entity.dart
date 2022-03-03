@@ -6,6 +6,7 @@ import 'address_entity.dart';
 enum AdStatus { PENDING, ACTIVE, SOLD, DELETED }
 
 class AdEntity {
+  final String? id;
   final String title;
   final String description;
   final num price;
@@ -19,6 +20,7 @@ class AdEntity {
   final DateTime? createdAt;
 
   AdEntity({
+    this.id,
     required this.title,
     required this.description,
     required this.price,

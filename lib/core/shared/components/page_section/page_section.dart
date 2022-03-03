@@ -17,12 +17,12 @@ class PageSection extends StatelessWidget {
           onTap: () => baseController.setPage(0),
           highlighted: baseController.page == 0,
         ),
-        PageTile(
-          label: headerInsertAd,
-          iconData: Icons.edit,
-          onTap: () => baseController.setPage(1),
-          highlighted: baseController.page == 1,
-        ),
+        // PageTile(
+        //   label: headerInsertAd,
+        //   iconData: Icons.edit,
+        //   onTap: () => baseController.setPage(1),
+        //   highlighted: baseController.page == 1,
+        // ),
         PageTile(
           label: headerChat,
           iconData: Icons.chat,

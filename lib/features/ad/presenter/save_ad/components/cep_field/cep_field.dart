@@ -4,20 +4,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
-import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/cep_field_controller.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
 
 class CepField extends StatefulWidget {
-  CepField(this.adController);
+  CepField(this.initializeCEP);
 
-  final SaveAdController adController;
+  final String? initializeCEP;
 
   @override
   State<CepField> createState() => _CepFieldState();
 }
 
 class _CepFieldState extends ModularState<CepField, CepFieldController> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initializeCEP != null) controller.setInitializeField(true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +34,9 @@ class _CepFieldState extends ModularState<CepField, CepFieldController> {
         ),
         Observer(builder: (_) {
           return TextFormField(
-            initialValue: controller.cep,
+            initialValue: widget.initializeCEP != null
+                ? widget.initializeCEP
+                : controller.cep,
             keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,

@@ -1,4 +1,4 @@
-import 'package:brasil_fields/brasil_fields.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
@@ -56,10 +56,6 @@ abstract class _SaveAdControllerBase with Store {
 
   CategoryModel? get category => _category;
 
-  // AddressModel? _address;
-
-  // AddressModel? get address => _address;
-
   // ignore: unnecessary_getters_setters
   bool get loading => _loading;
 
@@ -78,12 +74,26 @@ abstract class _SaveAdControllerBase with Store {
 
   set images(dynamic value) => _images = value;
 
+  String? idAd;
+
+  @observable
+  bool? _hidePhone = false;
+
+  bool? get hidePhone => _hidePhone;
+
+  @action
+  void setHidePhone(bool? value) => _hidePhone = value;
+
+  var numberFormat = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+
   @computed
   AdModel get adModel => AdModel.createAd(
+        id: idAd,
         title: _title ?? '',
         description: _description ?? '',
         price: _price ?? 0,
         status: AdStatus.PENDING,
+        hidePhone: _hidePhone,
         images: _images,
         category: _category ?? CategoryModel(description: ''),
         onwer: _getCurrentUser(),
@@ -125,9 +135,11 @@ abstract class _SaveAdControllerBase with Store {
   }
 
   @action
-  void setPrice(String value) =>
-      _price = UtilBrasilFields.converterMoedaParaDouble(
-          value == '' ? 'R\$ 0,00' : value);
+  void setPrice(String value) {
+    // _price = UtilBrasilFields.converterMoedaParaDouble(
+    //     value == '' ? 'R\$ 0,00' : value);
+    _price = numberFormat.parse(value);
+  }
 
   @computed
   String? get priceError {
@@ -201,5 +213,22 @@ abstract class _SaveAdControllerBase with Store {
     if (_authController.user != null) return _authController.user!;
 
     return UserModel(name: 'name', email: 'email');
+  }
+
+  Future<void> initializeFields(AdModel ad) async {
+    idAd = ad.id;
+    _images.addAll(ad.images);
+    setTitle(ad.title);
+    setDescription(ad.description);
+    setPrice(numberFormat.format(ad.price));
+
+    if (ad.isValidAddress) {
+      _cepFieldController.setInitializeField(true);
+      await Future.delayed(Duration(milliseconds: 600));
+      _cepFieldController.setAddress(ad.address as AddressModel);
+      _cepFieldController.setCep(ad.address.cep);
+    }
+
+    setCategory(ad.category as CategoryModel);
   }
 }

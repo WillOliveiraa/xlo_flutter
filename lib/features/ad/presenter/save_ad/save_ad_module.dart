@@ -1,5 +1,4 @@
 // ignore: implementation_imports
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/fetch_by_cep_repository_imp.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/get_all_categories_repository_imp.dart';
@@ -17,7 +16,7 @@ import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dar
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_page.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/cep_field_controller.dart';
 
-class SaveAdModule extends WidgetModule {
+class SaveAdModule extends Module {
   @override
   final List<Bind> binds = [
     // datasources
@@ -43,6 +42,8 @@ class SaveAdModule extends WidgetModule {
     Bind.singleton((i) => SaveAdController(i(), i(), i(), i(), i())),
   ];
 
-  @override
-  Widget get view => SaveAdPage();
+  final List<ModularRoute> routes = [
+    ChildRoute(Modular.initialRoute,
+        child: (_, args) => SaveAdPage(ad: args.data)),
+  ];
 }

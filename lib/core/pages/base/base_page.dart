@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
-import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_module.dart';
+// import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_module.dart';
 import 'package:xlo_flutter/features/home/presenter/home_module.dart';
 
 import 'base_controller.dart';
@@ -21,8 +21,10 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
   void initState() {
     super.initState();
 
-    reaction((_) => controller.page,
-        (page) => pageController.jumpToPage(page as int));
+    reaction((_) => controller.page, (page) {
+      pageController.jumpToPage(page as int);
+      Navigator.of(context).pop();
+    });
   }
 
   @override
@@ -32,7 +34,7 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
       physics: const NeverScrollableScrollPhysics(),
       children: <Widget>[
         HomeModule(),
-        SaveAdModule(),
+        // SaveAdModule(),
         Scaffold(
           appBar: AppBar(title: Text('Chat')),
           drawer: CustomDrawer(),

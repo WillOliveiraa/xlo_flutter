@@ -9,10 +9,8 @@ import 'city_model.dart';
 import 'uf_model.dart';
 
 class AdModel extends AdEntity {
-  final String? id;
-
   AdModel({
-    this.id,
+    String? id,
     required String title,
     required String description,
     required num price,
@@ -25,6 +23,7 @@ class AdModel extends AdEntity {
     final bool? hidePhone,
     final DateTime? createdAt,
   }) : super(
+          id: id,
           title: title,
           description: description,
           price: price,
@@ -49,6 +48,7 @@ class AdModel extends AdEntity {
   }
 
   factory AdModel.createAd({
+    String? id,
     required String title,
     required String description,
     required num price,
@@ -62,6 +62,7 @@ class AdModel extends AdEntity {
     final DateTime? createdAt,
   }) {
     return AdModel(
+      id: id,
       title: title,
       description: description,
       price: price,
@@ -103,6 +104,6 @@ class AdModel extends AdEntity {
 
   @override
   String toString() {
-    return 'AdModel(title: $title, description: $description, price: $price, status: $status, views: $views, images: $images, category: $category, owner: $owner, address: $address)';
+    return 'AdModel(id: $id, title: $title, description: $description, price: $price, status: $status, views: $views, images: $images, category: $category, owner: $owner, address: $address)';
   }
 }

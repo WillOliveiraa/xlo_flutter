@@ -3,36 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:xlo_flutter/core/shared/components/button_default.dart';
 import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default.dart';
-import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
+import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/components/images_field.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
 
 import 'components/cep_field/cep_field.dart';
+import 'components/hide_phone_field.dart';
 
 class SaveAdPage extends StatefulWidget {
+  SaveAdPage({this.ad});
+
+  final AdModel? ad;
+
   @override
   State<SaveAdPage> createState() => _SaveAdPageState();
 }
 
 class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
+  var numberFormat = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+
   @override
   void initState() {
     super.initState();
     controller.getAllCategories();
+    if (widget.ad != null) controller.initializeFields(widget.ad!);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inserir Anúncio'),
+        title: Text(widget.ad != null ? 'Editar Anúncio' : 'Inserir Anúncio'),
       ),
-      drawer: CustomDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
@@ -52,6 +60,7 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
                     isDense: true,
                     errorText: controller.titleError,
                   ),
+                  initialValue: widget.ad != null ? widget.ad?.title : '',
                   onChanged: controller.setTitle,
                   enabled: !controller.loading,
                 );
@@ -68,6 +77,7 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
                     isDense: true,
                     errorText: controller.descriptionError,
                   ),
+                  initialValue: widget.ad != null ? widget.ad?.description : '',
                   onChanged: controller.setDescription,
                   enabled: !controller.loading,
                 );
@@ -78,8 +88,13 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
                 subtitle: adCategoryDesc,
               ),
               Observer(builder: (_) {
+                if (controller.loadingCategories)
+                  return Center(child: const CircularProgressIndDefault());
+
                 return DropdownButton<CategoryModel>(
-                  value: controller.category,
+                  value: widget.ad != null
+                      ? widget.ad?.category as CategoryModel
+                      : controller.category,
                   onChanged: (value) => controller.setCategory(value),
                   items: controller.categories
                       .map<DropdownMenuItem<CategoryModel>>(
@@ -92,7 +107,11 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
                 );
               }),
               const SizedBox(height: 10),
-              CepField(controller),
+              CepField(widget.ad != null && widget.ad!.isValidAddress
+                  ? widget.ad?.address.cep
+                  : null),
+              const SizedBox(height: 10),
+              HidePhoneField(controller),
               const SizedBox(height: 10),
               const FieldTitle(
                 title: adPrice,
@@ -105,6 +124,9 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
                     isDense: true,
                     errorText: controller.priceError,
                   ),
+                  initialValue: widget.ad != null
+                      ? numberFormat.format(widget.ad?.price)
+                      : '',
                   keyboardType: TextInputType.number,
                   onChanged: controller.setPrice,
                   enabled: !controller.loading,

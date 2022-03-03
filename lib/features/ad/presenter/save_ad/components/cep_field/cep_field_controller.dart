@@ -17,8 +17,7 @@ abstract class _CepFieldControllerBase with Store {
     autorun((_) {
       if (clearCep.length != 8)
         _reset();
-      else
-        _searchCep();
+      else if (!_isInitialize) _searchCep();
     });
   }
 
@@ -33,7 +32,7 @@ abstract class _CepFieldControllerBase with Store {
   // ignore: unnecessary_getters_setters
   AddressModel? get address => _address;
 
-  set address(AddressModel? value) => _address = value;
+  setAddress(AddressModel? value) => _address = value;
 
   @observable
   String? _error;
@@ -44,6 +43,10 @@ abstract class _CepFieldControllerBase with Store {
   bool _loading = false;
 
   bool get loading => _loading;
+
+  bool _isInitialize = false;
+
+  bool setInitializeField(bool value) => _isInitialize = value;
 
   @action
   void setCep(String value) => _cep = value;

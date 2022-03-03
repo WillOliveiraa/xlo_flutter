@@ -24,6 +24,8 @@ class SaveAdDatasourceImp implements SaveAdDatasource {
     parseAcl.setPublicWriteAccess(allowed: false);
     _parseObject.setACL(parseAcl);
 
+    if (adEntity.id != null) _parseObject.objectId = adEntity.id;
+
     _parseObject
       ..set<String>(keyAdTitle, adEntity.title)
       ..set<String>(keyAdDescription, adEntity.description)

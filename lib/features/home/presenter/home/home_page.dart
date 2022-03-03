@@ -17,7 +17,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeController> {
+class _HomePageState extends ModularState<HomePage, HomeController>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
@@ -28,11 +29,22 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   }
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
         title: Text(headerBegin),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () async {
+              Modular.to.pushNamed(
+                '$baseRouter$saveAdRouter'.replaceAll('//', '/'),
+              );
+            },
+          ),
+        ],
       ),
       body: Observer(builder: (_) {
         if (controller.loading)
@@ -93,4 +105,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       }),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -171,6 +171,21 @@ mixin _$SaveAdController on _SaveAdControllerBase, Store {
     });
   }
 
+  final _$_hidePhoneAtom = Atom(name: '_SaveAdControllerBase._hidePhone');
+
+  @override
+  bool? get _hidePhone {
+    _$_hidePhoneAtom.reportRead();
+    return super._hidePhone;
+  }
+
+  @override
+  set _hidePhone(bool? value) {
+    _$_hidePhoneAtom.reportWrite(value, super._hidePhone, () {
+      super._hidePhone = value;
+    });
+  }
+
   final _$getAllCategoriesAsyncAction =
       AsyncAction('_SaveAdControllerBase.getAllCategories');
 
@@ -188,6 +203,17 @@ mixin _$SaveAdController on _SaveAdControllerBase, Store {
         name: '_SaveAdControllerBase.setCategory');
     try {
       return super.setCategory(value);
+    } finally {
+      _$_SaveAdControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setHidePhone(bool? value) {
+    final _$actionInfo = _$_SaveAdControllerBaseActionController.startAction(
+        name: '_SaveAdControllerBase.setHidePhone');
+    try {
+      return super.setHidePhone(value);
     } finally {
       _$_SaveAdControllerBaseActionController.endAction(_$actionInfo);
     }
