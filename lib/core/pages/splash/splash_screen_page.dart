@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
-import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default.dart';
+import 'package:xlo_flutter/core/shared/widgets/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 
 class SplashScreenPage extends StatelessWidget {

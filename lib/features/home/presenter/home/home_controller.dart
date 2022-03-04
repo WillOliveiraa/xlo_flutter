@@ -23,8 +23,43 @@ abstract class _HomeControllerBase with Store {
   @observable
   bool loading = false;
 
+  @observable
+  String search = '';
+
+  @action
+  void setSeach(String value) {
+    search = value;
+    // resetPage();
+  }
+
+  void resetPage() {
+    ads.clear();
+  }
+
   void checkIfNeedToUpdateList() {
     if (ads.isEmpty) getAllAds();
+  }
+
+  @computed
+  List<AdModel> get filteredAds {
+    final List<AdModel> filteredAds = [];
+
+    if (search.isEmpty) {
+      filteredAds.addAll(ads);
+    } else {
+      filteredAds.addAll(ads.where(
+          (ad) => ad.title.toLowerCase().contains(search.toLowerCase())));
+    }
+
+    return filteredAds;
+  }
+
+  AdModel? findAdById(String id) {
+    try {
+      return ads.firstWhere((p) => p.id == id);
+    } catch (e) {
+      return null;
+    }
   }
 
   @action

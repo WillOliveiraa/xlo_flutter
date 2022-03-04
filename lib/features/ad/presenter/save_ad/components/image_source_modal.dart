@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:xlo_flutter/core/shared/components/button_default.dart';
+import 'package:xlo_flutter/core/shared/widgets/button_default.dart';
 
 class ImageSourceModal extends StatelessWidget {
   ImageSourceModal({required this.onImageSelected});

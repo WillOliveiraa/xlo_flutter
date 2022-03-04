@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:xlo_flutter/core/shared/components/button_default.dart';
+import 'package:xlo_flutter/core/shared/widgets/button_default.dart';
 
 class ImageDialog extends StatelessWidget {
   final dynamic image;
