@@ -36,7 +36,6 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
     if (widget.ad != null) controller.initializeFields(widget.ad!);
 
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
-      // await Future.delayed(Duration(milliseconds: 900));
       if (widget.ad != null) alreadyUpdate = true;
     });
   }

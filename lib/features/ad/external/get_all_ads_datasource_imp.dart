@@ -17,6 +17,7 @@ class GetAllAdsDatasourceImp implements GetAllAdsDatasource {
     // queryBuilder.setAmountToSkip(page * 5);
     // queryBuilder.setLimit(5);
     queryBuilder.whereEqualTo(keyAdStatus, AdStatus.ACTIVE.index);
+    queryBuilder.orderByDescending(keyAdCreatedAt);
 
     final response = await queryBuilder.query();
 

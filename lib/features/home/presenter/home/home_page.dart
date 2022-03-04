@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobx/mobx.dart';
 import 'package:xlo_flutter/core/shared/components/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/core/shared/helpers/money_formatter.dart';
@@ -31,13 +32,6 @@ class _HomePageState extends ModularState<HomePage, HomeController>
       await Future.delayed(Duration(milliseconds: 900));
       controller.checkIfNeedToUpdateList();
     });
-
-    autorun((_) {
-      print(saveAdController.isUpdateAd ? 'reloadHome' : '');
-      if (saveAdController.isUpdateAd) {
-        controller.getAllAds();
-      }
-    });
   }
 
   @override
@@ -62,6 +56,9 @@ class _HomePageState extends ModularState<HomePage, HomeController>
         if (controller.loading)
           return Center(child: CircularProgressIndDefault());
 
+        if (saveAdController.isUpdateAd)
+          updateItemFromList(controller.ads, saveAdController.adModel);
+
         return RefreshIndicator(
           color: Theme.of(context).primaryColor,
           onRefresh: () => controller.getAllAds(),
@@ -69,6 +66,7 @@ class _HomePageState extends ModularState<HomePage, HomeController>
             itemCount: controller.ads.length,
             itemBuilder: (_, index) {
               final ad = controller.ads[index];
+
               return ListTile(
                 onTap: () {
                   Modular.to.pushNamed('$baseRouter$adRouter', arguments: ad);
@@ -81,10 +79,15 @@ class _HomePageState extends ModularState<HomePage, HomeController>
                     child: ad.images.isNotEmpty
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(32),
-                            child: Image.network(
-                              ad.images.first.toString(),
-                              fit: BoxFit.cover,
-                            ),
+                            child: ad.images.first is String
+                                ? Image.network(
+                                    ad.images.first,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.file(
+                                    ad.images.first as File,
+                                    fit: BoxFit.cover,
+                                  ),
                           )
                         : SvgPicture.asset('assets/icons/User.svg'),
                   ),
@@ -121,8 +124,12 @@ class _HomePageState extends ModularState<HomePage, HomeController>
   }
 
   void updateItemFromList(List<AdModel> ads, AdModel adModel) {
-    // foods[foods.indexWhere((element) => element.uid == food.uid)] = food;
-    ads[ads.indexWhere((item) => item.id == adModel.id)] = adModel;
+    final index = ads.indexWhere((item) => item.id == adModel.id);
+
+    if (index > 0)
+      ads[index] = adModel;
+    else
+      ads.insert(0, adModel);
   }
 
   @override

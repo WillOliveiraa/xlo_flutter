@@ -18,6 +18,8 @@ import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 
 part 'save_ad_controller.g.dart';
 
+enum OperationAd { none, create, update }
+
 class SaveAdController = _SaveAdControllerBase with _$SaveAdController;
 
 abstract class _SaveAdControllerBase with Store {
@@ -89,7 +91,7 @@ abstract class _SaveAdControllerBase with Store {
   @observable
   bool isUpdateAd = false;
 
-  DateTime? createdAt;
+  DateTime? createdAt = DateTime.now();
 
   @computed
   AdModel get adModel => AdModel.createAd(
@@ -141,8 +143,8 @@ abstract class _SaveAdControllerBase with Store {
   }
 
   @action
-  void setPrice(String value) =>
-      _price = numberFormat.parse(value.replaceAll('R\$', ''));
+  void setPrice(String value) => _price =
+      numberFormat.parse(value == '' ? '0.00' : value.replaceAll('R\$', ''));
 
   @computed
   String? get priceError {
@@ -174,6 +176,8 @@ abstract class _SaveAdControllerBase with Store {
       adModel.isValidDescription &&
       adModel.isValidCategory &&
       adModel.isValidImages &&
+      adModel.isValidPrice &&
+      adModel.isValidAddress &&
       adModel.isValidOwner;
 
   @computed
@@ -181,6 +185,7 @@ abstract class _SaveAdControllerBase with Store {
 
   Future<void> saveAd() async {
     loading = true;
+
     final response = await _saveAdUseCase(adModel);
 
     response.fold((failure) {
@@ -194,10 +199,10 @@ abstract class _SaveAdControllerBase with Store {
               : 'Anúncio salvo com sucesso!')));
       // await Future.delayed(Duration(seconds: 2));
       // loading = false;
-      if (idAd != null) {
-        isUpdateAd = true;
+      isUpdateAd = true;
+      if (idAd != null)
         Modular.to.pop();
-      } else
+      else
         Modular.to.popUntil(ModalRoute.withName(baseRouter));
     });
   }
