@@ -32,10 +32,6 @@ abstract class _HomeControllerBase with Store {
     // resetPage();
   }
 
-  void resetPage() {
-    ads.clear();
-  }
-
   void checkIfNeedToUpdateList() {
     if (ads.isEmpty) getAllAds();
   }
@@ -74,5 +70,36 @@ abstract class _HomeControllerBase with Store {
       ads = result as List<AdModel>;
       loading = false;
     });
+  }
+
+  // ignore: slash_for_doc_comments
+  /**
+   * Pagination
+   */
+
+  @observable
+  int page = 0;
+
+  @action
+  void loadNextPage() {
+    page++;
+  }
+
+  @computed
+  int get itemCount => lastPage ? ads.length : ads.length + 1;
+
+  @observable
+  bool lastPage = false;
+
+  @action
+  void addNewAds(List<AdModel> newAds) {
+    if (newAds.length < 5) lastPage = true;
+    ads.addAll(newAds);
+  }
+
+  void resetPage() {
+    page = 0;
+    ads.clear();
+    lastPage = false;
   }
 }
