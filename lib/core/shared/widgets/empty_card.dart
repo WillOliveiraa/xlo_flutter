@@ -31,7 +31,7 @@ class EmptyCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    'Hmmm...',
+                    'Ops...',
                     style: TextStyle(
                       color: Colors.orange,
                       fontSize: 18,

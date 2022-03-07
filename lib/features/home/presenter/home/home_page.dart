@@ -8,8 +8,9 @@ import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
+import 'package:xlo_flutter/features/home/presenter/home/components/ad_tile.dart';
 
-import 'components/ad_list_tile.dart';
+import 'components/create_ad_button.dart';
 import 'components/search_dialog.dart';
 import 'components/top_bar.dart';
 import 'home_controller.dart';
@@ -31,7 +32,7 @@ class _HomePageState extends ModularState<HomePage, HomeController>
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       await Future.delayed(Duration(milliseconds: 900));
-      controller.checkIfNeedToUpdateList();
+      controller.checkIfNeedToUpdateList(false);
     });
   }
 
@@ -112,20 +113,37 @@ class _HomePageState extends ModularState<HomePage, HomeController>
 
                   return RefreshIndicator(
                     color: Theme.of(context).primaryColor,
-                    onRefresh: () => controller.getAllAds(),
+                    onRefresh: () => controller.refreshAds(),
                     child: ListView.builder(
                       controller: scrollController,
-                      itemCount: filteredAds.length,
+                      itemCount: controller.itemCount,
+                      // itemCount: controller.ads.length + 1,
                       itemBuilder: (_, index) {
+                        if (index == controller.ads.length &&
+                            !controller.lastPage) {
+                          controller.checkIfNeedToUpdateList(true);
+
+                          return Center(
+                            child: Container(
+                              margin: const EdgeInsets.all(10),
+                              child: CircularProgressIndDefault(),
+                            ),
+                          );
+                        }
+
                         final ad = filteredAds[index];
 
-                        // controller.loadNextPage();
-
-                        return AdListTile(ad: ad);
+                        return AdTile(ad);
                       },
                     ),
                   );
                 }),
+                Positioned(
+                  bottom: -50,
+                  left: 0,
+                  right: 0,
+                  child: CreateAdButton(scrollController),
+                )
               ],
             ),
           ),

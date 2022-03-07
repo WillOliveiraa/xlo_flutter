@@ -24,21 +24,6 @@ mixin _$HomeController on _HomeControllerBase, Store {
               name: '_HomeControllerBase.itemCount'))
           .value;
 
-  final _$adsAtom = Atom(name: '_HomeControllerBase.ads');
-
-  @override
-  List<AdModel> get ads {
-    _$adsAtom.reportRead();
-    return super.ads;
-  }
-
-  @override
-  set ads(List<AdModel> value) {
-    _$adsAtom.reportWrite(value, super.ads, () {
-      super.ads = value;
-    });
-  }
-
   final _$categoriesAtom = Atom(name: '_HomeControllerBase.categories');
 
   @override
@@ -99,21 +84,6 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
-  final _$pageAtom = Atom(name: '_HomeControllerBase.page');
-
-  @override
-  int get page {
-    _$pageAtom.reportRead();
-    return super.page;
-  }
-
-  @override
-  set page(int value) {
-    _$pageAtom.reportWrite(value, super.page, () {
-      super.page = value;
-    });
-  }
-
   final _$lastPageAtom = Atom(name: '_HomeControllerBase.lastPage');
 
   @override
@@ -136,12 +106,12 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$getAllAdsAsyncAction.run(() => super.getAllAds());
   }
 
-  final _$getFilteredAdsAsyncAction =
-      AsyncAction('_HomeControllerBase.getFilteredAds');
+  final _$getAllCategoriesAsyncAction =
+      AsyncAction('_HomeControllerBase.getAllCategories');
 
   @override
-  Future<void> getFilteredAds() {
-    return _$getFilteredAdsAsyncAction.run(() => super.getFilteredAds());
+  Future<void> getAllCategories() {
+    return _$getAllCategoriesAsyncAction.run(() => super.getAllCategories());
   }
 
   final _$_HomeControllerBaseActionController =
@@ -181,17 +151,6 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
-  void loadNextPage() {
-    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.loadNextPage');
-    try {
-      return super.loadNextPage();
-    } finally {
-      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void addNewAds(List<AdModel> newAds) {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
         name: '_HomeControllerBase.addNewAds');
@@ -205,11 +164,9 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   String toString() {
     return '''
-ads: ${ads},
 categories: ${categories},
 loading: ${loading},
 search: ${search},
-page: ${page},
 lastPage: ${lastPage},
 filteredAds: ${filteredAds},
 itemCount: ${itemCount}

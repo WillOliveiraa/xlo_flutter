@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
+import 'package:xlo_flutter/core/shared/utils/constants.dart';
+import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
+import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
 
 import '../home_controller.dart';
 import 'bar_button.dart';
@@ -23,16 +26,8 @@ class TopBar extends StatelessWidget {
                 bottom: BorderSide(color: Colors.grey[400]!),
               ),
             ),
-            onTap: () async {
-              // final category =
-              //     await Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (_) => CategoryScreen(
-              //     showAll: true,
-              //     selected: homeController.category,
-              //   ),
-              // ));
-              // if (category != null)
-              //   homeController.setCategory(category as Category);
+            onTap: () {
+              showCategories(context);
             },
           );
         }),
@@ -51,6 +46,45 @@ class TopBar extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+
+  void showCategories(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Observer(builder: (_) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const FieldTitle(
+                  title: adCategory,
+                  subtitle: '',
+                ),
+                Expanded(
+                  child: DropdownButton<CategoryModel>(
+                    value: homeController.category,
+                    onChanged: (value) {
+                      Navigator.of(context).pop();
+                      return homeController.setCategory(value);
+                    },
+                    items: homeController.categories
+                        .map<DropdownMenuItem<CategoryModel>>(
+                            (CategoryModel category) {
+                      return DropdownMenuItem<CategoryModel>(
+                        value: category,
+                        child: Text(category.description),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+      },
     );
   }
 }

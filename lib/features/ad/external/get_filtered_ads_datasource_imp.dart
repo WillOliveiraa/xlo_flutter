@@ -22,8 +22,8 @@ class GetFilteredAdsDatasourceImp implements GetFilteredAdsDatasource {
 
     queryBuilder.includeObject([keyAdOwner, keyAdCategory]);
 
-    queryBuilder.setAmountToSkip(page * 10);
-    queryBuilder.setLimit(10);
+    queryBuilder.setAmountToSkip(page * 7);
+    queryBuilder.setLimit(7);
     queryBuilder.whereEqualTo(keyAdStatus, AdStatus.ACTIVE.index);
 
     if (search != null && search.trim().isNotEmpty) {

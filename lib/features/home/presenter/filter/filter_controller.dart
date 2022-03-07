@@ -67,7 +67,7 @@ abstract class _FilterControllerBase with Store {
   void save() {
     HomeController homeController = Modular.get();
     homeController.setAdFilter(clone());
-    homeController.getFilteredAds();
+    homeController.getFilteredAds(false);
   }
 
   @action
