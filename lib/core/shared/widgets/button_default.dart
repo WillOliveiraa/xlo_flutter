@@ -7,12 +7,14 @@ class ButtonDefault extends StatelessWidget {
     this.onPressed,
     this.primaryColor,
     this.secondColor,
+    this.shape,
   }) : super(key: key);
 
   final Widget child;
   final Function()? onPressed;
   final Color? primaryColor;
   final Color? secondColor;
+  final RoundedRectangleBorder? shape;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,10 @@ class ButtonDefault extends StatelessWidget {
           primary: primaryColor ?? Theme.of(context).primaryColor,
           onPrimary: secondColor ?? Colors.white,
           elevation: 0,
-          onSurface: Theme.of(context).primaryColor.withAlpha(150),
+          shape: shape,
+          onSurface: primaryColor != null
+              ? primaryColor!.withAlpha(150)
+              : Theme.of(context).primaryColor.withAlpha(150),
         ),
         child: child,
         onPressed: onPressed,

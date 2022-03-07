@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 // import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_module.dart';
-import 'package:xlo_flutter/features/home/presenter/home_module.dart';
+import 'package:xlo_flutter/features/home/presenter/home/home_module.dart';
 
 import 'base_controller.dart';
 

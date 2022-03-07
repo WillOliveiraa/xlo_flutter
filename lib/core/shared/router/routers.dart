@@ -6,3 +6,4 @@ const saveAdRouter = "/save_ad/";
 // AnotherModules
 const adRouter = "ad/";
 const signUpRouter = "sign_up/";
+const filterRouter = "/filter/";

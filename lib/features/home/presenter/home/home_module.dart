@@ -2,18 +2,30 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/get_all_ads_repository_imp.dart';
+import 'package:xlo_flutter/features/ad/data/repositories/get_filtered_ads_repository_imp.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_ad_usecase/get_all_ad_usecase.dart';
+import 'package:xlo_flutter/features/ad/domain/usecases/get_filtered_ads_usecase/get_filtered_ads_usecase.dart';
 import 'package:xlo_flutter/features/ad/external/get_all_ads_datasource_imp.dart';
+import 'package:xlo_flutter/features/ad/external/get_filtered_ads_datasource_imp.dart';
 import 'package:xlo_flutter/features/home/presenter/home/home_controller.dart';
-import 'home/home_page.dart';
+import '../filter/filter_controller.dart';
+import 'home_page.dart';
 
 class HomeModule extends WidgetModule {
   @override
   final List<Bind> binds = [
+    // Datasources
     Bind.singleton((i) => GetAllAdsDatasourceImp()),
+    Bind.singleton((i) => GetFilteredAdsDatasourceImp()),
+    // repositories
     Bind.singleton((i) => GetAllAdsRepositoryImp(i())),
+    Bind.singleton((i) => GetFilteredAdsRepositoryImp(i())),
+    // usecases
     Bind.singleton((i) => GetAllAdsUseCaseImp(i())),
-    Bind.singleton((i) => HomeController(i())),
+    Bind.singleton((i) => GetFilteredAdsUseCaseImp(i())),
+    // controllers
+    Bind.singleton((i) => FilterController()),
+    Bind.singleton((i) => HomeController(i(), i(), i())),
   ];
 
   final List<ModularRoute> routes = [

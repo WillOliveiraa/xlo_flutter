@@ -11,6 +11,7 @@ import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dar
 
 import 'components/ad_list_tile.dart';
 import 'components/search_dialog.dart';
+import 'components/top_bar.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -90,34 +91,46 @@ class _HomePageState extends ModularState<HomePage, HomeController>
           ),
         ],
       ),
-      body: Observer(builder: (_) {
-        final filteredAds = controller.filteredAds;
+      body: Column(
+        children: [
+          TopBar(controller),
+          Expanded(
+            child: Stack(
+              children: [
+                Observer(builder: (_) {
+                  final filteredAds = controller.filteredAds;
 
-        if (controller.loading)
-          return Center(child: CircularProgressIndDefault());
+                  if (controller.loading)
+                    return Center(child: CircularProgressIndDefault());
 
-        if (saveAdController.isUpdateAd)
-          updateItemFromList(controller.ads, saveAdController.adModel);
+                  if (saveAdController.isUpdateAd)
+                    updateItemFromList(
+                        controller.ads, saveAdController.adModel);
 
-        if (!controller.loading && filteredAds.isEmpty)
-          return EmptyCard('Humm... Nenhum anúncio encontrado!');
+                  if (!controller.loading && filteredAds.isEmpty)
+                    return EmptyCard('Humm... Nenhum anúncio encontrado!');
 
-        return RefreshIndicator(
-          color: Theme.of(context).primaryColor,
-          onRefresh: () => controller.getAllAds(),
-          child: ListView.builder(
-            controller: scrollController,
-            itemCount: filteredAds.length,
-            itemBuilder: (_, index) {
-              final ad = filteredAds[index];
+                  return RefreshIndicator(
+                    color: Theme.of(context).primaryColor,
+                    onRefresh: () => controller.getAllAds(),
+                    child: ListView.builder(
+                      controller: scrollController,
+                      itemCount: filteredAds.length,
+                      itemBuilder: (_, index) {
+                        final ad = filteredAds[index];
 
-              // controller.loadNextPage();
+                        // controller.loadNextPage();
 
-              return AdListTile(ad: ad);
-            },
+                        return AdListTile(ad: ad);
+                      },
+                    ),
+                  );
+                }),
+              ],
+            ),
           ),
-        );
-      }),
+        ],
+      ),
     );
   }
 

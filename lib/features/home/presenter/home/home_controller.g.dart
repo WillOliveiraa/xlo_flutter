@@ -16,6 +16,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
           Computed<List<AdModel>>(() => super.filteredAds,
               name: '_HomeControllerBase.filteredAds'))
       .value;
+  Computed<int>? _$itemCountComputed;
+
+  @override
+  int get itemCount =>
+      (_$itemCountComputed ??= Computed<int>(() => super.itemCount,
+              name: '_HomeControllerBase.itemCount'))
+          .value;
 
   final _$adsAtom = Atom(name: '_HomeControllerBase.ads');
 
@@ -77,6 +84,51 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$_categoryAtom = Atom(name: '_HomeControllerBase._category');
+
+  @override
+  CategoryModel? get _category {
+    _$_categoryAtom.reportRead();
+    return super._category;
+  }
+
+  @override
+  set _category(CategoryModel? value) {
+    _$_categoryAtom.reportWrite(value, super._category, () {
+      super._category = value;
+    });
+  }
+
+  final _$pageAtom = Atom(name: '_HomeControllerBase.page');
+
+  @override
+  int get page {
+    _$pageAtom.reportRead();
+    return super.page;
+  }
+
+  @override
+  set page(int value) {
+    _$pageAtom.reportWrite(value, super.page, () {
+      super.page = value;
+    });
+  }
+
+  final _$lastPageAtom = Atom(name: '_HomeControllerBase.lastPage');
+
+  @override
+  bool get lastPage {
+    _$lastPageAtom.reportRead();
+    return super.lastPage;
+  }
+
+  @override
+  set lastPage(bool value) {
+    _$lastPageAtom.reportWrite(value, super.lastPage, () {
+      super.lastPage = value;
+    });
+  }
+
   final _$getAllAdsAsyncAction = AsyncAction('_HomeControllerBase.getAllAds');
 
   @override
@@ -84,8 +136,27 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$getAllAdsAsyncAction.run(() => super.getAllAds());
   }
 
+  final _$getFilteredAdsAsyncAction =
+      AsyncAction('_HomeControllerBase.getFilteredAds');
+
+  @override
+  Future<void> getFilteredAds() {
+    return _$getFilteredAdsAsyncAction.run(() => super.getFilteredAds());
+  }
+
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
+
+  @override
+  void setCategory(CategoryModel? value) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.setCategory');
+    try {
+      return super.setCategory(value);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setSeach(String value) {
@@ -99,13 +170,49 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  void setAdFilter(AdFilterModel filter) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.setAdFilter');
+    try {
+      return super.setAdFilter(filter);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void loadNextPage() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.loadNextPage');
+    try {
+      return super.loadNextPage();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addNewAds(List<AdModel> newAds) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.addNewAds');
+    try {
+      return super.addNewAds(newAds);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 ads: ${ads},
 categories: ${categories},
 loading: ${loading},
 search: ${search},
-filteredAds: ${filteredAds}
+page: ${page},
+lastPage: ${lastPage},
+filteredAds: ${filteredAds},
+itemCount: ${itemCount}
     ''';
   }
 }

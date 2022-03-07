@@ -4,7 +4,8 @@ import 'package:xlo_flutter/core/pages/base/base_page.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/ad/presenter/ad/ad_module.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_module.dart';
-import 'package:xlo_flutter/features/home/presenter/home_module.dart';
+import 'package:xlo_flutter/features/home/presenter/filter/filter_module.dart';
+import 'package:xlo_flutter/features/home/presenter/home/home_module.dart';
 
 class BaseModule extends Module {
   @override
@@ -19,5 +20,6 @@ class BaseModule extends Module {
     ChildRoute(homeRouter, child: (_, args) => HomeModule()),
     ModuleRoute(saveAdRouter, module: SaveAdModule()),
     ModuleRoute(adRouter, module: AdModule()),
+    ModuleRoute(filterRouter, module: FilterModule()),
   ];
 }
