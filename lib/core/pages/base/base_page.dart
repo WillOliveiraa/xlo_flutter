@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:xlo_flutter/core/pages/account/account_page.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 // import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_module.dart';
 import 'package:xlo_flutter/features/home/presenter/home/home_module.dart';
@@ -34,7 +35,6 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
       physics: const NeverScrollableScrollPhysics(),
       children: <Widget>[
         HomeModule(),
-        // SaveAdModule(),
         Scaffold(
           appBar: AppBar(title: Text('Chat')),
           drawer: CustomDrawer(),
@@ -45,11 +45,7 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
           drawer: CustomDrawer(),
           body: Container(color: Colors.pink),
         ),
-        Scaffold(
-          appBar: AppBar(title: Text('My Account')),
-          drawer: CustomDrawer(),
-          body: Container(color: Colors.green),
-        ),
+        AccountPage(),
       ],
     );
   }

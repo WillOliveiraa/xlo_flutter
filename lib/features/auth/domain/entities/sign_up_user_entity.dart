@@ -7,7 +7,7 @@ class SignUpUserEntity extends UserEntity {
   SignUpUserEntity({
     required String name,
     required String email,
-    required String password,
+    required String? password,
     required this.passwordConf,
     required String phone,
     UserType type = UserType.PARTICULAR,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/core/shared/widgets/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/core/shared/widgets/empty_card.dart';
@@ -25,6 +26,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends ModularState<HomePage, HomeController>
     with AutomaticKeepAliveClientMixin {
   final SaveAdController saveAdController = Modular.get();
+  final AuthController authController = Modular.get();
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -85,9 +87,12 @@ class _HomePageState extends ModularState<HomePage, HomeController>
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () async {
-              Modular.to.pushNamed(
-                '$baseRouter$saveAdRouter'.replaceAll('//', '/'),
-              );
+              if (authController.isLoggedIn) {
+                Modular.to.pushNamed(
+                  '$baseRouter$saveAdRouter'.replaceAll('//', '/'),
+                );
+              } else
+                Modular.to.pushNamed(signInRouter);
             },
           ),
         ],

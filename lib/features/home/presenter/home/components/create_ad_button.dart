@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/core/shared/widgets/button_default.dart';
 
@@ -17,6 +18,7 @@ class _CreateAdButtonState extends State<CreateAdButton>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> buttonAnimation;
+  final AuthController authController = Modular.get();
 
   @override
   void initState() {
@@ -75,10 +77,13 @@ class _CreateAdButtonState extends State<CreateAdButton>
                   ),
                 ],
               ),
-              onPressed: () => {
-                Modular.to.pushNamed(
-                  '$baseRouter$saveAdRouter'.replaceAll('//', '/'),
-                ),
+              onPressed: () {
+                if (authController.isLoggedIn) {
+                  Modular.to.pushNamed(
+                    '$baseRouter$saveAdRouter'.replaceAll('//', '/'),
+                  );
+                } else
+                  Modular.to.pushNamed(signInRouter);
               },
             ),
           ),

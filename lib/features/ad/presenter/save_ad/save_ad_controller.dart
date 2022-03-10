@@ -15,6 +15,7 @@ import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/cep_field_controller.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
+import 'package:xlo_flutter/features/home/presenter/home/home_controller.dart';
 
 part 'save_ad_controller.g.dart';
 
@@ -209,6 +210,12 @@ abstract class _SaveAdControllerBase with Store {
 
   @action
   Future<void> getAllCategories() async {
+    final homeController = Modular.get<HomeController>();
+    if (homeController.categories.isNotEmpty) {
+      _categories = homeController.categories;
+      return;
+    }
+
     loadingCategories = true;
     final response = await _getAllCategoriesUseCase();
 

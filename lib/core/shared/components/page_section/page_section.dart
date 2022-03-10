@@ -26,20 +26,20 @@ class PageSection extends StatelessWidget {
         PageTile(
           label: headerChat,
           iconData: Icons.chat,
-          onTap: () => baseController.setPage(2),
-          highlighted: baseController.page == 2,
+          onTap: () => baseController.setPage(1),
+          highlighted: baseController.page == 1,
         ),
         PageTile(
           label: headerFavorites,
           iconData: Icons.favorite,
-          onTap: () => baseController.setPage(3),
-          highlighted: baseController.page == 3,
+          onTap: () => baseController.setPage(2),
+          highlighted: baseController.page == 2,
         ),
         PageTile(
           label: headerMyAccount,
           iconData: Icons.person,
-          onTap: () => baseController.setPage(4),
-          highlighted: baseController.page == 4,
+          onTap: () => baseController.setPage(3),
+          highlighted: baseController.page == 3,
         ),
       ],
     );
