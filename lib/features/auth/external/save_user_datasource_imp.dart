@@ -16,7 +16,7 @@ class SaveUserDatasourceImp implements SaveUserDatasource {
     parseUser.set<String>(keyUserPhone, user.phone!);
     parseUser.set<int>(keyUserType, user.type.index);
 
-    if (user.password != null) {
+    if (user.password != null && user.password!.isNotEmpty) {
       parseUser.password = user.password;
     }
 

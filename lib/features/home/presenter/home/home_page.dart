@@ -26,7 +26,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends ModularState<HomePage, HomeController>
     with AutomaticKeepAliveClientMixin {
   final SaveAdController saveAdController = Modular.get();
-  final AuthController authController = Modular.get();
+  final authController = Modular.get<AuthController>();
   final ScrollController scrollController = ScrollController();
 
   @override

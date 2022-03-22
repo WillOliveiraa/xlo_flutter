@@ -18,7 +18,7 @@ class _CreateAdButtonState extends State<CreateAdButton>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> buttonAnimation;
-  final AuthController authController = Modular.get();
+  final authController = Modular.get<AuthController>();
 
   @override
   void initState() {

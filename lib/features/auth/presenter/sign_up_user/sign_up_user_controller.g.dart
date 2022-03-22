@@ -64,6 +64,13 @@ mixin _$SignUpUserController on _SignUpUserControllerBase, Store {
           Computed<Function?>(() => super.signUpPressed,
               name: '_SignUpUserControllerBase.signUpPressed'))
       .value;
+  Computed<Function?>? _$savePressedComputed;
+
+  @override
+  Function? get savePressed =>
+      (_$savePressedComputed ??= Computed<Function?>(() => super.savePressed,
+              name: '_SignUpUserControllerBase.savePressed'))
+          .value;
 
   final _$_nameAtom = Atom(name: '_SignUpUserControllerBase._name');
 
@@ -215,6 +222,17 @@ mixin _$SignUpUserController on _SignUpUserControllerBase, Store {
   }
 
   @override
+  void initializeFields(UserModel user) {
+    final _$actionInfo = _$_SignUpUserControllerBaseActionController
+        .startAction(name: '_SignUpUserControllerBase.initializeFields');
+    try {
+      return super.initializeFields(user);
+    } finally {
+      _$_SignUpUserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 userModel: ${userModel},
@@ -224,7 +242,8 @@ passwordError: ${passwordError},
 passwordErrorConf: ${passwordErrorConf},
 phoneError: ${phoneError},
 isValid: ${isValid},
-signUpPressed: ${signUpPressed}
+signUpPressed: ${signUpPressed},
+savePressed: ${savePressed}
     ''';
   }
 }

@@ -1,7 +1,12 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
+import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/features/auth/data/models/sign_up_user_model.dart';
+import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
+import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
+import 'package:xlo_flutter/features/auth/domain/usecases/save_user_usecase.dart';
 import 'package:xlo_flutter/features/auth/domain/usecases/sign_up_user_usecase.dart';
 
 part 'sign_up_user_controller.g.dart';
@@ -11,25 +16,43 @@ class SignUpUserController = _SignUpUserControllerBase
 
 abstract class _SignUpUserControllerBase with Store {
   final SignUpUserUseCaseImp _signUpUserUseCase;
+  final SaveUserUseCaseImp _saveUserUseCase;
+  final authController = Modular.get<AuthController>();
 
-  _SignUpUserControllerBase(this._signUpUserUseCase);
+  _SignUpUserControllerBase(this._signUpUserUseCase, this._saveUserUseCase);
+
+  @observable
+  UserType? _userType;
 
   @observable
   String? _name;
+
   @observable
   String? _email;
+
   @observable
   String? _password;
+
   @observable
   String? _passwordConf;
+
   @observable
   String? _phone;
 
   @observable
   bool _loading = false;
 
+  String? _userId;
+
+  DateTime? _createAt;
+
   // ignore: unnecessary_getters_setters
   bool get loading => _loading;
+
+  UserType get userType => _userType!;
+
+  @action
+  void setUserType(int? value) => _userType = UserType.values[value!];
 
   @computed
   SignUpUserModel get userModel => SignUpUserModel.signUpUser(
@@ -38,6 +61,7 @@ abstract class _SignUpUserControllerBase with Store {
         password: _password ?? '',
         passwordConf: _passwordConf ?? '',
         phone: _phone ?? '',
+        type: _userType ?? UserType.PARTICULAR,
       );
 
   // @action
@@ -74,7 +98,7 @@ abstract class _SignUpUserControllerBase with Store {
 
   @computed
   String? get passwordError {
-    if (_password == null || userModel.isValidPassword) {
+    if (_password == null || userModel.isValidPassword || _userId != null) {
       return null;
     } else if (_password!.isEmpty) {
       return 'Campo obrigatório';
@@ -108,15 +132,24 @@ abstract class _SignUpUserControllerBase with Store {
   }
 
   @computed
-  bool get isValid =>
-      userModel.isValidName &&
-      userModel.isValidEmail &&
-      userModel.isValidPhone &&
-      userModel.isValidPassword &&
-      userModel.isValidPasswordsAreTheSame;
+  bool get isValid {
+    if (_password != null && _password!.isNotEmpty || _userId == null)
+      return userModel.isValidName &&
+          userModel.isValidEmail &&
+          userModel.isValidPhone &&
+          userModel.isValidPassword &&
+          userModel.isValidPasswordsAreTheSame;
+
+    return userModel.isValidName &&
+        userModel.isValidEmail &&
+        userModel.isValidPhone;
+  }
 
   @computed
   Function? get signUpPressed => isValid && !loading ? _signUpUser : null;
+
+  @computed
+  Function? get savePressed => isValid && !loading ? _saveUser : null;
 
   Future<void> _signUpUser() async {
     loading = true;
@@ -130,5 +163,38 @@ abstract class _SignUpUserControllerBase with Store {
           .showSnackBar(SnackBar(content: Text('Usuário criado com sucesso!')));
       loading = false;
     });
+  }
+
+  Future<void> _saveUser() async {
+    loading = true;
+    final response = await _saveUserUseCase(userModel);
+
+    response.fold((failure) {
+      asuka.showSnackBar(SnackBar(content: Text(failure.message!)));
+      loading = false;
+    }, (_) {
+      asuka.showSnackBar(
+          SnackBar(content: Text('Usuário alterado com sucesso!')));
+      loading = false;
+      Modular.to.pop();
+      authController.setUser(UserModel(
+        name: _name!,
+        email: _email!,
+        id: _userId,
+        phone: _phone,
+        createdAt: _createAt,
+        type: _userType!,
+      ));
+    });
+  }
+
+  @action
+  void initializeFields(UserModel user) {
+    _userId = user.id;
+    _createAt = user.createdAt!;
+    setUserType(user.type.index);
+    setName(user.name);
+    setEmail(user.email);
+    if (user.phone != null) setPhone(user.phone!);
   }
 }
