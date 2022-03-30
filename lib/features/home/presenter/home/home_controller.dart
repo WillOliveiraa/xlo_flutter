@@ -66,10 +66,8 @@ abstract class _HomeControllerBase with Store {
   void checkIfNeedToUpdateList(bool loadMore) {
     if (lastPage) return;
 
-    getFilteredAds(loadMore);
-    if (categories.isEmpty) getAllCategories();
-    // if (ads.isEmpty) getFilteredAds();
-    // getAllAds();
+    // getFilteredAds(loadMore);
+    // if (categories.isEmpty) getAllCategories();
   }
 
   @action

@@ -29,6 +29,8 @@ class _HomePageState extends ModularState<HomePage, HomeController>
   final authController = Modular.get<AuthController>();
   final ScrollController scrollController = ScrollController();
 
+  var _overlayIsVisible = false;
+
   @override
   void initState() {
     super.initState();
@@ -148,6 +150,24 @@ class _HomePageState extends ModularState<HomePage, HomeController>
                   left: 0,
                   right: 0,
                   child: CreateAdButton(scrollController),
+                ),
+                // widget.builder()
+                IgnorePointer(
+                  child: AnimatedOpacity(
+                    opacity: _overlayIsVisible ? 1 : 0,
+                    duration: const Duration(milliseconds: 500),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0x00000000),
+                              Theme.of(context).primaryColor
+                            ]),
+                      ),
+                    ),
+                  ),
                 )
               ],
             ),

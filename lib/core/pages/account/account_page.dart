@@ -91,8 +91,7 @@ class AccountPage extends StatelessWidget {
                 ),
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
-                  // Navigator.of(context)
-                  //     .push(MaterialPageRoute(builder: (_) => MyAdsScreen()));
+                  Modular.to.pushNamed(myAdsRouter);
                 },
               ),
               ListTile(

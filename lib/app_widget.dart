@@ -13,6 +13,7 @@ class AppWidget extends StatelessWidget {
     initializeDateFormatting();
 
     return MaterialApp(
+      // showPerformanceOverlay: true, // show performance
       builder: asuka.builder,
       title: 'XLO',
       theme: buildTheme(),

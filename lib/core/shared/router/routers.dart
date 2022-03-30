@@ -7,3 +7,4 @@ const saveAdRouter = "/save_ad/";
 const adRouter = "ad/";
 const signUpRouter = "sign_up/";
 const filterRouter = "/filter/";
+const myAdsRouter = "my_ads/";

@@ -72,6 +72,21 @@ mixin _$SignUpUserController on _SignUpUserControllerBase, Store {
               name: '_SignUpUserControllerBase.savePressed'))
           .value;
 
+  final _$_userTypeAtom = Atom(name: '_SignUpUserControllerBase._userType');
+
+  @override
+  UserType? get _userType {
+    _$_userTypeAtom.reportRead();
+    return super._userType;
+  }
+
+  @override
+  set _userType(UserType? value) {
+    _$_userTypeAtom.reportWrite(value, super._userType, () {
+      super._userType = value;
+    });
+  }
+
   final _$_nameAtom = Atom(name: '_SignUpUserControllerBase._name');
 
   @override
@@ -165,6 +180,17 @@ mixin _$SignUpUserController on _SignUpUserControllerBase, Store {
 
   final _$_SignUpUserControllerBaseActionController =
       ActionController(name: '_SignUpUserControllerBase');
+
+  @override
+  void setUserType(int? value) {
+    final _$actionInfo = _$_SignUpUserControllerBaseActionController
+        .startAction(name: '_SignUpUserControllerBase.setUserType');
+    try {
+      return super.setUserType(value);
+    } finally {
+      _$_SignUpUserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setName(String value) {
