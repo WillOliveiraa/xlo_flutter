@@ -144,14 +144,14 @@ class ActiveTile extends StatelessWidget {
         content: Text('Confirmar a venda de ${ad.title}?'),
         actions: [
           ButtonDefault(
-            onPressed: Navigator.of(context).pop,
+            onPressed: () => Navigator.pop(_),
             child: Text('Não'),
             primaryColor: Colors.white,
             secondColor: Colors.black87,
           ),
           ButtonDefault(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(_);
               controller.soldAd(ad);
             },
             child: Text('Sim'),
@@ -171,15 +171,15 @@ class ActiveTile extends StatelessWidget {
         content: Text('Confirmar a exclusão de ${ad.title}?'),
         actions: [
           ButtonDefault(
-            onPressed: Navigator.of(context).pop,
+            onPressed: () => Navigator.pop(_),
             child: Text('Não'),
             primaryColor: Colors.white,
             secondColor: Colors.black87,
           ),
           ButtonDefault(
             onPressed: () {
-              Navigator.of(context).pop();
-              // store.deleteAd(ad);
+              Navigator.pop(_);
+              controller.deleteAd(ad);
             },
             child: Text('Sim'),
             secondColor: Colors.red,
