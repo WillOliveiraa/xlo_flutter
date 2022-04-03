@@ -60,7 +60,6 @@ abstract class _HomeControllerBase with Store {
   @action
   void setSeach(String value) {
     search = value;
-    // resetPage();
   }
 
   void checkIfNeedToUpdateList(bool loadMore) {
