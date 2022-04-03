@@ -54,18 +54,13 @@ mixin _$MyAdsController on _MyAdsControllerBase, Store {
     return _$getMyAdsAsyncAction.run(() => super.getMyAds());
   }
 
-  final _$soldAdAsyncAction = AsyncAction('_MyAdsControllerBase.soldAd');
+  final _$updateStatusAsyncAction =
+      AsyncAction('_MyAdsControllerBase.updateStatus');
 
   @override
-  Future<void> soldAd(AdModel ad) {
-    return _$soldAdAsyncAction.run(() => super.soldAd(ad));
-  }
-
-  final _$deleteAdAsyncAction = AsyncAction('_MyAdsControllerBase.deleteAd');
-
-  @override
-  Future<void> deleteAd(AdModel ad) {
-    return _$deleteAdAsyncAction.run(() => super.deleteAd(ad));
+  Future<void> updateStatus(String adId, AdStatus status) {
+    return _$updateStatusAsyncAction
+        .run(() => super.updateStatus(adId, status));
   }
 
   @override

@@ -46,11 +46,18 @@ abstract class _MyAdsControllerBase with Store {
 
   void refresh() => getMyAds();
 
-  @action
   Future<void> soldAd(AdModel ad) async {
+    updateStatus(ad.id!, AdStatus.SOLD);
+  }
+
+  Future<void> deleteAd(AdModel ad) async {
+    updateStatus(ad.id!, AdStatus.DELETED);
+  }
+
+  @action
+  Future<void> updateStatus(String adId, AdStatus status) async {
     loading = true;
-    final response =
-        await _adStatusUseCase(adId: ad.id!, adStatus: AdStatus.SOLD);
+    final response = await _adStatusUseCase(adId: adId, adStatus: status);
 
     response.fold((failure) {
       asuka.showSnackBar(SnackBar(content: Text(failure.message!)));
@@ -59,12 +66,5 @@ abstract class _MyAdsControllerBase with Store {
       loading = false;
       refresh();
     });
-  }
-
-  @action
-  Future<void> deleteAd(AdModel ad) async {
-    loading = true;
-    // await AdRepository().delete(ad);
-    refresh();
   }
 }

@@ -88,7 +88,8 @@ class _MyAdsPageState extends ModularState<MyAdsPage, MyAdsController>
               return ListView.builder(
                 itemCount: controller.soldAds.length,
                 itemBuilder: (_, index) {
-                  return SoldTile(controller.soldAds[index]);
+                  return SoldTile(
+                      ad: controller.soldAds[index], controller: controller);
                 },
               );
             }),

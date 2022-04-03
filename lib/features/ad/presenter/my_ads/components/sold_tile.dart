@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:xlo_flutter/core/shared/helpers/extensions.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 
+import '../my_ads_controller.dart';
+
 class SoldTile extends StatelessWidget {
-  SoldTile(this.ad);
+  SoldTile({required this.ad, required this.controller});
 
   final AdModel ad;
-  // final MyAdsStore store;
+  final MyAdsController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class SoldTile extends StatelessWidget {
                   iconSize: 20,
                   color: Colors.purple,
                   onPressed: () {
-                    // store.deleteAd(ad);
+                    controller.deleteAd(ad);
                   },
                 ),
               ],

@@ -178,8 +178,8 @@ class ActiveTile extends StatelessWidget {
           ),
           ButtonDefault(
             onPressed: () {
-              Navigator.pop(_);
               controller.deleteAd(ad);
+              Navigator.pop(_);
             },
             child: Text('Sim'),
             secondColor: Colors.red,
