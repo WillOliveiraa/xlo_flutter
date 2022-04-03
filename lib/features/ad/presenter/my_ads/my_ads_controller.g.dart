@@ -47,6 +47,13 @@ mixin _$MyAdsController on _MyAdsControllerBase, Store {
     });
   }
 
+  final _$getMyAdsAsyncAction = AsyncAction('_MyAdsControllerBase.getMyAds');
+
+  @override
+  Future<void> getMyAds() {
+    return _$getMyAdsAsyncAction.run(() => super.getMyAds());
+  }
+
   final _$soldAdAsyncAction = AsyncAction('_MyAdsControllerBase.soldAd');
 
   @override

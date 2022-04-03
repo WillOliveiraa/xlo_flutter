@@ -25,11 +25,7 @@ class _MyAdsPageState extends ModularState<MyAdsPage, MyAdsController>
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
-      await Future.delayed(Duration(milliseconds: 1900));
-      controller.getMyAds();
-    });
+    controller.getMyAds();
 
     tabController = TabController(
       length: 3,
@@ -40,17 +36,18 @@ class _MyAdsPageState extends ModularState<MyAdsPage, MyAdsController>
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
         title: Text('Meus Anúncios'),
         centerTitle: true,
         bottom: TabBar(
           controller: tabController,
-          indicatorColor: Colors.orange,
+          indicatorColor: color,
           tabs: [
-            Tab(child: Text('ATIVOS')),
-            Tab(child: Text('PENDENTES')),
-            Tab(child: Text('VENDIDOS')),
+            Tab(child: Text('ATIVOS', style: TextStyle(color: color))),
+            Tab(child: Text('PENDENTES', style: TextStyle(color: color))),
+            Tab(child: Text('VENDIDOS', style: TextStyle(color: color))),
           ],
         ),
       ),
@@ -68,7 +65,8 @@ class _MyAdsPageState extends ModularState<MyAdsPage, MyAdsController>
               return ListView.builder(
                 itemCount: controller.activeAds.length,
                 itemBuilder: (_, index) {
-                  return ActiveTile(controller.activeAds[index]);
+                  return ActiveTile(
+                      ad: controller.activeAds[index], controller: controller);
                 },
               );
             }),

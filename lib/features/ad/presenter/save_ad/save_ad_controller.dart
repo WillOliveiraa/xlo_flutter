@@ -202,7 +202,7 @@ abstract class _SaveAdControllerBase with Store {
       // loading = false;
       isUpdateAd = true;
       if (idAd != null)
-        Modular.to.pop();
+        Modular.to.pop(true);
       else
         Modular.to.popUntil(ModalRoute.withName(baseRouter));
     });

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/helpers/extensions.dart';
+import 'package:xlo_flutter/core/shared/router/routers.dart';
+import 'package:xlo_flutter/core/shared/widgets/button_default.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 
+import '../my_ads_controller.dart';
+
 class ActiveTile extends StatelessWidget {
-  ActiveTile(this.ad);
+  ActiveTile({required this.ad, required this.controller});
 
   final AdModel ad;
-  // final MyAdsStore store;
+  final MyAdsController controller;
 
   final List<MenuChoice> choices = [
     MenuChoice(index: 0, title: 'Editar', iconData: Icons.edit),
@@ -16,10 +21,10 @@ class ActiveTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).primaryColor;
     return GestureDetector(
       onTap: () {
-        // Navigator.of(context)
-        //     .push(MaterialPageRoute(builder: (_) => AdScreen(ad)));
+        Modular.to.pushNamed('$baseRouter$adRouter', arguments: ad);
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -66,6 +71,7 @@ class ActiveTile extends StatelessWidget {
                 ),
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   PopupMenuButton<MenuChoice>(
                     onSelected: (choice) {
@@ -83,8 +89,8 @@ class ActiveTile extends StatelessWidget {
                     },
                     icon: Icon(
                       Icons.more_vert,
-                      size: 20,
-                      color: Colors.purple,
+                      size: 22,
+                      color: color,
                     ),
                     itemBuilder: (_) {
                       return choices
@@ -96,14 +102,14 @@ class ActiveTile extends StatelessWidget {
                                   Icon(
                                     choice.iconData,
                                     size: 20,
-                                    color: Colors.purple,
+                                    color: color,
                                   ),
                                   const SizedBox(width: 8),
                                   Text(
                                     choice.title,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w400,
-                                      color: Colors.purple,
+                                      color: color,
                                     ),
                                   ),
                                 ],
@@ -123,12 +129,11 @@ class ActiveTile extends StatelessWidget {
   }
 
   Future<void> editAd(BuildContext context) async {
-    // final success = await Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (_) => CreateScreen(ad: ad),
-    //   ),
-    // );
-    // if (success != null && success as bool) store.refresh();
+    final success = await Modular.to.pushNamed(
+        '$baseRouter$saveAdRouter'.replaceAll('//', '/'),
+        arguments: ad);
+
+    if (success != null && success as bool) controller.refresh();
   }
 
   void soldAd(BuildContext context) {
@@ -138,18 +143,20 @@ class ActiveTile extends StatelessWidget {
         title: Text('Vendido'),
         content: Text('Confirmar a venda de ${ad.title}?'),
         actions: [
-          FlatButton(
+          ButtonDefault(
             onPressed: Navigator.of(context).pop,
             child: Text('Não'),
-            textColor: Colors.purple,
+            primaryColor: Colors.white,
+            secondColor: Colors.black87,
           ),
-          FlatButton(
+          ButtonDefault(
             onPressed: () {
               Navigator.of(context).pop();
-              // store.soldAd(ad);
+              controller.soldAd(ad);
             },
             child: Text('Sim'),
-            textColor: Colors.red,
+            secondColor: Colors.red,
+            primaryColor: Colors.white,
           ),
         ],
       ),
@@ -163,18 +170,20 @@ class ActiveTile extends StatelessWidget {
         title: Text('Excluir'),
         content: Text('Confirmar a exclusão de ${ad.title}?'),
         actions: [
-          FlatButton(
+          ButtonDefault(
             onPressed: Navigator.of(context).pop,
             child: Text('Não'),
-            textColor: Colors.purple,
+            primaryColor: Colors.white,
+            secondColor: Colors.black87,
           ),
-          FlatButton(
+          ButtonDefault(
             onPressed: () {
               Navigator.of(context).pop();
               // store.deleteAd(ad);
             },
             child: Text('Sim'),
-            textColor: Colors.red,
+            secondColor: Colors.red,
+            primaryColor: Colors.white,
           ),
         ],
       ),

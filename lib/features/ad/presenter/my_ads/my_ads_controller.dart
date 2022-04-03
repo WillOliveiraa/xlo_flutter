@@ -25,6 +25,7 @@ abstract class _MyAdsControllerBase with Store {
   List<AdModel> get soldAds =>
       myAds.where((ad) => ad.status == AdStatus.SOLD).toList();
 
+  @action
   Future<void> getMyAds() async {
     loading = true;
     final response = await _getMyAdsUseCase();
