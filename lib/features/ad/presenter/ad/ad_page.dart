@@ -8,6 +8,7 @@ import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
+import 'package:xlo_flutter/features/ad/presenter/ad/ad_controller.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
 
 import 'components/bottom_bar.dart';
@@ -26,9 +27,15 @@ class AdPage extends StatefulWidget {
   State<AdPage> createState() => _AdPageState();
 }
 
-class _AdPageState extends State<AdPage> {
+class _AdPageState extends ModularState<AdPage, AdController> {
   final AuthController authController = Modular.get();
   final SaveAdController saveAdController = Modular.get();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.updateViews(widget.ad);
+  }
 
   @override
   Widget build(BuildContext context) {
