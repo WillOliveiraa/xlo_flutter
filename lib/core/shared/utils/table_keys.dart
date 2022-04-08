@@ -4,6 +4,7 @@ const keyUserEmail = 'email';
 const keyUserPhone = 'phone';
 const keyUserType = 'type';
 const keyUserCreatedAt = 'createdAt';
+const keyUserImage = 'image';
 
 const keyCategoryTable = 'Categories';
 const keyCategoryId = 'objectId';

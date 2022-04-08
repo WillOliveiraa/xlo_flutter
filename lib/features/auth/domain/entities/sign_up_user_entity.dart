@@ -11,12 +11,14 @@ class SignUpUserEntity extends UserEntity {
     required this.passwordConf,
     required String phone,
     UserType type = UserType.PARTICULAR,
+    dynamic image,
   }) : super(
           name: name,
           email: email,
           password: password,
           phone: phone,
           type: type,
+          image: image,
         );
 
   bool get isValidPhone => phone != null && phone!.length >= 14;

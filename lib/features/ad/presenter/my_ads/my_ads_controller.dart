@@ -44,7 +44,7 @@ abstract class _MyAdsControllerBase with Store {
   @observable
   bool loading = true;
 
-  void refresh() => getMyAds();
+  Future<void> refresh() => getMyAds();
 
   Future<void> soldAd(AdModel ad) async {
     updateStatus(ad.id!, AdStatus.SOLD);

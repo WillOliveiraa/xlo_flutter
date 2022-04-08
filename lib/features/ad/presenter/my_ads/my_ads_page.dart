@@ -45,9 +45,13 @@ class _MyAdsPageState extends ModularState<MyAdsPage, MyAdsController>
           controller: tabController,
           indicatorColor: color,
           tabs: [
-            Tab(child: Text('ATIVOS', style: TextStyle(color: color))),
-            Tab(child: Text('PENDENTES', style: TextStyle(color: color))),
-            Tab(child: Text('VENDIDOS', style: TextStyle(color: color))),
+            Tab(child: Text('ATIVOS', style: TextStyle(color: Colors.black87))),
+            Tab(
+                child:
+                    Text('PENDENTES', style: TextStyle(color: Colors.black87))),
+            Tab(
+                child:
+                    Text('VENDIDOS', style: TextStyle(color: Colors.black87))),
           ],
         ),
       ),
@@ -62,35 +66,48 @@ class _MyAdsPageState extends ModularState<MyAdsPage, MyAdsController>
               if (controller.activeAds.isEmpty)
                 return EmptyCard('Você não possui nenhum anúncio ativo.');
 
-              return ListView.builder(
-                itemCount: controller.activeAds.length,
-                itemBuilder: (_, index) {
-                  return ActiveTile(
-                      ad: controller.activeAds[index], controller: controller);
-                },
+              return RefreshIndicator(
+                color: Theme.of(context).primaryColor,
+                onRefresh: () => controller.refresh(),
+                child: ListView.builder(
+                  itemCount: controller.activeAds.length,
+                  itemBuilder: (_, index) {
+                    return ActiveTile(
+                        ad: controller.activeAds[index],
+                        controller: controller);
+                  },
+                ),
               );
             }),
             Observer(builder: (_) {
               if (controller.pendingAds.isEmpty)
                 return EmptyCard('Você não possui nenhum anúncio pendente.');
 
-              return ListView.builder(
-                itemCount: controller.pendingAds.length,
-                itemBuilder: (_, index) {
-                  return PendingTile(controller.pendingAds[index]);
-                },
+              return RefreshIndicator(
+                color: Theme.of(context).primaryColor,
+                onRefresh: () => controller.refresh(),
+                child: ListView.builder(
+                  itemCount: controller.pendingAds.length,
+                  itemBuilder: (_, index) {
+                    return PendingTile(controller.pendingAds[index]);
+                  },
+                ),
               );
             }),
             Observer(builder: (_) {
               if (controller.soldAds.isEmpty)
                 return EmptyCard('Você não possui nenhum anúncio vendido.');
 
-              return ListView.builder(
-                itemCount: controller.soldAds.length,
-                itemBuilder: (_, index) {
-                  return SoldTile(
-                      ad: controller.soldAds[index], controller: controller);
-                },
+              return RefreshIndicator(
+                color: Theme.of(context).primaryColor,
+                onRefresh: () => controller.refresh(),
+                child: ListView.builder(
+                  itemCount: controller.soldAds.length,
+                  itemBuilder: (_, index) {
+                    return SoldTile(
+                        ad: controller.soldAds[index], controller: controller);
+                  },
+                ),
               );
             }),
           ],

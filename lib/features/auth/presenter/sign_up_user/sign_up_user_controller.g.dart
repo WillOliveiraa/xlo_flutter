@@ -178,6 +178,21 @@ mixin _$SignUpUserController on _SignUpUserControllerBase, Store {
     });
   }
 
+  final _$_imageAtom = Atom(name: '_SignUpUserControllerBase._image');
+
+  @override
+  dynamic get _image {
+    _$_imageAtom.reportRead();
+    return super._image;
+  }
+
+  @override
+  set _image(dynamic value) {
+    _$_imageAtom.reportWrite(value, super._image, () {
+      super._image = value;
+    });
+  }
+
   final _$_SignUpUserControllerBaseActionController =
       ActionController(name: '_SignUpUserControllerBase');
 
@@ -187,6 +202,17 @@ mixin _$SignUpUserController on _SignUpUserControllerBase, Store {
         .startAction(name: '_SignUpUserControllerBase.setUserType');
     try {
       return super.setUserType(value);
+    } finally {
+      _$_SignUpUserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setImage(dynamic value) {
+    final _$actionInfo = _$_SignUpUserControllerBaseActionController
+        .startAction(name: '_SignUpUserControllerBase.setImage');
+    try {
+      return super.setImage(value);
     } finally {
       _$_SignUpUserControllerBaseActionController.endAction(_$actionInfo);
     }

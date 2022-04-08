@@ -51,8 +51,17 @@ abstract class _SignUpUserControllerBase with Store {
 
   UserType get userType => _userType!;
 
+  @observable
+  dynamic _image;
+
   @action
   void setUserType(int? value) => _userType = UserType.values[value!];
+
+  // ignore: unnecessary_getters_setters
+  dynamic get image => _image;
+
+  @action
+  setImage(dynamic value) => _image = value;
 
   @computed
   SignUpUserModel get userModel => SignUpUserModel.signUpUser(
@@ -62,6 +71,7 @@ abstract class _SignUpUserControllerBase with Store {
         passwordConf: _passwordConf ?? '',
         phone: _phone ?? '',
         type: _userType ?? UserType.PARTICULAR,
+        image: image,
       );
 
   // @action
@@ -184,6 +194,7 @@ abstract class _SignUpUserControllerBase with Store {
         phone: _phone,
         createdAt: _createAt,
         type: _userType!,
+        image: _image,
       ));
     });
   }
@@ -196,5 +207,6 @@ abstract class _SignUpUserControllerBase with Store {
     setName(user.name);
     setEmail(user.email);
     if (user.phone != null) setPhone(user.phone!);
+    if (user.image != null) setImage(user.image);
   }
 }

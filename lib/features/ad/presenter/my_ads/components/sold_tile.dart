@@ -50,11 +50,12 @@ class SoldTile extends StatelessWidget {
               ),
             ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
                   icon: Icon(Icons.delete),
                   iconSize: 20,
-                  color: Colors.purple,
+                  color: Theme.of(context).primaryColor,
                   onPressed: () {
                     controller.deleteAd(ad);
                   },

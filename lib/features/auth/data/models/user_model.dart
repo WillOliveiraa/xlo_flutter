@@ -12,6 +12,7 @@ class UserModel extends UserEntity {
     UserType type = UserType.PARTICULAR,
     final DateTime? createdAt,
     String? id,
+    dynamic image,
   }) : super(
           name: name,
           email: email,
@@ -20,6 +21,7 @@ class UserModel extends UserEntity {
           type: type,
           id: id,
           createdAt: createdAt,
+          image: image,
         );
 
   factory UserModel.signInWithEmail({
@@ -44,6 +46,9 @@ class UserModel extends UserEntity {
       phone: parseUser.get(keyUserPhone),
       type: UserType.values[parseUser.get(keyUserType)],
       createdAt: parseUser.get(keyUserCreatedAt),
+      image: parseUser.get(keyUserImage) != null
+          ? parseUser.get(keyUserImage).url
+          : null,
     );
   }
 

@@ -9,6 +9,7 @@ class SignUpUserModel extends SignUpUserEntity {
     required String passwordConf,
     required String phone,
     UserType type = UserType.PARTICULAR,
+    dynamic image,
   }) : super(
           name: name,
           email: email,
@@ -16,6 +17,7 @@ class SignUpUserModel extends SignUpUserEntity {
           passwordConf: passwordConf,
           phone: phone,
           type: type,
+          image: image,
         );
 
   factory SignUpUserModel.signUpUser({
@@ -25,6 +27,7 @@ class SignUpUserModel extends SignUpUserEntity {
     required String passwordConf,
     required String phone,
     UserType type = UserType.PARTICULAR,
+    dynamic image,
   }) {
     return SignUpUserModel(
       name: name,
@@ -33,6 +36,7 @@ class SignUpUserModel extends SignUpUserEntity {
       passwordConf: passwordConf,
       phone: phone,
       type: type,
+      image: image,
     );
   }
 

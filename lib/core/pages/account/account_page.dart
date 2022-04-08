@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -36,14 +38,7 @@ class AccountPage extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          CircleAvatar(
-                            radius: 32,
-                            backgroundColor: Colors.grey[300],
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(32),
-                              child: SvgPicture.asset('assets/icons/User.svg'),
-                            ),
-                          ),
+                          _showImageUser(authController.user?.image),
                           const SizedBox(height: 10),
                           Observer(builder: (_) {
                             return Text(
@@ -111,6 +106,26 @@ class AccountPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _showImageUser(dynamic image) {
+    if (image != null) {
+      return CircleAvatar(
+        radius: 32,
+        backgroundImage: image is File
+            ? FileImage(image) as ImageProvider<Object>
+            : NetworkImage(image.toString()),
+      );
+    }
+
+    return CircleAvatar(
+      radius: 32,
+      backgroundColor: Colors.grey[300],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(32),
+        child: SvgPicture.asset('assets/icons/User.svg'),
       ),
     );
   }

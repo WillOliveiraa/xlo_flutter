@@ -16,7 +16,7 @@ class ImageDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.file(image as File),
+          _showImage(image),
           ButtonDefault(
             child: const Text('Excluir'),
             primaryColor: Colors.white,
@@ -29,5 +29,11 @@ class ImageDialog extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _showImage(dynamic image) {
+    if (image is File) return Image.file(image);
+
+    return Image.network(image);
   }
 }

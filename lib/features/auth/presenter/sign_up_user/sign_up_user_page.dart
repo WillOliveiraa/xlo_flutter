@@ -10,6 +10,7 @@ import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/sign_up_user_controller.dart';
 
 import 'components/field_title.dart';
+import 'components/images_field.dart';
 
 class SignUpUserPage extends StatefulWidget {
   const SignUpUserPage(this.user, {Key? key}) : super(key: key);
@@ -62,6 +63,7 @@ class _SignUpUserPageState
                     Observer(builder: (_) {
                       return Column(
                         children: [
+                          UserImageField(controller),
                           const SizedBox(height: 16),
                           IgnorePointer(
                             ignoring: controller.loading,

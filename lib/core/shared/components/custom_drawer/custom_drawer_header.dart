@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -25,8 +27,9 @@ class CustomDrawerHeader extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
-            const Icon(Icons.person, color: Colors.white, size: 35),
-            const SizedBox(width: 20),
+            Observer(builder: (_) {
+              return _showImageUser(authController.user?.image);
+            }),
             Observer(builder: (_) {
               if (authController.loading) {
                 return Container(
@@ -71,6 +74,29 @@ class CustomDrawerHeader extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _showImageUser(dynamic image) {
+    if (image != null) {
+      return Row(
+        children: [
+          CircleAvatar(
+            radius: 24,
+            backgroundImage: image is File
+                ? FileImage(image) as ImageProvider<Object>
+                : NetworkImage(image.toString()),
+          ),
+          const SizedBox(width: 20),
+        ],
+      );
+    }
+
+    return Row(
+      children: [
+        Icon(Icons.person, color: Colors.white, size: 35),
+        const SizedBox(width: 20),
+      ],
     );
   }
 }

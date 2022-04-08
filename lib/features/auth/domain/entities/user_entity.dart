@@ -10,6 +10,7 @@ class UserEntity {
   final String? password;
   final UserType type;
   final DateTime? createdAt;
+  final dynamic image;
 
   UserEntity({
     this.id,
@@ -19,6 +20,7 @@ class UserEntity {
     required this.password,
     this.type = UserType.PARTICULAR,
     this.createdAt,
+    this.image,
   });
 
   bool get isValidName => name.isNotEmpty;
