@@ -9,23 +9,21 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_get_my_ads.dart';
 class GetMyFavoriteAdsDatasourceImp implements GetMyFavoriteAdsDatasource {
   @override
   Future<Either<Failure, List<AdModel>>> getMyFavoriteAds(String userId) async {
-    final currentUser = await ParseUser.currentUser();
-    final queryBuilder = QueryBuilder<ParseObject>(ParseObject(keyAdTable));
+    final queryBuilder =
+        QueryBuilder<ParseObject>(ParseObject(keyFavoritesTable));
 
-    queryBuilder.setLimit(100);
-    queryBuilder.orderByDescending(keyAdCreatedAt);
-    queryBuilder.whereEqualTo(keyAdOwner, currentUser.toPointer());
-    queryBuilder.includeObject([keyAdOwner, keyAdCategory]);
+    queryBuilder.whereEqualTo(keyFavoritesOwner, userId);
+    queryBuilder.includeObject([keyAdTable, 'ad.owner']);
 
     final response = await queryBuilder.query();
 
-    List<AdModel> adsList = [];
-    if (response.success) {
-      for (final object in response.result) {
-        final obj = AdModel.fromParse(object);
-        adsList.add(obj);
-      }
-      return Right(adsList);
+    if (response.success && response.results != null) {
+      return Right(response.results!
+          .map((parseObj) =>
+              AdModel.fromParse(parseObj.get(keyFavoritesAd) as ParseObject))
+          .toList());
+    } else if (response.success && response.results == null) {
+      return Right([]);
     } else
       return Left(ErrorGetMyAds(
           message: 'Ocorreu um erro ao tentar obter os meus anúncios'));

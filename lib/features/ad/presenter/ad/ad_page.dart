@@ -9,6 +9,7 @@ import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/ad/presenter/ad/ad_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/my_favorite_ads/my_favorite_ads_controller.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
 
 import 'components/bottom_bar.dart';
@@ -30,6 +31,7 @@ class AdPage extends StatefulWidget {
 class _AdPageState extends ModularState<AdPage, AdController> {
   final AuthController authController = Modular.get();
   final SaveAdController saveAdController = Modular.get();
+  final MyFavoriteAdsController favoriteController = Modular.get();
 
   @override
   void initState() {
@@ -54,7 +56,17 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                 );
               },
             ),
-          Container(),
+          if (widget.ad.status == AdStatus.ACTIVE && authController.isLoggedIn)
+            Observer(builder: (_) {
+              return IconButton(
+                icon: Icon(favoriteController.checkIsFavorite(widget.ad.id!)
+                    ? Icons.favorite
+                    : Icons.favorite_border),
+                onPressed: () async {
+                  favoriteController.toggleFavorite(widget.ad);
+                },
+              );
+            }),
         ],
       ),
       body: Observer(

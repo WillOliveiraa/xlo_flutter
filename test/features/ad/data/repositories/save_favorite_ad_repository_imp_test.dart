@@ -11,27 +11,32 @@ class SaveFavoriteAdDatasourceMock extends Mock
 void main() {
   final datasource = SaveFavoriteAdDatasourceMock();
   final respository = SaveFavoriteAdRepositoryImp(datasource);
-  final adIds = ['adIds'];
+  final adId = 'adId';
+  final userId = 'userId';
 
   test('should save a ad', () async {
-    when(() => datasource.saveFavoriteAd(adIds))
+    when(() => datasource.saveFavoriteAd(adId: adId, userId: userId))
         .thenAnswer((_) async => Right(unit));
 
-    final result = await respository.saveFavoriteAd(adIds);
+    final result = await respository.saveFavoriteAd(adId: adId, userId: userId);
 
     expect(result, isA<Right<dynamic, Unit>>());
-    verify(() => datasource.saveFavoriteAd(adIds)).called(1);
+    verify(() => datasource.saveFavoriteAd(adId: adId, userId: userId))
+        .called(1);
     verifyNoMoreInteractions(datasource);
   });
 
   test('should return a ErrorSaveFavoriteAd', () async {
-    when(() => datasource.saveFavoriteAd(adIds))
+    when(() => datasource.saveFavoriteAd(adId: adId, userId: userId))
         .thenAnswer((_) async => Left(ErrorSaveFavoriteAd()));
 
-    final result = (await respository.saveFavoriteAd(adIds)).fold(id, id);
+    final result =
+        (await respository.saveFavoriteAd(adId: adId, userId: userId))
+            .fold(id, id);
 
     expect(result, isA<ErrorSaveFavoriteAd>());
-    verify(() => datasource.saveFavoriteAd(adIds)).called(1);
+    verify(() => datasource.saveFavoriteAd(adId: adId, userId: userId))
+        .called(1);
     verifyNoMoreInteractions(datasource);
   });
 }

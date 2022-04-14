@@ -7,12 +7,17 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_save_favorite_ad.dar
 
 class SaveFavoriteAdDatasourceImp implements SaveFavoriteAdDatasource {
   @override
-  Future<Either<Failure, Unit>> saveFavoriteAd(List<String> adIds) async {
-    final _parseUser = await ParseUser.currentUser() as ParseUser;
+  Future<Either<Failure, Unit>> saveFavoriteAd(
+      {required String adId, required String userId}) async {
+    final favoritesObject = ParseObject(keyFavoritesTable);
 
-    _parseUser.set<List<String>>(keyUserFavorite, adIds);
+    favoritesObject.set<String>(keyFavoritesOwner, userId);
+    favoritesObject.set<ParseObject>(
+      keyFavoritesAd,
+      ParseObject(keyAdTable)..set(keyAdId, adId),
+    );
 
-    final result = await _parseUser.save();
+    final result = await favoritesObject.save();
 
     if (result.success)
       return Right(unit);

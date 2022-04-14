@@ -4,6 +4,7 @@ import 'package:xlo_flutter/core/pages/base/base_page.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/ad/presenter/ad/ad_module.dart';
 import 'package:xlo_flutter/features/ad/presenter/my_ads/my_ads_module.dart';
+import 'package:xlo_flutter/features/ad/presenter/my_favorite_ads/my_favorite_ads_module.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_module.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/sign_up_user_module.dart';
 import 'package:xlo_flutter/features/home/presenter/filter/filter_module.dart';
@@ -14,6 +15,7 @@ class BaseModule extends Module {
   final List<Bind> binds = [
     Bind.singleton((i) => BaseController()),
     ...SaveAdModule.export,
+    ...MyFavoriteAdsModule.export,
   ];
 
   @override
@@ -25,5 +27,6 @@ class BaseModule extends Module {
     ModuleRoute(filterRouter, module: FilterModule()),
     ModuleRoute(signUpRouter, module: SignUpUserModule()),
     ModuleRoute(myAdsRouter, module: MyAdsModule()),
+    ModuleRoute(myFavoriteAdsRouter, module: MyFavoriteAdsModule()),
   ];
 }

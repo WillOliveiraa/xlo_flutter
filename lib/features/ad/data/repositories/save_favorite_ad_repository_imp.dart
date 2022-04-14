@@ -10,9 +10,10 @@ class SaveFavoriteAdRepositoryImp implements SaveFavoriteAdRepository {
   SaveFavoriteAdRepositoryImp(this._datasource);
 
   @override
-  Future<Either<Failure, Unit>> saveFavoriteAd(List<String> adIds) async {
+  Future<Either<Failure, Unit>> saveFavoriteAd(
+      {required String adId, required String userId}) async {
     try {
-      return await _datasource.saveFavoriteAd(adIds);
+      return await _datasource.saveFavoriteAd(adId: adId, userId: userId);
     } catch (e) {
       return Left(ErrorSaveFavoriteAd());
     }

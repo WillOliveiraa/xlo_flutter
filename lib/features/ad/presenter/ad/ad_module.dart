@@ -10,9 +10,13 @@ import 'ad_page.dart';
 class AdModule extends Module {
   @override
   final List<Bind> binds = [
+    // datasources
     Bind.singleton((i) => UpdateAdViewsDatasourceImp()),
+    // repositories
     Bind.singleton((i) => UpdateAdViewsRepositoryImp(i())),
+    // usecases
     Bind.singleton((i) => UpdateAdViewsUseCaseImp(i())),
+    // controllers
     Bind.singleton((i) => AdController(i())),
   ];
 

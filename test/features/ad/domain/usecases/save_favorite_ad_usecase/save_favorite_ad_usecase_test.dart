@@ -11,22 +11,24 @@ class SaveFavoriteAdRepositoryMock extends Mock
 void main() {
   final repository = SaveFavoriteAdRepositoryMock();
   final usecase = SaveFavoriteAdUseCaseImp(repository);
-  final adIds = ['adIds'];
+  final adId = 'adId';
+  final userId = 'userId';
 
   test('should save a favorite ad', () async {
-    when(() => repository.saveFavoriteAd(adIds))
+    when(() => repository.saveFavoriteAd(adId: adId, userId: userId))
         .thenAnswer((_) async => Right(unit));
 
-    final result = (await usecase(adIds)).fold((l) => null, (r) => r);
+    final result =
+        (await usecase(adId: adId, userId: userId)).fold((l) => null, (r) => r);
 
     expect(result, unit);
   });
 
   test('should return a ErrorSaveFavoriteAd', () async {
-    when(() => repository.saveFavoriteAd(adIds))
+    when(() => repository.saveFavoriteAd(adId: adId, userId: userId))
         .thenAnswer((_) async => Left(ErrorSaveFavoriteAd()));
 
-    final result = (await usecase(adIds)).fold(id, id);
+    final result = (await usecase(adId: adId, userId: userId)).fold(id, id);
 
     expect(result, isA<ErrorSaveFavoriteAd>());
   });

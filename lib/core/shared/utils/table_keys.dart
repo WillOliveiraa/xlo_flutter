@@ -5,7 +5,6 @@ const keyUserPhone = 'phone';
 const keyUserType = 'type';
 const keyUserCreatedAt = 'createdAt';
 const keyUserImage = 'image';
-const keyUserFavorite = 'favorites';
 
 const keyCategoryTable = 'Categories';
 const keyCategoryId = 'objectId';
@@ -28,3 +27,8 @@ const keyAdCategory = 'category';
 const keyAdOwner = 'owner';
 const keyAdCreatedAt = 'createdAt';
 const keyAdViews = 'views';
+
+const keyFavoritesTable = 'Favorites';
+const keyFavoritesId = 'objectId';
+const keyFavoritesAd = 'ad';
+const keyFavoritesOwner = 'owner';

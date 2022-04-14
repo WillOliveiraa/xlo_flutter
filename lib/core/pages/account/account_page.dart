@@ -99,8 +99,7 @@ class AccountPage extends StatelessWidget {
                 ),
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //     builder: (_) => FavoritesScreen(hideDrawer: true)));
+                  Modular.to.pushNamed(myFavoriteAdsRouter);
                 },
               ),
             ],
