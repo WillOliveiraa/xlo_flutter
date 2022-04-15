@@ -79,25 +79,28 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                 children: [
                   Container(
                     height: 280,
-                    child: Carousel(
-                      images: widget.ad.images
-                          .map(
-                            (url) => url is String
-                                ? Image.network(
-                                    url,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.file(
-                                    url as File,
-                                    fit: BoxFit.cover,
-                                  ),
-                          )
-                          .toList(),
-                      dotSize: 4,
-                      dotBgColor: Colors.transparent,
-                      dotColor: Colors.orange,
-                      autoplay: false,
-                      dotSpacing: 15,
+                    child: Hero(
+                      tag: widget.ad.id!,
+                      child: Carousel(
+                        images: widget.ad.images
+                            .map(
+                              (url) => url is String
+                                  ? Image.network(
+                                      url,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.file(
+                                      url as File,
+                                      fit: BoxFit.cover,
+                                    ),
+                            )
+                            .toList(),
+                        dotSize: 4,
+                        dotBgColor: Colors.transparent,
+                        dotColor: Colors.orange,
+                        autoplay: false,
+                        dotSpacing: 15,
+                      ),
                     ),
                   ),
                   Padding(

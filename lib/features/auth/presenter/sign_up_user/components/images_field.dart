@@ -63,13 +63,16 @@ class UserImageField extends StatelessWidget {
                       ),
                     );
                   },
-                  child: CircleAvatar(
-                    radius: 72,
-                    backgroundImage: signUpUserController.image is File
-                        ? FileImage(
-                            signUpUserController.image as File,
-                          ) as ImageProvider<Object>
-                        : NetworkImage(signUpUserController.image.toString()),
+                  child: Hero(
+                    tag: 'userImg',
+                    child: CircleAvatar(
+                      radius: 72,
+                      backgroundImage: signUpUserController.image is File
+                          ? FileImage(
+                              signUpUserController.image as File,
+                            ) as ImageProvider<Object>
+                          : NetworkImage(signUpUserController.image.toString()),
+                    ),
                   ),
                 );
               }

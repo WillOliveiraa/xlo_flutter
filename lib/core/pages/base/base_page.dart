@@ -45,12 +45,6 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
             drawer: CustomDrawer(),
             body: Container(color: Colors.blue),
           ),
-          if (isLoggedIn)
-            Scaffold(
-              appBar: AppBar(title: Text('Favorites')),
-              drawer: CustomDrawer(),
-              body: Container(color: Colors.pink),
-            ),
           if (isLoggedIn) AccountPage(),
         ],
       );

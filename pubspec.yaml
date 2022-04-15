@@ -48,6 +48,7 @@ dependencies:
   readmore: ^2.1.0
   url_launcher: ^6.0.20
   toggle_switch: ^1.4.0
+  animated_card: ^2.0.0
 
 dev_dependencies:
   build_runner: ^2.1.7

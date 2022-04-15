@@ -27,18 +27,21 @@ class AdTile extends StatelessWidget {
           elevation: 8,
           child: Row(
             children: [
-              SizedBox(
-                height: 135,
-                width: 127,
-                child: ad.images.first is String
-                    ? Image.network(
-                        ad.images.first,
-                        fit: BoxFit.cover,
-                      )
-                    : Image.file(
-                        ad.images.first as File,
-                        fit: BoxFit.cover,
-                      ),
+              Hero(
+                tag: ad.id!,
+                child: SizedBox(
+                  height: 135,
+                  width: 127,
+                  child: ad.images.first is String
+                      ? Image.network(
+                          ad.images.first,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.file(
+                          ad.images.first as File,
+                          fit: BoxFit.cover,
+                        ),
+                ),
               ),
               Expanded(
                 child: Padding(

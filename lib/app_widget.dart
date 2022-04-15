@@ -19,6 +19,7 @@ class AppWidget extends StatelessWidget {
       theme: buildTheme(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
+      navigatorObservers: [HeroController()],
       // supportedLocales: const [
       //   Locale('pt', 'BR'),
       // ],

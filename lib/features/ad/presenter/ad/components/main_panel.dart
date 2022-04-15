@@ -33,7 +33,7 @@ class MainPanel extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 20, bottom: 18),
+          padding: const EdgeInsets.only(top: 20, bottom: 5),
           child: Text(
             'Publicado em ${ad.createdAt!.formattedDate()}',
             style: TextStyle(
@@ -43,6 +43,16 @@ class MainPanel extends StatelessWidget {
             ),
           ),
         ),
+        Visibility(
+          visible: ad.views != null,
+          child: Text(
+            'Visualizações: ${ad.views}',
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey[600],
+            ),
+          ),
+        )
       ],
     );
   }

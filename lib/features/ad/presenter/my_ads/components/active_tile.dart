@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/helpers/extensions.dart';
@@ -23,108 +24,115 @@ class ActiveTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = Theme.of(context).primaryColor;
 
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      elevation: 4,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {
-            Modular.to.pushNamed('$baseRouter$adRouter', arguments: ad);
-          },
-          child: Container(
-            height: 80,
-            child: Row(
-              children: [
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: Image.network(
-                    ad.images.isEmpty
-                        ? 'https://static.thenounproject.com/png/194055-200.png'
-                        : ad.images.first.toString(),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          ad.title,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          ad.price.formattedMoney(),
-                          style: TextStyle(fontWeight: FontWeight.w300),
-                        ),
-                        Text(
-                          '${ad.views} visitas',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: Colors.grey[800],
-                          ),
-                        ),
-                      ],
+    return AnimatedCard(
+      direction: AnimatedCardDirection.right,
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        elevation: 4,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              Modular.to.pushNamed('$baseRouter$adRouter', arguments: ad);
+            },
+            child: Container(
+              height: 80,
+              child: Row(
+                children: [
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: Hero(
+                      tag: ad.id!,
+                      child: Image.network(
+                        ad.images.isEmpty
+                            ? 'https://static.thenounproject.com/png/194055-200.png'
+                            : ad.images.first.toString(),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    PopupMenuButton<MenuChoice>(
-                      onSelected: (choice) {
-                        switch (choice.index) {
-                          case 0:
-                            editAd(context);
-                            break;
-                          case 1:
-                            soldAd(context);
-                            break;
-                          case 2:
-                            deleteAd(context);
-                            break;
-                        }
-                      },
-                      icon: Icon(
-                        Icons.more_vert,
-                        size: 22,
-                        color: color,
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            ad.title,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            ad.price.formattedMoney(),
+                            style: TextStyle(fontWeight: FontWeight.w300),
+                          ),
+                          Text(
+                            '${ad.views} visitas',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.grey[800],
+                            ),
+                          ),
+                        ],
                       ),
-                      itemBuilder: (_) {
-                        return choices
-                            .map(
-                              (choice) => PopupMenuItem<MenuChoice>(
-                                value: choice,
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      choice.iconData,
-                                      size: 20,
-                                      color: color,
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      choice.title,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  // Hero(tag: 'activeImg2', child: Icon(Icons.add)),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      PopupMenuButton<MenuChoice>(
+                        onSelected: (choice) {
+                          switch (choice.index) {
+                            case 0:
+                              editAd(context);
+                              break;
+                            case 1:
+                              soldAd(context);
+                              break;
+                            case 2:
+                              deleteAd(context);
+                              break;
+                          }
+                        },
+                        icon: Icon(
+                          Icons.more_vert,
+                          size: 22,
+                          color: color,
+                        ),
+                        itemBuilder: (_) {
+                          return choices
+                              .map(
+                                (choice) => PopupMenuItem<MenuChoice>(
+                                  value: choice,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        choice.iconData,
+                                        size: 20,
                                         color: color,
                                       ),
-                                    ),
-                                  ],
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        choice.title,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: color,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList();
-                      },
-                    ),
-                  ],
-                ),
-              ],
+                              )
+                              .toList();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

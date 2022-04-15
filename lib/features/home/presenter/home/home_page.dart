@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -124,7 +125,6 @@ class _HomePageState extends ModularState<HomePage, HomeController>
                     child: ListView.builder(
                       controller: scrollController,
                       itemCount: controller.itemCount,
-                      // itemCount: controller.ads.length + 1,
                       itemBuilder: (_, index) {
                         if (index == controller.ads.length &&
                             !controller.lastPage) {
@@ -140,7 +140,11 @@ class _HomePageState extends ModularState<HomePage, HomeController>
 
                         final ad = filteredAds[index];
 
-                        return AdTile(ad);
+                        return AnimatedCard(
+                          direction: AnimatedCardDirection.left,
+                          initDelay: Duration(milliseconds: 600),
+                          child: AdTile(ad),
+                        );
                       },
                     ),
                   );

@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,31 +20,41 @@ class TopBar extends StatelessWidget {
     return Row(
       children: [
         Observer(builder: (_) {
-          return BarButton(
-            label: homeController.category?.description ?? 'Categorias',
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey[400]!),
+          return Expanded(
+            child: AnimatedCard(
+              direction: AnimatedCardDirection.left,
+              child: BarButton(
+                label: homeController.category?.description ?? 'Categorias',
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey[400]!),
+                  ),
+                ),
+                onTap: () {
+                  showCategories(context);
+                },
               ),
             ),
-            onTap: () {
-              showCategories(context);
-            },
           );
         }),
-        BarButton(
-          label: 'Filtros',
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: Colors.grey[400]!),
-              left: BorderSide(color: Colors.grey[400]!),
+        Expanded(
+          child: AnimatedCard(
+            direction: AnimatedCardDirection.right,
+            child: BarButton(
+              label: 'Filtros',
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey[400]!),
+                  left: BorderSide(color: Colors.grey[400]!),
+                ),
+              ),
+              onTap: () {
+                Modular.to.pushNamed(
+                    '$baseRouter$filterRouter'.replaceAll('//', '/'),
+                    arguments: homeController.adFilter);
+              },
             ),
           ),
-          onTap: () {
-            Modular.to.pushNamed(
-                '$baseRouter$filterRouter'.replaceAll('//', '/'),
-                arguments: homeController.adFilter);
-          },
         ),
       ],
     );

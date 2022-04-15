@@ -31,17 +31,10 @@ class PageSection extends StatelessWidget {
           ),
           if (isLoggedIn)
             PageTile(
-              label: headerFavorites,
-              iconData: Icons.favorite,
-              onTap: () => baseController.setPage(2),
-              highlighted: baseController.page == 2,
-            ),
-          if (isLoggedIn)
-            PageTile(
               label: headerMyAccount,
               iconData: Icons.person,
-              onTap: () => baseController.setPage(3),
-              highlighted: baseController.page == 3,
+              onTap: () => baseController.setPage(2),
+              highlighted: baseController.page == 2,
             ),
         ],
       );
