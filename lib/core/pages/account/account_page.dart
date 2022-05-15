@@ -9,6 +9,7 @@ import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/core/shared/widgets/button_default.dart';
+import 'package:xlo_flutter/core/shared/widgets/circular_progress_ind_default.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -16,6 +17,8 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authController = Modular.get<AuthController>();
+    final color = Theme.of(context).primaryColor;
+
     return Scaffold(
       appBar: AppBar(title: Text('Minha Conta')),
       drawer: CustomDrawer(),
@@ -55,7 +58,7 @@ class AccountPage extends StatelessWidget {
                                   authController.user!.name,
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.purple,
+                                    color: color,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -74,7 +77,7 @@ class AccountPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -94,6 +97,25 @@ class AccountPage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Observer(builder: (_) {
+                      return AnimatedCard(
+                        direction: AnimatedCardDirection.top,
+                        duration: Duration(milliseconds: 1900),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: ButtonDefault(
+                            child: authController.loading
+                                ? CircularProgressIndDefault(color: color)
+                                : Text('SAIR'),
+                            primaryColor: Colors.white,
+                            secondColor: Theme.of(context).primaryColor,
+                            onPressed: () {
+                              authController.logout();
+                            },
+                          ),
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -104,7 +126,7 @@ class AccountPage extends StatelessWidget {
                   title: Text(
                     'Meus anúncios',
                     style: TextStyle(
-                      color: Colors.purple,
+                      color: color,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -121,7 +143,7 @@ class AccountPage extends StatelessWidget {
                   title: Text(
                     'Favoritos',
                     style: TextStyle(
-                      color: Colors.purple,
+                      color: color,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

@@ -26,7 +26,7 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
 
     reaction((_) => controller.page, (page) {
       pageController.jumpToPage(page as int);
-      Navigator.of(context).pop();
+      if (authController.isLoggedIn) Navigator.of(context).pop();
     });
   }
 

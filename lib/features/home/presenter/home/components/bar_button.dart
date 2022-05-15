@@ -11,20 +11,18 @@ class BarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          height: 40,
-          alignment: Alignment.center,
-          decoration: decoration,
-          child: Text(
-            label,
-            style: TextStyle(
-              color: AppColors.kTextColor,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 40,
+        alignment: Alignment.center,
+        decoration: decoration,
+        child: Text(
+          label,
+          style: TextStyle(
+            color: AppColors.kTextColor,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
