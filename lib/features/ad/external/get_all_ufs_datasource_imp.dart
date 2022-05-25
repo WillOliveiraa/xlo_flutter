@@ -20,6 +20,7 @@ class GetAllUfsDatasourceImp implements GetAllUfsDatasource {
     if (preferences.containsKey('UF_LIST')) {
       final jsonJ = json.decode(preferences.get('UF_LIST')! as String);
 
+      // ignore: avoid_dynamic_calls
       return Right(jsonJ
           .map<UfModel>((j) => UfModel.fromJson(j as Map<String, dynamic>))
           .toList() as List<UfModel>

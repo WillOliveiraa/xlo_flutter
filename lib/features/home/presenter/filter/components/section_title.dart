@@ -11,7 +11,7 @@ class SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.purple,
           fontSize: 13,
           fontWeight: FontWeight.w400,

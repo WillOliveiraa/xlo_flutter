@@ -11,12 +11,12 @@ class UpdateAdViewsDatasourceMock extends Mock
 void main() {
   final datasource = UpdateAdViewsDatasourceMock();
   final repository = UpdateAdViewsRepositoryImp(datasource);
-  final adViews = 1;
-  final adId = 'adId';
+  const adViews = 1;
+  const adId = 'adId';
 
   test('should update ad Views', () async {
     when(() => datasource.updateAdViews(adId: adId, views: adViews))
-        .thenAnswer((_) async => Right(unit));
+        .thenAnswer((_) async => const Right(unit));
 
     final result = await repository.updateAdViews(adId: adId, views: adViews);
 

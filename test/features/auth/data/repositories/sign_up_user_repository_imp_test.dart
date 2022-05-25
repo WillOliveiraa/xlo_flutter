@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:xlo_flutter/core/errors/failure.dart';
 import 'package:xlo_flutter/features/auth/data/datasources/sign_up_user_datasource.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 import 'package:xlo_flutter/features/auth/data/repositories/sign_up_user_repository_imp.dart';
 import 'package:xlo_flutter/features/auth/domain/entities/sign_up_user_entity.dart';
-import 'package:xlo_flutter/core/errors/failure.dart';
 import 'package:xlo_flutter/features/auth/domain/errors/error_sign_up_user.dart';
 
 class SignUpUserDatasourceMock extends Mock implements SignUpUserDatasource {}

@@ -48,6 +48,7 @@ abstract class _CepFieldControllerBase with Store {
 
   bool _isInitialize = false;
 
+  // ignore: avoid_positional_boolean_parameters
   bool setInitializeField(bool value) => _isInitialize = value;
 
   @action

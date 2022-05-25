@@ -11,12 +11,12 @@ class SaveFavoriteAdRepositoryMock extends Mock
 void main() {
   final repository = SaveFavoriteAdRepositoryMock();
   final usecase = SaveFavoriteAdUseCaseImp(repository);
-  final adId = 'adId';
-  final userId = 'userId';
+  const adId = 'adId';
+  const userId = 'userId';
 
   test('should save a favorite ad', () async {
     when(() => repository.saveFavoriteAd(adId: adId, userId: userId))
-        .thenAnswer((_) async => Right(unit));
+        .thenAnswer((_) async => const Right(unit));
 
     final result =
         (await usecase(adId: adId, userId: userId)).fold((l) => null, (r) => r);

@@ -48,6 +48,7 @@ class SaveAdModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute,
-        child: (_, args) => SaveAdPage(ad: args.data as AdModel)),
+        child: (_, args) =>
+            SaveAdPage(ad: args.data != null ? args.data as AdModel : null)),
   ];
 }

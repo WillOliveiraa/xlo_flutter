@@ -21,7 +21,7 @@ void main() {
 
   test('should save user', () async {
     when(() => datasource.saveUser(signUpUserEntity))
-        .thenAnswer((_) async => Right(unit));
+        .thenAnswer((_) async => const Right(unit));
 
     final result = await repository.saveUser(signUpUserEntity);
 

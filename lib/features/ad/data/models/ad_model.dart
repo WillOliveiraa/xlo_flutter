@@ -72,7 +72,11 @@ class AdModel extends AdEntity {
       title: object.get<String>(keyAdTitle) ?? '',
       description: object.get<String>(keyAdDescription) ?? '',
       status: AdStatus.values[object.get<int>(keyAdStatus)!],
-      images: object.get<List>(keyAdImages)?.map((e) => e.url).toList() ?? [],
+      images: object
+              .get<List>(keyAdImages)
+              ?.map((e) => (e as ParseFile).url)
+              .toList() ??
+          [],
       price: object.get<num>(keyAdPrice) ?? 0,
       views: object.get<int>(keyAdViews, defaultValue: 0),
       category: CategoryModel.fromParse(object.get<ParseObject>(keyAdCategory)),

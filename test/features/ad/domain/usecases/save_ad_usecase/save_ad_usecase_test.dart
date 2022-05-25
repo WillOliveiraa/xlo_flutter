@@ -33,7 +33,7 @@ void main() {
 
   test('should save the ad', () async {
     when(() => repository.saveAd(adEntity))
-        .thenAnswer((_) async => Right(unit));
+        .thenAnswer((_) async => const Right(unit));
 
     final result = (await usecase(adEntity)).fold((l) => null, (r) => r);
 

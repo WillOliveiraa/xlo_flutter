@@ -13,7 +13,7 @@ class FetchByCepDatasourceMock extends Mock implements FetchByCepDatasource {}
 void main() {
   final datasource = FetchByCepDatasourceMock();
   final respository = FetchByCepRepositoryImp(datasource);
-  final cep = '87240000';
+  const cep = '87240000';
   final address = AddressModel(
     uf: UfModel(initials: 'PR', name: 'Paraná'),
     city: CityModel(name: 'Terra Boa'),

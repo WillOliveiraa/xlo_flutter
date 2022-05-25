@@ -35,9 +35,9 @@ void main() {
     ),
   ];
   final filter = AdFilterEntity();
-  final search = '';
+  const search = '';
   final category = CategoryEntity(description: 'description of category');
-  final page = 0;
+  const page = 0;
 
   test('should get Filtered ads', () async {
     when(() => repository.getFilteredAds(

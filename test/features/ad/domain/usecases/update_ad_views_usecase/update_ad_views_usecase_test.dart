@@ -11,12 +11,12 @@ class UpdateAdViewsRepositoryMock extends Mock
 void main() {
   final repository = UpdateAdViewsRepositoryMock();
   final usecase = UpdateAdViewsUseCaseImp(repository);
-  final adViews = 1;
-  final adId = 'adId';
+  const adViews = 1;
+  const adId = 'adId';
 
   test('should update ad Views', () async {
     when(() => repository.updateAdViews(adId: adId, views: adViews))
-        .thenAnswer((_) async => Right(unit));
+        .thenAnswer((_) async => const Right(unit));
 
     final result =
         (await usecase(adId: adId, views: adViews)).fold((l) => null, (r) => r);

@@ -9,7 +9,7 @@ class UserModel extends UserEntity {
     required String email,
     String? password,
     String? phone,
-    UserType type = UserType.PARTICULAR,
+    UserType type = UserType.particular,
     final DateTime? createdAt,
     String? id,
     dynamic image,
@@ -44,7 +44,9 @@ class UserModel extends UserEntity {
       phone: parseUser.get(keyUserPhone),
       type: UserType.values[parseUser.get(keyUserType) as int],
       createdAt: parseUser.get(keyUserCreatedAt),
-      image: parseUser.get(keyUserImage) ?? parseUser.get(keyUserImage).url,
+      image: parseUser.get(keyUserImage) != null
+          ? (parseUser.get(keyUserImage) as ParseFile).url
+          : null,
     );
   }
 

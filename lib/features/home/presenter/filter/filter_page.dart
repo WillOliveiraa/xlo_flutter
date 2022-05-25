@@ -3,11 +3,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/shared/widgets/button_default.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_filter_model.dart';
+import 'package:xlo_flutter/features/home/presenter/filter/components/order_by_filter.dart';
+import 'package:xlo_flutter/features/home/presenter/filter/components/price_range_field.dart';
+import 'package:xlo_flutter/features/home/presenter/filter/components/vendor_type_field.dart';
 import 'package:xlo_flutter/features/home/presenter/filter/filter_controller.dart';
-
-import 'components/order_by_filter.dart';
-import 'components/price_range_field.dart';
-import 'components/vendor_type_field.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage(this.filter);
@@ -28,7 +27,7 @@ class _FilterPageState extends ModularState<FilterPage, FilterController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Filtrar Busca'),
+        title: const Text('Filtrar Busca'),
         centerTitle: true,
       ),
       body: Center(
@@ -57,17 +56,17 @@ class _FilterPageState extends ModularState<FilterPage, FilterController> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),
                         ),
-                        child: Text(
-                          'Filtrar',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
-                        ),
                         onPressed: controller.isFormValid
                             ? () {
                                 controller.save();
                                 Navigator.of(context).pop();
                               }
                             : null,
+                        child: const Text(
+                          'Filtrar',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
                       ),
                     );
                   }),

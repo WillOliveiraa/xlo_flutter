@@ -22,12 +22,12 @@ class SearchDialog extends StatelessWidget {
                 contentPadding: const EdgeInsets.symmetric(vertical: 15),
                 border: InputBorder.none,
                 prefixIcon: IconButton(
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   color: Colors.grey[700],
                   onPressed: Navigator.of(context).pop,
                 ),
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.close),
+                  icon: const Icon(Icons.close),
                   color: Colors.grey[700],
                   onPressed: () => controller.clear(),
                 ),

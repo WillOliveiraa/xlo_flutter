@@ -33,7 +33,7 @@ void main() {
 
   test('should save a ad', () async {
     when(() => datasource.saveAd(adEntity))
-        .thenAnswer((_) async => Right(unit));
+        .thenAnswer((_) async => const Right(unit));
 
     final result = await respository.saveAd(adEntity);
 

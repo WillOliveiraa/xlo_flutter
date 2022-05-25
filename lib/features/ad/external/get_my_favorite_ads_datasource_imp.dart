@@ -19,8 +19,8 @@ class GetMyFavoriteAdsDatasourceImp implements GetMyFavoriteAdsDatasource {
 
     if (response.success && response.results != null) {
       return Right(response.results!
-          .map((parseObj) =>
-              AdModel.fromParse(parseObj.get(keyFavoritesAd) as ParseObject))
+          .map((parseObj) => AdModel.fromParse(
+              (parseObj as ParseObject).get(keyFavoritesAd) as ParseObject))
           .toList());
     } else if (response.success && response.results == null) {
       return const Right([]);

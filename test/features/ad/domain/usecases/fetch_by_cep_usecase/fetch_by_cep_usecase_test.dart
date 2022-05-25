@@ -13,7 +13,7 @@ class FetchByCepRepositoryMock extends Mock implements FetchByCepRepository {}
 void main() {
   final repository = FetchByCepRepositoryMock();
   final usecase = FetchByCepUseCaseImp(repository);
-  final cep = '87240000';
+  const cep = '87240000';
   final address = AddressEntity(
     uf: UfEntity(initials: 'PR', name: 'Paraná'),
     city: CityEntity(name: 'Terra Boa'),

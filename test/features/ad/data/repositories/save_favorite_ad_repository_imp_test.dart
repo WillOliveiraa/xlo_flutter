@@ -11,12 +11,12 @@ class SaveFavoriteAdDatasourceMock extends Mock
 void main() {
   final datasource = SaveFavoriteAdDatasourceMock();
   final respository = SaveFavoriteAdRepositoryImp(datasource);
-  final adId = 'adId';
-  final userId = 'userId';
+  const adId = 'adId';
+  const userId = 'userId';
 
   test('should save a ad', () async {
     when(() => datasource.saveFavoriteAd(adId: adId, userId: userId))
-        .thenAnswer((_) async => Right(unit));
+        .thenAnswer((_) async => const Right(unit));
 
     final result = await respository.saveFavoriteAd(adId: adId, userId: userId);
 

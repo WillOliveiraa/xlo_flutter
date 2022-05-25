@@ -32,3 +32,5 @@ linter:
 
     depend_on_referenced_packages: false
 
+    sort_pub_dependencies: false
+

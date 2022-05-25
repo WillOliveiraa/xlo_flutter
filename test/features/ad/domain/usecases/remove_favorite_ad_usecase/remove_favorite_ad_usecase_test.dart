@@ -11,12 +11,12 @@ class RemoveFavoriteAdRepositoryMock extends Mock
 void main() {
   final repository = RemoveFavoriteAdRepositoryMock();
   final usecase = RemoveFavoriteAdUseCaseImp(repository);
-  final adId = 'adId';
-  final userId = 'userId';
+  const adId = 'adId';
+  const userId = 'userId';
 
   test('should remove a favorite ad', () async {
     when(() => repository.removeFavoriteAd(adId: adId, userId: userId))
-        .thenAnswer((_) async => Right(unit));
+        .thenAnswer((_) async => const Right(unit));
 
     final result =
         (await usecase(adId: adId, userId: userId)).fold((l) => null, (r) => r);

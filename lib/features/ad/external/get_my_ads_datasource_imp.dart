@@ -15,7 +15,8 @@ class GetMyAdsDatasourceImp implements GetMyAdsDatasource {
 
     queryBuilder.setLimit(100);
     queryBuilder.orderByDescending(keyAdCreatedAt);
-    queryBuilder.whereEqualTo(keyAdOwner, currentUser.toPointer());
+    queryBuilder.whereEqualTo(
+        keyAdOwner, (currentUser as ParseUser).toPointer());
     queryBuilder.includeObject([keyAdOwner, keyAdCategory]);
 
     final ParseResponse response = await queryBuilder.query();

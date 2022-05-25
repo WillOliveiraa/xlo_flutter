@@ -85,6 +85,7 @@ abstract class _SaveAdControllerBase with Store {
   bool? get hidePhone => _hidePhone;
 
   @action
+  // ignore: avoid_positional_boolean_parameters
   void setHidePhone(bool? value) => _hidePhone = value;
 
   NumberFormat numberFormat =

@@ -10,9 +10,9 @@ import 'package:xlo_flutter/features/ad/domain/usecases/get_filtered_ads_usecase
 import 'package:xlo_flutter/features/ad/external/get_all_ads_datasource_imp.dart';
 import 'package:xlo_flutter/features/ad/external/get_all_categories_datasource_imp.dart';
 import 'package:xlo_flutter/features/ad/external/get_filtered_ads_datasource_imp.dart';
+import 'package:xlo_flutter/features/home/presenter/filter/filter_controller.dart';
 import 'package:xlo_flutter/features/home/presenter/home/home_controller.dart';
-import '../filter/filter_controller.dart';
-import 'home_page.dart';
+import 'package:xlo_flutter/features/home/presenter/home/home_page.dart';
 
 class HomeModule extends WidgetModule {
   @override
@@ -35,9 +35,9 @@ class HomeModule extends WidgetModule {
   ];
 
   final List<ModularRoute> routes = [
-    ChildRoute(Modular.initialRoute, child: (_, args) => HomePage()),
+    ChildRoute(Modular.initialRoute, child: (_, args) => const HomePage()),
   ];
 
   @override
-  Widget get view => HomePage();
+  Widget get view => const HomePage();
 }

@@ -6,14 +6,13 @@ import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
-
-import '../home_controller.dart';
-import 'bar_button.dart';
+import 'package:xlo_flutter/features/home/presenter/home/components/bar_button.dart';
+import 'package:xlo_flutter/features/home/presenter/home/home_controller.dart';
 
 class TopBar extends StatelessWidget {
-  final HomeController homeController;
-
   const TopBar(this.homeController);
+
+  final HomeController homeController;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,6 @@ class TopBar extends StatelessWidget {
         }),
         Expanded(
           child: AnimatedCard(
-            direction: AnimatedCardDirection.right,
             child: BarButton(
               label: 'Filtros',
               decoration: BoxDecoration(

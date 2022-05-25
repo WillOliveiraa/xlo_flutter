@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
-import '../filter_controller.dart';
-import 'price_field.dart';
-import 'section_title.dart';
+import 'package:xlo_flutter/features/home/presenter/filter/components/price_field.dart';
+import 'package:xlo_flutter/features/home/presenter/filter/components/section_title.dart';
+import 'package:xlo_flutter/features/home/presenter/filter/filter_controller.dart';
 
 class PriceRangeField extends StatelessWidget {
   const PriceRangeField(this.filter);
@@ -14,7 +13,7 @@ class PriceRangeField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionTitle('Preço'),
+        const SectionTitle('Preço'),
         Row(
           children: [
             PriceField(
@@ -38,7 +37,7 @@ class PriceRangeField extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8),
               child: Text(
                 filter.priceError!,
-                style: TextStyle(color: Colors.red, fontSize: 12),
+                style: const TextStyle(color: Colors.red, fontSize: 12),
               ),
             );
           }

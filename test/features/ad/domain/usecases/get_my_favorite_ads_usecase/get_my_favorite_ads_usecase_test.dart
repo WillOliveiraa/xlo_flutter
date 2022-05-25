@@ -17,7 +17,7 @@ class GetMyFavoriteAdsRepositoryMock extends Mock
 void main() {
   final repository = GetMyFavoriteAdsRepositoryMock();
   final usecase = GetMyFavoriteAdsUseCaseImp(repository);
-  final userId = 'userID';
+  const userId = 'userID';
   final adList = [
     AdEntity(
       title: 'Novo anuncio',

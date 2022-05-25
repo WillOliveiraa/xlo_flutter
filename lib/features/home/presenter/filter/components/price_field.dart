@@ -19,7 +19,7 @@ class PriceField extends StatelessWidget {
       child: TextFormField(
         decoration: InputDecoration(
           // prefixText: 'R\$ ',
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
           isDense: true,
           labelText: label,
         ),
@@ -28,7 +28,7 @@ class PriceField extends StatelessWidget {
           RealInputFormatter(moeda: true),
         ],
         keyboardType: TextInputType.number,
-        style: TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16),
         onChanged: onChanged,
         initialValue: initialValue,
       ),

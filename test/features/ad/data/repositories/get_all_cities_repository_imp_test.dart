@@ -12,7 +12,7 @@ class GetAllCitiesDatasourceMock extends Mock
 void main() {
   final datasource = GetAllCitiesDatasourceMock();
   final repository = GetAllCitiesRepositoryImp(datasource);
-  final ufId = '123';
+  const ufId = '123';
   final cities = [
     CityModel(name: 'Terra Boa'),
   ];

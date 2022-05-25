@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_filter_entity.dart';
+import 'package:xlo_flutter/features/home/presenter/filter/components/section_title.dart';
 import 'package:xlo_flutter/features/home/presenter/filter/filter_controller.dart';
-
-import 'section_title.dart';
 
 class VendorTypeField extends StatelessWidget {
   const VendorTypeField(this.filter);

@@ -66,7 +66,7 @@ class AdTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${ad.createdAt!.formattedDate()} - ${ad.address.city.name} - ${ad.address.uf.initials}',
+                        '''${ad.createdAt!.formattedDate()} - ${ad.address.city.name} - ${ad.address.uf.initials}''',
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w300,

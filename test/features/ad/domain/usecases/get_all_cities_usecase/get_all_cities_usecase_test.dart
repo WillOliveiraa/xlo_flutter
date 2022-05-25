@@ -12,7 +12,7 @@ class GetAllCitiesRepositoryMock extends Mock
 void main() {
   final repository = GetAllCitiesRepositoryMock();
   final usecase = GetAllCitiesUseCaseImp(repository);
-  String ufId = '123';
+  const String ufId = '123';
   final ufList = [
     CityEntity(name: 'Terra Boa'),
   ];
