@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:xlo_flutter/core/shared/helpers/extensions.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
-import 'package:xlo_flutter/core/shared/helpers/extensions.dart';
 
 class AdTile extends StatelessWidget {
   const AdTile(this.ad);
@@ -34,7 +34,7 @@ class AdTile extends StatelessWidget {
                   width: 127,
                   child: ad.images.first is String
                       ? Image.network(
-                          ad.images.first,
+                          ad.images.first as String,
                           fit: BoxFit.cover,
                         )
                       : Image.file(
@@ -53,18 +53,24 @@ class AdTile extends StatelessWidget {
                     children: [
                       Text(
                         ad.title,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       Text(
                         ad.price.formattedMoney(),
-                        style: TextStyle(
-                            fontSize: 19, fontWeight: FontWeight.w700),
+                        style: const TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                       Text(
                         '${ad.createdAt!.formattedDate()} - ${ad.address.city.name} - ${ad.address.uf.initials}',
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w300),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
                     ],
                   ),

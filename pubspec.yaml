@@ -53,6 +53,7 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.1.7
   mobx_codegen: ^2.0.4
+  lint: ^1.8.2
   flutter_test:
     sdk: flutter
 

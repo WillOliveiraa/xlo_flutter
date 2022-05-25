@@ -18,13 +18,13 @@ class ImageDialog extends StatelessWidget {
         children: [
           _showImage(image),
           ButtonDefault(
-            child: const Text('Excluir'),
             primaryColor: Colors.white,
             secondColor: Colors.red,
             onPressed: () {
               Navigator.of(context).pop();
               onDelete();
             },
+            child: const Text('Excluir'),
           )
         ],
       ),
@@ -34,6 +34,6 @@ class ImageDialog extends StatelessWidget {
   Widget _showImage(dynamic image) {
     if (image is File) return Image.file(image);
 
-    return Image.network(image);
+    return Image.network(image as String);
   }
 }

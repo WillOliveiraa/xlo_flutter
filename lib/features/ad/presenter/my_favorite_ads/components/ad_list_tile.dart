@@ -19,12 +19,11 @@ class AdListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedCard(
-      direction: AnimatedCardDirection.right,
       child: ListTile(
         onTap: () {
           Modular.to.pushNamed('$baseRouter$adRouter', arguments: ad);
         },
-        leading: Container(
+        leading: SizedBox(
           height: double.infinity,
           child: Hero(
             tag: ad.id!,
@@ -36,7 +35,7 @@ class AdListTile extends StatelessWidget {
                       borderRadius: BorderRadius.circular(32),
                       child: ad.images.first is String
                           ? Image.network(
-                              ad.images.first,
+                              ad.images.first as String,
                               fit: BoxFit.cover,
                             )
                           : Image.file(
@@ -50,7 +49,7 @@ class AdListTile extends StatelessWidget {
         ),
         title: Text(
           ad.title,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold),
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
         ),

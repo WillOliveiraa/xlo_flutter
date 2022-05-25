@@ -1,5 +1,6 @@
 // ignore: implementation_imports
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/fetch_by_cep_repository_imp.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/get_all_categories_repository_imp.dart';
 import 'package:xlo_flutter/features/ad/data/repositories/get_all_ufs_repository_imp.dart';
@@ -46,6 +47,6 @@ class SaveAdModule extends Module {
 
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute,
-        child: (_, args) => SaveAdPage(ad: args.data)),
+        child: (_, args) => SaveAdPage(ad: args.data as AdModel)),
   ];
 }

@@ -9,14 +9,13 @@ import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/ad/presenter/ad/ad_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/ad/components/bottom_bar.dart';
+import 'package:xlo_flutter/features/ad/presenter/ad/components/description_panel.dart';
+import 'package:xlo_flutter/features/ad/presenter/ad/components/location_panel.dart';
+import 'package:xlo_flutter/features/ad/presenter/ad/components/main_panel.dart';
+import 'package:xlo_flutter/features/ad/presenter/ad/components/user_panel.dart';
 import 'package:xlo_flutter/features/ad/presenter/my_favorite_ads/my_favorite_ads_controller.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
-
-import 'components/bottom_bar.dart';
-import 'components/description_panel.dart';
-import 'components/location_panel.dart';
-import 'components/main_panel.dart';
-import 'components/user_panel.dart';
 
 // ignore: must_be_immutable
 class AdPage extends StatefulWidget {
@@ -36,7 +35,8 @@ class _AdPageState extends ModularState<AdPage, AdController> {
   @override
   void initState() {
     super.initState();
-    controller.updateViews(widget.ad);
+
+    if (authController.isLoggedIn) controller.updateViews(widget.ad);
   }
 
   @override
@@ -44,8 +44,8 @@ class _AdPageState extends ModularState<AdPage, AdController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Anúncio'),
-        actions: [
+        title: const Text('Anúncio'),
+        actions: <Widget>[
           if (widget.ad.owner.id == authController.user?.id)
             IconButton(
               icon: const Icon(Icons.edit),
@@ -74,17 +74,17 @@ class _AdPageState extends ModularState<AdPage, AdController> {
           if (saveAdController.isUpdateAd) widget.ad = saveAdController.adModel;
 
           return Stack(
-            children: [
+            children: <Widget>[
               ListView(
-                children: [
-                  Container(
+                children: <Widget>[
+                  SizedBox(
                     height: 280,
                     child: Hero(
                       tag: widget.ad.id!,
                       child: Carousel(
                         images: widget.ad.images
                             .map(
-                              (url) => url is String
+                              (dynamic url) => url is String
                                   ? Image.network(
                                       url,
                                       fit: BoxFit.cover,
@@ -107,7 +107,7 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
+                      children: <Widget>[
                         MainPanel(widget.ad),
                         Divider(color: Colors.grey[300]),
                         DescriptionPanel(widget.ad),

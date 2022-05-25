@@ -28,8 +28,6 @@ class UserModel extends UserEntity {
     String? name,
     required String email,
     required String password,
-    String? passwordConf,
-    String? phone,
   }) {
     return UserModel(
       name: name!,
@@ -41,10 +39,10 @@ class UserModel extends UserEntity {
   factory UserModel.fromParse(ParseUser parseUser) {
     return UserModel(
       id: parseUser.objectId,
-      name: parseUser.get(keyUserName),
-      email: parseUser.get(keyUserEmail),
+      name: parseUser.get(keyUserName) as String,
+      email: parseUser.get(keyUserEmail) as String,
       phone: parseUser.get(keyUserPhone),
-      type: UserType.values[parseUser.get(keyUserType)],
+      type: UserType.values[parseUser.get(keyUserType) as int],
       createdAt: parseUser.get(keyUserCreatedAt),
       image: parseUser.get(keyUserImage) != null
           ? parseUser.get(keyUserImage).url
@@ -55,7 +53,7 @@ class UserModel extends UserEntity {
   factory UserModel.fromParseAd(ParseUser parseUser) {
     return UserModel(
       id: parseUser.objectId,
-      name: parseUser.get(keyUserName),
+      name: parseUser.get(keyUserName) as String,
       email: '',
       phone: parseUser.get(keyUserPhone),
       createdAt: parseUser.get(keyUserCreatedAt),

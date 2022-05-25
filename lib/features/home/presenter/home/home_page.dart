@@ -155,7 +155,6 @@ class _HomePageState extends ModularState<HomePage, HomeController>
                   right: 0,
                   child: CreateAdButton(scrollController),
                 ),
-                // widget.builder()
                 IgnorePointer(
                   child: AnimatedOpacity(
                     opacity: _overlayIsVisible ? 1 : 0,

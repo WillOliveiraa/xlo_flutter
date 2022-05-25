@@ -75,7 +75,7 @@ abstract class _SaveAdControllerBase with Store {
   // ignore: unnecessary_getters_setters
   dynamic get images => _images;
 
-  set images(dynamic value) => _images = value;
+  set images(dynamic value) => _images = value as ObservableList<dynamic>;
 
   String? idAd;
 
