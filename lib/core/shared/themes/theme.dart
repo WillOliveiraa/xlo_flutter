@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'app_colors.dart';
+import 'package:xlo_flutter/core/shared/themes/app_colors.dart';
 
 ThemeData buildTheme() {
   return ThemeData(
@@ -14,7 +13,7 @@ ThemeData buildTheme() {
 }
 
 AppBarTheme appBarTheme() {
-  return AppBarTheme(
+  return const AppBarTheme(
     color: Colors.white,
     titleTextStyle: TextStyle(color: Colors.black87, fontSize: 18),
     elevation: 0,

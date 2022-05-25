@@ -6,9 +6,9 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_get_all_ufs.dart';
 import 'package:xlo_flutter/features/ad/domain/repositories/get_all_ufs_repository.dart';
 
 class GetAllUfsRepositoryImp implements GetAllUfsRepository {
-  final GetAllUfsDatasource _datasource;
-
   GetAllUfsRepositoryImp(this._datasource);
+
+  final GetAllUfsDatasource _datasource;
 
   @override
   Future<Either<Failure, List<UfModel>>> getAllUfs() async {

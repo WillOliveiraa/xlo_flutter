@@ -20,7 +20,7 @@ class BaseModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(Modular.initialRoute, child: (_, args) => BasePage()),
+    ChildRoute(Modular.initialRoute, child: (_, args) => const BasePage()),
     ChildRoute(homeRouter, child: (_, args) => HomeModule()),
     ModuleRoute(saveAdRouter, module: SaveAdModule()),
     ModuleRoute(adRouter,

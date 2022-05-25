@@ -1,7 +1,6 @@
+import 'package:xlo_flutter/features/ad/data/models/city_model.dart';
+import 'package:xlo_flutter/features/ad/data/models/uf_model.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/address_entity.dart';
-
-import 'city_model.dart';
-import 'uf_model.dart';
 
 class AddressModel extends AddressEntity {
   AddressModel({

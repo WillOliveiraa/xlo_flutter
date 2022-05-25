@@ -4,10 +4,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:xlo_flutter/core/pages/account/account_page.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
+import 'package:xlo_flutter/core/pages/base/base_controller.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
 import 'package:xlo_flutter/features/home/presenter/home/home_module.dart';
-
-import 'base_controller.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
     super.initState();
 
     reaction((_) => controller.page, (page) {
-      pageController.jumpToPage(page as int);
+      pageController.jumpToPage(page! as int);
       if (authController.isLoggedIn) Navigator.of(context).pop();
     });
   }
@@ -41,11 +40,11 @@ class _BasePageState extends ModularState<BasePage, BaseController> {
         children: <Widget>[
           HomeModule(),
           Scaffold(
-            appBar: AppBar(title: Text('Chat')),
+            appBar: AppBar(title: const Text('Chat')),
             drawer: CustomDrawer(),
             body: Container(color: Colors.blue),
           ),
-          if (isLoggedIn) AccountPage(),
+          if (isLoggedIn) const AccountPage(),
         ],
       );
     });

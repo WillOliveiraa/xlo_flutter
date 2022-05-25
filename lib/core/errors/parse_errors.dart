@@ -42,10 +42,10 @@ class ParseErrors {
     207: 'Usuário só pode ser criado via Signup (MustCreateUserThroughSignup)',
     208: 'A conta informada já está vinculada com outro usuário',
     209: 'Sessão inválida (InvalidSessionToken)',
-    250:
-        'Usuário não pode ser vinculado a uma conta porque o ID não foi localizado (InvalidSessionToken)',
-    251:
-        'Usuário com conta vinculada está com sessão inválida (InvalidLinkedSession)',
+    250: '''
+Usuário não pode ser vinculado a uma conta porque o ID não foi localizado (InvalidSessionToken)''',
+    251: '''
+Usuário com conta vinculada está com sessão inválida (InvalidLinkedSession)''',
     252: 'Serviço que está sendo vinculado não é suportado (UnsupportedService)'
   };
 

@@ -5,9 +5,9 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_save_favorite_ad.dar
 import 'package:xlo_flutter/features/ad/domain/repositories/save_favorite_ad_repository.dart';
 
 class SaveFavoriteAdRepositoryImp implements SaveFavoriteAdRepository {
-  final SaveFavoriteAdDatasource _datasource;
-
   SaveFavoriteAdRepositoryImp(this._datasource);
+
+  final SaveFavoriteAdDatasource _datasource;
 
   @override
   Future<Either<Failure, Unit>> saveFavoriteAd(

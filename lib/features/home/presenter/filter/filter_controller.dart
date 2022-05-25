@@ -65,9 +65,9 @@ abstract class _FilterControllerBase with Store {
   bool get isFormValid => priceError == null;
 
   void save() {
-    HomeController homeController = Modular.get();
+    final HomeController homeController = Modular.get();
     homeController.setAdFilter(clone());
-    homeController.getFilteredAds(false);
+    homeController.getFilteredAds(loadMore: false);
   }
 
   @action

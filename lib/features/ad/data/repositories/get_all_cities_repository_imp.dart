@@ -6,9 +6,9 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_get_all_cities.dart'
 import 'package:xlo_flutter/features/ad/domain/repositories/get_all_cities_repository.dart';
 
 class GetAllCitiesRepositoryImp implements GetAllCitiesRepository {
-  final GetAllCitiesDatasource _datasource;
-
   GetAllCitiesRepositoryImp(this._datasource);
+
+  final GetAllCitiesDatasource _datasource;
 
   @override
   Future<Either<Failure, List<CityModel>>> getAllCities(String ufId) async {

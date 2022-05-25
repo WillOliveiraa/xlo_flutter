@@ -19,11 +19,6 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  final GetAllAdsUseCaseImp _getAllAdsUseCase;
-  final GetAllCategoriesUseCaseImp _getAllCategoriesUseCase;
-  final GetFilteredAdsUseCaseImp _getFilteredAdsUseCase;
-  final FilterController _filterController;
-
   _HomeControllerBase(
     this._getAllAdsUseCase,
     this._getFilteredAdsUseCase,
@@ -37,6 +32,11 @@ abstract class _HomeControllerBase with Store {
       vendorType: _filterController.vendorType,
     );
   }
+
+  final GetAllAdsUseCaseImp _getAllAdsUseCase;
+  final GetAllCategoriesUseCaseImp _getAllCategoriesUseCase;
+  final GetFilteredAdsUseCaseImp _getFilteredAdsUseCase;
+  final FilterController _filterController;
 
   ObservableList<AdModel> ads = ObservableList<AdModel>();
 
@@ -59,18 +59,16 @@ abstract class _HomeControllerBase with Store {
   @action
   void setCategory(CategoryModel? value) {
     _category = value;
-    getFilteredAds(false);
+    getFilteredAds(loadMore: false);
   }
 
   @action
-  void setSeach(String value) {
-    search = value;
-  }
+  void setSeach(String value) => search = value;
 
-  void checkIfNeedToUpdateList(bool loadMore) {
+  void checkIfNeedToUpdateList({required bool loadMore}) {
     if (lastPage) return;
 
-    getFilteredAds(loadMore);
+    getFilteredAds(loadMore: loadMore);
     if (categories.isEmpty) getAllCategories();
   }
 
@@ -113,7 +111,7 @@ abstract class _HomeControllerBase with Store {
       asuka.showSnackBar(SnackBar(content: Text(failure.message!)));
       loading = false;
     }, (List<AdEntity>? result) {
-      ads = result as ObservableList<AdModel>;
+      ads = result! as ObservableList<AdModel>;
       loading = false;
     });
   }
@@ -126,12 +124,12 @@ abstract class _HomeControllerBase with Store {
     response.fold((Failure failure) {
       asuka.showSnackBar(SnackBar(content: Text(failure.message!)));
     }, (List<CategoryEntity>? result) {
-      categories = result as List<CategoryModel>;
+      categories = result! as List<CategoryModel>;
       categories.insert(0, CategoryModel(id: '*', description: 'Categoria'));
     });
   }
 
-  Future<void> getFilteredAds(bool loadMore) async {
+  Future<void> getFilteredAds({required bool loadMore}) async {
     if (!loadMore) loading = true;
 
     final Either<Failure, List<AdEntity>?> response =
@@ -161,7 +159,7 @@ abstract class _HomeControllerBase with Store {
 
   Future<void> refreshAds() async {
     resetPage();
-    getFilteredAds(false);
+    getFilteredAds(loadMore: false);
   }
 
   void resetPage() {

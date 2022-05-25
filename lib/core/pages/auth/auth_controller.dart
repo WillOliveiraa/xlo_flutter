@@ -10,12 +10,12 @@ part 'auth_controller.g.dart';
 class AuthController = _AuthControllerBase with _$AuthController;
 
 abstract class _AuthControllerBase with Store {
+  _AuthControllerBase(this._getCurrentUserUsecase, this._logoutUserUsecase,
+      this._baseController);
+
   final GetCurrentUserImp _getCurrentUserUsecase;
   final LogoutUserUseCaseImp _logoutUserUsecase;
   final BaseController _baseController;
-
-  _AuthControllerBase(this._getCurrentUserUsecase, this._logoutUserUsecase,
-      this._baseController);
 
   @observable
   UserModel? _userModel;
@@ -33,7 +33,7 @@ abstract class _AuthControllerBase with Store {
 
   Future<bool> checkLogin() async {
     loading = true;
-    var result = await _getCurrentUserUsecase();
+    final result = await _getCurrentUserUsecase();
 
     loading = false;
     return result.fold((l) => false, (user) {
@@ -44,7 +44,7 @@ abstract class _AuthControllerBase with Store {
 
   Future<void> logout() async {
     loading = true;
-    var result = await _logoutUserUsecase();
+    final result = await _logoutUserUsecase();
     loading = false;
 
     result.fold((l) => false, (_) {

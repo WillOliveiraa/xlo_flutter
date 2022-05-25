@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'splash_screen_page.dart';
+import 'package:xlo_flutter/core/pages/splash/splash_screen_page.dart';
 
 class SplashScreenModule extends Module {
   @override

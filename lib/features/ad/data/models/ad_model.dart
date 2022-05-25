@@ -1,12 +1,11 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_flutter/core/shared/utils/table_keys.dart';
+import 'package:xlo_flutter/features/ad/data/models/address_model.dart';
+import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
+import 'package:xlo_flutter/features/ad/data/models/city_model.dart';
+import 'package:xlo_flutter/features/ad/data/models/uf_model.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
-
-import 'address_model.dart';
-import 'category_model.dart';
-import 'city_model.dart';
-import 'uf_model.dart';
 
 class AdModel extends AdEntity {
   AdModel({
@@ -36,16 +35,6 @@ class AdModel extends AdEntity {
           hidePhone: hidePhone,
           createdAt: createdAt,
         );
-
-  Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'description': description,
-      'price': price,
-      'views': views,
-      'images': images,
-    };
-  }
 
   factory AdModel.createAd({
     String? id,
@@ -102,8 +91,18 @@ class AdModel extends AdEntity {
     );
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'description': description,
+      'price': price,
+      'views': views,
+      'images': images,
+    };
+  }
+
   @override
   String toString() {
-    return 'AdModel(id: $id, title: $title, description: $description, price: $price, status: $status, views: $views, images: $images, category: $category, owner: $owner, address: $address)';
+    return '''AdModel(id: $id, title: $title, description: $description, price: $price, status: $status, views: $views, images: $images, category: $category, owner: $owner, address: $address)''';
   }
 }

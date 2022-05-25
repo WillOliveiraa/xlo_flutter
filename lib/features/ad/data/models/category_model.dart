@@ -19,7 +19,8 @@ class CategoryModel extends CategoryEntity {
   @override
   String toString() => 'CategoryModel(description: $description)';
 
+  @override
   // ignore: hash_and_equals
-  bool operator ==(o) =>
+  bool operator ==(Object o) =>
       o is CategoryModel && o.description == description && o.id == id;
 }

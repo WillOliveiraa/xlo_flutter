@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer_header.dart';
 import 'package:xlo_flutter/core/shared/components/page_section/page_section.dart';
-
-import 'custom_drawer_header.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override

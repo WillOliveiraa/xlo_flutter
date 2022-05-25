@@ -20,7 +20,7 @@ class AccountPage extends StatelessWidget {
     final color = Theme.of(context).primaryColor;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Minha Conta')),
+      appBar: AppBar(title: const Text('Minha Conta')),
       drawer: CustomDrawer(),
       body: Center(
         child: Card(
@@ -33,12 +33,11 @@ class AccountPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
+              SizedBox(
                 height: 160,
                 child: Stack(
                   children: [
                     Align(
-                      alignment: Alignment.center,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -52,7 +51,7 @@ class AccountPage extends StatelessWidget {
                           Observer(builder: (_) {
                             return AnimatedCard(
                               direction: AnimatedCardDirection.bottom,
-                              initDelay: Duration(milliseconds: 400),
+                              initDelay: const Duration(milliseconds: 400),
                               child: Center(
                                 child: Text(
                                   authController.user!.name,
@@ -67,7 +66,7 @@ class AccountPage extends StatelessWidget {
                           }),
                           AnimatedCard(
                             direction: AnimatedCardDirection.bottom,
-                            initDelay: Duration(milliseconds: 900),
+                            initDelay: const Duration(milliseconds: 900),
                             child: Center(
                               child: Text(
                                 authController.user!.email,
@@ -83,35 +82,35 @@ class AccountPage extends StatelessWidget {
                     ),
                     AnimatedCard(
                       direction: AnimatedCardDirection.top,
-                      duration: Duration(milliseconds: 1900),
+                      duration: const Duration(milliseconds: 1900),
                       child: Align(
                         alignment: Alignment.topRight,
                         child: ButtonDefault(
-                          child: Text('EDITAR'),
                           primaryColor: Colors.white,
                           secondColor: Theme.of(context).primaryColor,
                           onPressed: () {
                             Modular.to.pushNamed(signUpRouter,
                                 arguments: authController.user);
                           },
+                          child: const Text('EDITAR'),
                         ),
                       ),
                     ),
                     Observer(builder: (_) {
                       return AnimatedCard(
                         direction: AnimatedCardDirection.top,
-                        duration: Duration(milliseconds: 1900),
+                        duration: const Duration(milliseconds: 1900),
                         child: Align(
                           alignment: Alignment.topLeft,
                           child: ButtonDefault(
-                            child: authController.loading
-                                ? CircularProgressIndDefault(color: color)
-                                : Text('SAIR'),
                             primaryColor: Colors.white,
                             secondColor: Theme.of(context).primaryColor,
                             onPressed: () {
                               authController.logout();
                             },
+                            child: authController.loading
+                                ? CircularProgressIndDefault(color: color)
+                                : const Text('SAIR'),
                           ),
                         ),
                       );
@@ -119,7 +118,7 @@ class AccountPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(),
+              const Divider(),
               AnimatedCard(
                 direction: AnimatedCardDirection.bottom,
                 child: ListTile(
@@ -130,7 +129,7 @@ class AccountPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  trailing: Icon(Icons.keyboard_arrow_right),
+                  trailing: const Icon(Icons.keyboard_arrow_right),
                   onTap: () {
                     Modular.to.pushNamed(myAdsRouter);
                   },
@@ -138,7 +137,7 @@ class AccountPage extends StatelessWidget {
               ),
               AnimatedCard(
                 direction: AnimatedCardDirection.bottom,
-                initDelay: Duration(milliseconds: 600),
+                initDelay: const Duration(milliseconds: 600),
                 child: ListTile(
                   title: Text(
                     'Favoritos',
@@ -147,7 +146,7 @@ class AccountPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  trailing: Icon(Icons.keyboard_arrow_right),
+                  trailing: const Icon(Icons.keyboard_arrow_right),
                   onTap: () {
                     Modular.to.pushNamed(myFavoriteAdsRouter);
                   },

@@ -6,9 +6,9 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_get_my_ads.dart';
 import 'package:xlo_flutter/features/ad/domain/repositories/get_my_ads_repository.dart';
 
 class GetMyAdsRepositoryImp implements GetMyAdsRepository {
-  final GetMyAdsDatasource _datasource;
-
   GetMyAdsRepositoryImp(this._datasource);
+
+  final GetMyAdsDatasource _datasource;
 
   @override
   Future<Either<Failure, List<AdModel>>> getMyAds() async {

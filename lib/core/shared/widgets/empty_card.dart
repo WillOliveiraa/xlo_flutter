@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EmptyCard extends StatelessWidget {
-  EmptyCard(this.text);
+  const EmptyCard(this.text);
 
   final String text;
 
@@ -15,7 +15,7 @@ class EmptyCard extends StatelessWidget {
       margin: const EdgeInsets.all(32),
       child: Column(
         children: [
-          Expanded(
+          const Expanded(
             flex: 4,
             child: Icon(
               Icons.border_clear,
@@ -23,14 +23,14 @@ class EmptyCard extends StatelessWidget {
               color: Colors.purple,
             ),
           ),
-          Divider(),
+          const Divider(),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(
+                  const Text(
                     'Ops...',
                     style: TextStyle(
                       color: Colors.orange,
@@ -41,7 +41,7 @@ class EmptyCard extends StatelessWidget {
                   Text(
                     text,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),

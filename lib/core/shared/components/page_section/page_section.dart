@@ -3,9 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/core/pages/base/base_controller.dart';
+import 'package:xlo_flutter/core/shared/components/page_section/page_tile.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
-
-import 'page_tile.dart';
 
 class PageSection extends StatelessWidget {
   @override

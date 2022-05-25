@@ -5,7 +5,7 @@ class CustomMoneyFormatter {
     final moneyFormatter = MoneyFormatter(
         amount: value.toDouble(),
         settings: MoneyFormatterSettings(
-            symbol: "R\$", decimalSeparator: ",", thousandSeparator: "."));
+            symbol: 'R\$', decimalSeparator: ',', thousandSeparator: '.'));
 
     return moneyFormatter.output.symbolOnLeft;
   }

@@ -6,9 +6,9 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_get_all_categories.d
 import 'package:xlo_flutter/features/ad/domain/repositories/get_all_categories_repository.dart';
 
 class GetAllCategoriesRepositoryImp implements GetAllCategoriesRepository {
-  final GetAllCategoriesDatasource _datasource;
-
   GetAllCategoriesRepositoryImp(this._datasource);
+
+  final GetAllCategoriesDatasource _datasource;
 
   @override
   Future<Either<Failure, List<CategoryModel>?>> getAllCategories() async {

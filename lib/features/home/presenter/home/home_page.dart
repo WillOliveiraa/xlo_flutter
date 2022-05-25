@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
-import 'package:xlo_flutter/core/shared/widgets/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/components/custom_drawer/custom_drawer.dart';
-import 'package:xlo_flutter/core/shared/widgets/empty_card.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
+import 'package:xlo_flutter/core/shared/widgets/circular_progress_ind_default.dart';
+import 'package:xlo_flutter/core/shared/widgets/empty_card.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
 import 'package:xlo_flutter/features/home/presenter/home/components/ad_tile.dart';
@@ -30,18 +30,18 @@ class _HomePageState extends ModularState<HomePage, HomeController>
   final authController = Modular.get<AuthController>();
   final ScrollController scrollController = ScrollController();
 
-  var _overlayIsVisible = false;
+  final _overlayIsVisible = false;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
-      await Future.delayed(Duration(milliseconds: 900));
-      controller.checkIfNeedToUpdateList(false);
+      await Future.delayed(const Duration(milliseconds: 900));
+      controller.checkIfNeedToUpdateList(loadMore: false);
     });
   }
 
-  void openSearch(BuildContext context) async {
+  Future<void> openSearch(BuildContext context) async {
     final search = await showDialog(
       context: context,
       builder: (_) => SearchDialog(
@@ -59,13 +59,13 @@ class _HomePageState extends ModularState<HomePage, HomeController>
       appBar: AppBar(
         title: Observer(builder: (_) {
           if (controller.search.isEmpty) {
-            return Text(headerBegin);
+            return const Text(headerBegin);
           }
 
           return GestureDetector(
             onTap: () => openSearch(context),
             child: LayoutBuilder(builder: (_, constraints) {
-              return Container(
+              return SizedBox(
                 width: constraints.biggest.width,
                 child: Text(controller.search),
               );
@@ -77,12 +77,12 @@ class _HomePageState extends ModularState<HomePage, HomeController>
             builder: (_) {
               if (controller.search.isEmpty) {
                 return IconButton(
-                  icon: Icon(Icons.search),
+                  icon: const Icon(Icons.search),
                   onPressed: () => openSearch(context),
                 );
               }
               return IconButton(
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 onPressed: () => controller.setSeach(''),
               );
             },
@@ -94,8 +94,9 @@ class _HomePageState extends ModularState<HomePage, HomeController>
                 Modular.to.pushNamed(
                   '$baseRouter$saveAdRouter'.replaceAll('//', '/'),
                 );
-              } else
+              } else {
                 Modular.to.pushNamed(signInRouter);
+              }
             },
           ),
         ],
@@ -109,15 +110,18 @@ class _HomePageState extends ModularState<HomePage, HomeController>
                 Observer(builder: (_) {
                   final filteredAds = controller.filteredAds;
 
-                  if (controller.loading)
-                    return Center(child: CircularProgressIndDefault());
+                  if (controller.loading) {
+                    return const Center(child: CircularProgressIndDefault());
+                  }
 
-                  if (saveAdController.isUpdateAd)
+                  if (saveAdController.isUpdateAd) {
                     updateItemFromList(
                         controller.ads, saveAdController.adModel);
+                  }
 
-                  if (!controller.loading && filteredAds.isEmpty)
+                  if (!controller.loading && filteredAds.isEmpty) {
                     return EmptyCard('Humm... Nenhum anúncio encontrado!');
+                  }
 
                   return RefreshIndicator(
                     color: Theme.of(context).primaryColor,
@@ -128,12 +132,12 @@ class _HomePageState extends ModularState<HomePage, HomeController>
                       itemBuilder: (_, index) {
                         if (index == controller.ads.length &&
                             !controller.lastPage) {
-                          controller.checkIfNeedToUpdateList(true);
+                          controller.checkIfNeedToUpdateList(loadMore: true);
 
                           return Center(
                             child: Container(
                               margin: const EdgeInsets.all(10),
-                              child: CircularProgressIndDefault(),
+                              child: const CircularProgressIndDefault(),
                             ),
                           );
                         }
@@ -142,7 +146,7 @@ class _HomePageState extends ModularState<HomePage, HomeController>
 
                         return AnimatedCard(
                           direction: AnimatedCardDirection.left,
-                          initDelay: Duration(milliseconds: 600),
+                          initDelay: const Duration(milliseconds: 600),
                           child: AdTile(ad),
                         );
                       },
@@ -165,7 +169,7 @@ class _HomePageState extends ModularState<HomePage, HomeController>
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              Color(0x00000000),
+                              const Color(0x00000000),
                               Theme.of(context).primaryColor
                             ]),
                       ),
@@ -183,10 +187,11 @@ class _HomePageState extends ModularState<HomePage, HomeController>
   void updateItemFromList(List<AdModel> ads, AdModel adModel) {
     final index = ads.indexWhere((item) => item.id == adModel.id);
 
-    if (index > 0)
+    if (index > 0) {
       ads[index] = adModel;
-    else
+    } else {
       ads.insert(0, adModel);
+    }
   }
 
   @override

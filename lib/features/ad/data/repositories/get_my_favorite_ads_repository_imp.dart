@@ -6,9 +6,9 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_get_my_favorite_ads.
 import 'package:xlo_flutter/features/ad/domain/repositories/get_my_favorite_ads_repository.dart';
 
 class GetMyFavoriteAdsRepositoryImp implements GetMyFavoriteAdsRepository {
-  final GetMyFavoriteAdsDatasource _datasource;
-
   GetMyFavoriteAdsRepositoryImp(this._datasource);
+
+  final GetMyFavoriteAdsDatasource _datasource;
 
   @override
   Future<Either<Failure, List<AdModel>>> getMyFavoriteAds(String userId) async {

@@ -5,9 +5,9 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_remove_favorite_ad.d
 import 'package:xlo_flutter/features/ad/domain/repositories/remove_favorite_ad_repository.dart';
 
 class RemoveFavoriteAdRepositoryImp implements RemoveFavoriteAdRepository {
-  final RemoveFavoriteAdDatasource _datasource;
-
   RemoveFavoriteAdRepositoryImp(this._datasource);
+
+  final RemoveFavoriteAdDatasource _datasource;
 
   @override
   Future<Either<Failure, Unit>> removeFavoriteAd(

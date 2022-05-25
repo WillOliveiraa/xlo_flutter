@@ -30,8 +30,8 @@ class ButtonDefault extends StatelessWidget {
               ? primaryColor!.withAlpha(150)
               : Theme.of(context).primaryColor.withAlpha(150),
         ),
-        child: child,
         onPressed: onPressed,
+        child: child,
       ),
     );
   }

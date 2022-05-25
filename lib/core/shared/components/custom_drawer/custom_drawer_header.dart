@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
-import 'package:xlo_flutter/core/shared/widgets/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/core/shared/utils/constants.dart';
+import 'package:xlo_flutter/core/shared/widgets/circular_progress_ind_default.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
   final AuthController authController = Modular.get();
@@ -34,7 +34,7 @@ class CustomDrawerHeader extends StatelessWidget {
               if (authController.loading) {
                 return Container(
                   margin: const EdgeInsets.only(left: 20, bottom: 5),
-                  child: SizedBox(
+                  child: const SizedBox(
                     width: 25,
                     height: 25,
                     child: CircularProgressIndDefault(),
@@ -93,8 +93,9 @@ class CustomDrawerHeader extends StatelessWidget {
     }
 
     return Row(
+      // ignore: prefer_const_literals_to_create_immutables
       children: [
-        Icon(Icons.person, color: Colors.white, size: 35),
+        const Icon(Icons.person, color: Colors.white, size: 35),
         const SizedBox(width: 20),
       ],
     );
