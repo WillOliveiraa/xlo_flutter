@@ -8,12 +8,13 @@ abstract class GetAllCategoriesUseCase {
 }
 
 class GetAllCategoriesUseCaseImp implements GetAllCategoriesUseCase {
-  final GetAllCategoriesRepository _repository;
-
   GetAllCategoriesUseCaseImp(this._repository);
+
+  final GetAllCategoriesRepository _repository;
 
   @override
   Future<Either<Failure, List<CategoryEntity>?>> call() async {
-    return await _repository.getAllCategories();
+    final result = await _repository.getAllCategories();
+    return result;
   }
 }

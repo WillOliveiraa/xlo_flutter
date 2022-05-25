@@ -12,12 +12,12 @@ class UpdateAdStatusDatasourceMock extends Mock
 void main() {
   final datasource = UpdateAdStatusDatasourceMock();
   final repository = UpdateAdStatusRepositoryImp(datasource);
-  final adStatus = AdStatus.SOLD;
-  final adId = 'adId';
+  const adStatus = AdStatus.sold;
+  const adId = 'adId';
 
   test('should update ad status', () async {
     when(() => datasource.updateAdStatus(adId: adId, adStatus: adStatus))
-        .thenAnswer((_) async => Right(unit));
+        .thenAnswer((_) async => const Right(unit));
 
     final result =
         await repository.updateAdStatus(adId: adId, adStatus: adStatus);

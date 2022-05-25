@@ -21,7 +21,7 @@ class UserImageField extends StatelessWidget {
 
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: 120,
           child: Observer(
             builder: (_) {
@@ -45,9 +45,8 @@ class UserImageField extends StatelessWidget {
                     backgroundColor: Colors.grey[300],
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.camera_alt,
-                            size: 40, color: Colors.white),
+                      children: const [
+                        Icon(Icons.camera_alt, size: 40, color: Colors.white),
                       ],
                     ),
                   ),

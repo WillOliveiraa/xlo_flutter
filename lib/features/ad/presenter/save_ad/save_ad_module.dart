@@ -13,9 +13,9 @@ import 'package:xlo_flutter/features/ad/external/fetch_by_cep_datasource_imp.dar
 import 'package:xlo_flutter/features/ad/external/get_all_categories_datasource_imp.dart';
 import 'package:xlo_flutter/features/ad/external/get_all_ufs_datasource_imp.dart';
 import 'package:xlo_flutter/features/ad/external/save_ad_datasource_imp.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/cep_field_controller.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_page.dart';
-import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/cep_field_controller.dart';
 
 class SaveAdModule extends Module {
   @override
@@ -45,6 +45,7 @@ class SaveAdModule extends Module {
     Bind.singleton((i) => SaveAdController(i(), i(), i(), i())),
   ];
 
+  @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute,
         child: (_, args) => SaveAdPage(ad: args.data as AdModel)),

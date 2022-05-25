@@ -8,7 +8,7 @@ import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/c
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
 
 class CepField extends StatefulWidget {
-  CepField(this.initializeCEP);
+  const CepField(this.initializeCEP);
 
   final String? initializeCEP;
 
@@ -34,24 +34,20 @@ class _CepFieldState extends ModularState<CepField, CepFieldController> {
         ),
         Observer(builder: (_) {
           return TextFormField(
-            initialValue: widget.initializeCEP != null
-                ? widget.initializeCEP
-                : controller.cep,
+            initialValue: widget.initializeCEP ?? controller.cep,
             keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
               CepInputFormatter()
             ],
             onChanged: controller.setCep,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
               isDense: true,
-              labelStyle: const TextStyle(
+              labelStyle: TextStyle(
                 fontWeight: FontWeight.w800,
                 color: Colors.grey,
-                // fontSize: 18,
               ),
-              // errorText: controller.error,
             ),
           );
         }),
@@ -73,8 +69,8 @@ class _CepFieldState extends ModularState<CepField, CepFieldController> {
               alignment: Alignment.center,
               child: Text(
                 controller.error!,
-                style:
-                    TextStyle(fontWeight: FontWeight.w600, color: Colors.red),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600, color: Colors.red),
               ),
             );
           } else {
@@ -86,9 +82,9 @@ class _CepFieldState extends ModularState<CepField, CepFieldController> {
               padding: const EdgeInsets.all(8),
               alignment: Alignment.center,
               child: Text(
-                'Localização: ${address!.district.isNotEmpty ? address.district + ' ' : ''}${address.city.name} - ${address.uf.initials}',
-                style:
-                    TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+                '''Localização: ${address!.district.isNotEmpty ? '${address.district} ' : ''}${address.city.name} - ${address.uf.initials}''',
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600, color: Colors.white),
                 textAlign: TextAlign.center,
               ),
             );

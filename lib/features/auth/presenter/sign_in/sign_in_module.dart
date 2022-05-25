@@ -19,7 +19,7 @@ class SignInModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(Modular.initialRoute, child: (_, args) => SignInPage()),
+    ChildRoute(Modular.initialRoute, child: (_, args) => const SignInPage()),
     ModuleRoute(signUpRouter, module: SignUpUserModule()),
   ];
 }

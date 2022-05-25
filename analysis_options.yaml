@@ -30,3 +30,5 @@ linter:
 
     use_setters_to_change_properties: false
 
+    depend_on_referenced_packages: false
+

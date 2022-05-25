@@ -1,14 +1,14 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
-import 'package:dartz/dartz.dart';
 import 'package:xlo_flutter/features/ad/data/datasources/get_all_cities_datasource.dart';
 import 'package:xlo_flutter/features/ad/data/models/city_model.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_get_all_cities.dart';
 
 class GetAllCitiesDatasourceImp implements GetAllCitiesDatasource {
-  final Dio _dio;
-
   GetAllCitiesDatasourceImp(this._dio);
+
+  final Dio _dio;
 
   @override
   Future<Either<Failure, List<CityModel>>> getAllCities(String ufId) async {

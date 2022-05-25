@@ -6,14 +6,13 @@ import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 
 class PendingTile extends StatelessWidget {
-  PendingTile(this.ad);
+  const PendingTile(this.ad);
 
   final AdModel ad;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedCard(
-      direction: AnimatedCardDirection.right,
       child: Card(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         elevation: 4,
@@ -23,7 +22,7 @@ class PendingTile extends StatelessWidget {
             onTap: () {
               Modular.to.pushNamed('$baseRouter$adRouter', arguments: ad);
             },
-            child: Container(
+            child: SizedBox(
               height: 80,
               child: Row(
                 children: <Widget>[
@@ -33,7 +32,7 @@ class PendingTile extends StatelessWidget {
                       tag: ad.id!,
                       child: Image.network(
                         ad.images.isEmpty
-                            ? "https://static.thenounproject.com/png/194055-200.png"
+                            ? 'https://static.thenounproject.com/png/194055-200.png'
                             : ad.images[0].toString(),
                         fit: BoxFit.cover,
                       ),
@@ -52,21 +51,21 @@ class PendingTile extends StatelessWidget {
                           Text(
                             ad.title,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                            style: const TextStyle(fontWeight: FontWeight.w600),
                           ),
                           Text(
                             ad.price.formattedMoney(),
-                            style: TextStyle(fontWeight: FontWeight.w300),
+                            style: const TextStyle(fontWeight: FontWeight.w300),
                           ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
+                            children: const <Widget>[
                               Icon(
                                 Icons.access_time,
                                 color: Colors.orange,
                                 size: 15,
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 width: 4,
                               ),
                               Text(

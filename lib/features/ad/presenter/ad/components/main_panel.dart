@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/core/shared/helpers/extensions.dart';
+import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 
 class MainPanel extends StatelessWidget {
   const MainPanel(this.ad);
@@ -26,7 +26,7 @@ class MainPanel extends StatelessWidget {
         ),
         Text(
           ad.title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             letterSpacing: 1,
             fontWeight: FontWeight.w400,

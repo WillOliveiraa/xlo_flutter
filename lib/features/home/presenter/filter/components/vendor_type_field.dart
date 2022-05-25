@@ -24,12 +24,12 @@ class VendorTypeField extends StatelessWidget {
                 onTap: () {
                   if (filter.isTypeParticular) {
                     if (filter.isTypeProfessional) {
-                      filter.resetVendorType(VENDOR_TYPE_PARTICULAR);
+                      filter.resetVendorType(vendorTypeParticular);
                     } else {
-                      filter.selectVendorType(VENDOR_TYPE_PROFESSIONAL);
+                      filter.selectVendorType(vendorTypeProfessional);
                     }
                   } else {
-                    filter.setVendorType(VENDOR_TYPE_PARTICULAR);
+                    filter.setVendorType(vendorTypeParticular);
                   }
                 },
                 child: Container(
@@ -60,12 +60,12 @@ class VendorTypeField extends StatelessWidget {
                 onTap: () {
                   if (filter.isTypeProfessional) {
                     if (filter.isTypeParticular) {
-                      filter.resetVendorType(VENDOR_TYPE_PROFESSIONAL);
+                      filter.resetVendorType(vendorTypeProfessional);
                     } else {
-                      filter.selectVendorType(VENDOR_TYPE_PARTICULAR);
+                      filter.selectVendorType(vendorTypeParticular);
                     }
                   } else {
-                    filter.setVendorType(VENDOR_TYPE_PROFESSIONAL);
+                    filter.setVendorType(vendorTypeProfessional);
                   }
                 },
                 child: Container(

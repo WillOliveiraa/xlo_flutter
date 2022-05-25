@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class FieldTitle extends StatelessWidget {
+  const FieldTitle({required this.title, required this.subtitle});
+
   final String title;
   final String subtitle;
-
-  const FieldTitle({required this.title, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class FieldTitle extends StatelessWidget {
         crossAxisAlignment: WrapCrossAlignment.end,
         children: [
           Text(
-            '$title',
+            title,
             style: TextStyle(
               color: Colors.grey[800],
               fontSize: 16,
@@ -23,8 +23,8 @@ class FieldTitle extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Text(
-            '$subtitle',
-            style: TextStyle(color: Colors.grey, fontSize: 12),
+            subtitle,
+            style: const TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ],
       ),

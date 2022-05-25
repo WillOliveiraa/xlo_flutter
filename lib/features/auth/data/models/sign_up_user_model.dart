@@ -8,7 +8,7 @@ class SignUpUserModel extends SignUpUserEntity {
     required String password,
     required String passwordConf,
     required String phone,
-    UserType type = UserType.PARTICULAR,
+    UserType type = UserType.particular,
     dynamic image,
   }) : super(
           name: name,
@@ -26,7 +26,7 @@ class SignUpUserModel extends SignUpUserEntity {
     required String password,
     required String passwordConf,
     required String phone,
-    UserType type = UserType.PARTICULAR,
+    UserType type = UserType.particular,
     dynamic image,
   }) {
     return SignUpUserModel(
@@ -42,6 +42,6 @@ class SignUpUserModel extends SignUpUserEntity {
 
   @override
   String toString() {
-    return 'SignUpUserModel(name: $name, email: $email, phone: $phone, password: $password, type: $type)';
+    return '''SignUpUserModel(name: $name, email: $email, phone: $phone, password: $password, type: $type)''';
   }
 }

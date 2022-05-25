@@ -1,15 +1,14 @@
-enum OrderBy { DATE, PRICE }
+enum OrderBy { date, price }
 
-const VENDOR_TYPE_PARTICULAR = 1 << 0; // 1 deslocado em 0
-const VENDOR_TYPE_PROFESSIONAL = 1 << 1;
+const vendorTypeParticular = 1 << 0; // 1 deslocado em 0
+const vendorTypeProfessional = 1 << 1;
 
 class AdFilterEntity {
-  AdFilterEntity({
-    this.orderBy = OrderBy.DATE,
-    this.minPrice,
-    this.maxPrice,
-    this.vendorType = VENDOR_TYPE_PARTICULAR,
-  });
+  AdFilterEntity(
+      {this.orderBy = OrderBy.date,
+      this.minPrice,
+      this.maxPrice,
+      this.vendorType = vendorTypeParticular});
 
   final OrderBy orderBy;
   final int? minPrice;

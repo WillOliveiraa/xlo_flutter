@@ -3,10 +3,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/components/image_dialog.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/components/image_source_modal.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
-
-import 'image_dialog.dart';
-import 'image_source_modal.dart';
 
 class ImagesField extends StatelessWidget {
   const ImagesField(this.adController);

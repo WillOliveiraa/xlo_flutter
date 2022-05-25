@@ -22,7 +22,7 @@ void main() {
       title: 'Novo anuncio',
       description: 'descrição do anuncio',
       price: 350.00,
-      status: AdStatus.ACTIVE,
+      status: AdStatus.active,
       images: [''],
       category: CategoryModel(description: 'new description'),
       owner: UserModel(name: '', email: ''),

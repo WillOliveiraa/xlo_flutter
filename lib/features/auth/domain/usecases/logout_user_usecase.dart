@@ -7,12 +7,13 @@ abstract class LogoutUserUseCase {
 }
 
 class LogoutUserUseCaseImp implements LogoutUserUseCase {
-  final LogoutUserRepository _repository;
-
   LogoutUserUseCaseImp(this._repository);
+
+  final LogoutUserRepository _repository;
 
   @override
   Future<Either<Failure, Unit>> call() async {
-    return await _repository.logoutUser();
+    final result = await _repository.logoutUser();
+    return result;
   }
 }

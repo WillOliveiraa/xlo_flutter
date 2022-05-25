@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/core/shared/helpers/extensions.dart';
+import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 
 class UserPanel extends StatelessWidget {
   const UserPanel(this.ad);
@@ -12,8 +12,8 @@ class UserPanel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 18, bottom: 18),
+        const Padding(
+          padding: EdgeInsets.only(top: 18, bottom: 18),
           child: Text(
             'Anunciante',
             style: TextStyle(
@@ -30,7 +30,7 @@ class UserPanel extends StatelessWidget {
             children: [
               Text(
                 ad.owner.name,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
@@ -39,7 +39,7 @@ class UserPanel extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 'Na XLO desde ${ad.owner.createdAt!.formattedDate()}',
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               )
             ],
           ),

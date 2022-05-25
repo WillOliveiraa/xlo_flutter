@@ -6,9 +6,9 @@ import 'package:xlo_flutter/features/ad/data/models/address_model.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_fetch_by_cep.dart';
 
 class FetchByCepDatasourceImp implements FetchByCepDatasource {
-  final Dio _dio;
-
   FetchByCepDatasourceImp(this._dio);
+
+  final Dio _dio;
 
   @override
   Future<Either<Failure, AddressModel>> fetchByCep(String cep) async {

@@ -6,9 +6,10 @@ import 'package:xlo_flutter/features/auth/domain/errors/error_sign_in_with_email
 import 'package:xlo_flutter/features/auth/domain/repositories/sign_in_with_email_repository.dart';
 
 class SignInWithEmailRepositoryImp implements SignInWithEmailRepository {
+  SignInWithEmailRepositoryImp(this._datasource);
+
   final SignInWithEmailDatasource _datasource;
 
-  SignInWithEmailRepositoryImp(this._datasource);
   @override
   Future<Either<Failure, UserModel>> signInWithEmail(
       {required String email, required String password}) async {

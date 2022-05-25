@@ -9,13 +9,14 @@ abstract class SignUpUserUseCase {
 }
 
 class SignUpUserUseCaseImp implements SignUpUserUseCase {
-  final SignUpUserRepository _repository;
-
   SignUpUserUseCaseImp(this._repository);
+
+  final SignUpUserRepository _repository;
 
   @override
   Future<Either<Failure, UserEntity>> call(
       SignUpUserEntity signUpUserEntity) async {
-    return await _repository.signUpUser(signUpUserEntity);
+    final result = await _repository.signUpUser(signUpUserEntity);
+    return result;
   }
 }

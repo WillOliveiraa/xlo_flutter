@@ -8,12 +8,13 @@ abstract class GetAllCitiesUseCase {
 }
 
 class GetAllCitiesUseCaseImp implements GetAllCitiesUseCase {
-  final GetAllCitiesRepository _repository;
-
   GetAllCitiesUseCaseImp(this._repository);
+
+  final GetAllCitiesRepository _repository;
 
   @override
   Future<Either<Failure, List<CityEntity>>> call(String ufId) async {
-    return await _repository.getAllCities(ufId);
+    final result = await _repository.getAllCities(ufId);
+    return result;
   }
 }

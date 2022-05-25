@@ -8,12 +8,13 @@ abstract class SaveUserUseCase {
 }
 
 class SaveUserUseCaseImp implements SaveUserUseCase {
-  final SaveUserRepository _repository;
-
   SaveUserUseCaseImp(this._repository);
+
+  final SaveUserRepository _repository;
 
   @override
   Future<Either<Failure, Unit>> call(SignUpUserEntity userEntity) async {
-    return await _repository.saveUser(userEntity);
+    final result = await _repository.saveUser(userEntity);
+    return result;
   }
 }

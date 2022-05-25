@@ -1,6 +1,6 @@
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:xlo_flutter/features/ad/data/models/address_model.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/fetch_by_cep_usecase/fetch_by_cep_usecase.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_ufs_usecase/get_all_ufs_usecase.dart';
@@ -10,16 +10,18 @@ part 'cep_field_controller.g.dart';
 class CepFieldController = _CepFieldControllerBase with _$CepFieldController;
 
 abstract class _CepFieldControllerBase with Store {
-  final FetchByCepUseCaseImp _fetchByCepUsecase;
-  final GetAllUfsUseCaseImp _getAllUfsUseCase;
-
   _CepFieldControllerBase(this._fetchByCepUsecase, this._getAllUfsUseCase) {
     autorun((_) {
-      if (clearCep.length != 8)
+      if (clearCep.length != 8) {
         _reset();
-      else if (!_isInitialize) _searchCep();
+      } else if (!_isInitialize) {
+        _searchCep();
+      }
     });
   }
+
+  final FetchByCepUseCaseImp _fetchByCepUsecase;
+  final GetAllUfsUseCaseImp _getAllUfsUseCase;
 
   @observable
   String? _cep;
@@ -32,7 +34,7 @@ abstract class _CepFieldControllerBase with Store {
   // ignore: unnecessary_getters_setters
   AddressModel? get address => _address;
 
-  setAddress(AddressModel? value) => _address = value;
+  AddressModel? setAddress(AddressModel? value) => _address = value;
 
   @observable
   String? _error;
@@ -83,7 +85,8 @@ abstract class _CepFieldControllerBase with Store {
       _address!.uf =
           ufs.firstWhere((uf) => uf.initials == _address?.uf.initials);
       _loading = false;
-      asuka.showSnackBar(SnackBar(content: Text('CEP buscado com sucesso!')));
+      asuka.showSnackBar(
+          const SnackBar(content: Text('CEP buscado com sucesso!')));
     });
   }
 

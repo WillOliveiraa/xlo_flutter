@@ -11,8 +11,8 @@ class LocationPanel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 18, bottom: 12),
+        const Padding(
+          padding: EdgeInsets.only(top: 18, bottom: 12),
           child: Text(
             'Localização',
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
@@ -38,11 +38,11 @@ class LocationPanel extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('${ad.address.cep}'),
-                    SizedBox(height: 12),
-                    Text('${ad.address.city.name}'),
-                    SizedBox(height: 12),
-                    Text('${ad.address.district}')
+                    Text(ad.address.cep),
+                    const SizedBox(height: 12),
+                    Text(ad.address.city.name),
+                    const SizedBox(height: 12),
+                    Text(ad.address.district)
                   ],
                 ),
               ),

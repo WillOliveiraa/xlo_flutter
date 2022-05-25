@@ -8,12 +8,13 @@ abstract class GetMyAdsUseCase {
 }
 
 class GetMyAdsUseCaseImp implements GetMyAdsUseCase {
-  final GetMyAdsRepository _repository;
-
   GetMyAdsUseCaseImp(this._repository);
+
+  final GetMyAdsRepository _repository;
 
   @override
   Future<Either<Failure, List<AdEntity>>> call() async {
-    return await _repository.getMyAds();
+    final result = await _repository.getMyAds();
+    return result;
   }
 }

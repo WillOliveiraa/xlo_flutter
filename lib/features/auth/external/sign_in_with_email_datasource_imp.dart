@@ -1,6 +1,6 @@
+import 'package:dartz/dartz.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
-import 'package:dartz/dartz.dart';
 import 'package:xlo_flutter/core/errors/parse_errors.dart';
 import 'package:xlo_flutter/features/auth/data/datasources/sign_in_with_email_datasource.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
@@ -14,10 +14,11 @@ class SignInWithEmailDatasourceImp implements SignInWithEmailDatasource {
 
     final response = await parseUser.login();
 
-    if (response.success)
+    if (response.success) {
       return Right(UserModel.fromParse(parseUser));
-    else
+    } else {
       return Left(ErrorSignInWithEmail(
           message: ParseErrors.getDescription(response.error!.code)));
+    }
   }
 }

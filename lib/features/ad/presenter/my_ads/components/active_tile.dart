@@ -5,8 +5,7 @@ import 'package:xlo_flutter/core/shared/helpers/extensions.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/core/shared/widgets/button_default.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
-
-import '../my_ads_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/my_ads/my_ads_controller.dart';
 
 class ActiveTile extends StatelessWidget {
   ActiveTile({required this.ad, required this.controller});
@@ -25,7 +24,6 @@ class ActiveTile extends StatelessWidget {
     final color = Theme.of(context).primaryColor;
 
     return AnimatedCard(
-      direction: AnimatedCardDirection.right,
       child: Card(
         clipBehavior: Clip.antiAlias,
         elevation: 4,
@@ -35,7 +33,7 @@ class ActiveTile extends StatelessWidget {
             onTap: () {
               Modular.to.pushNamed('$baseRouter$adRouter', arguments: ad);
             },
-            child: Container(
+            child: SizedBox(
               height: 80,
               child: Row(
                 children: [
@@ -62,11 +60,11 @@ class ActiveTile extends StatelessWidget {
                           Text(
                             ad.title,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                            style: const TextStyle(fontWeight: FontWeight.w600),
                           ),
                           Text(
                             ad.price.formattedMoney(),
-                            style: TextStyle(fontWeight: FontWeight.w300),
+                            style: const TextStyle(fontWeight: FontWeight.w300),
                           ),
                           Text(
                             '${ad.views} visitas',
@@ -152,23 +150,23 @@ class ActiveTile extends StatelessWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Vendido'),
+        title: const Text('Vendido'),
         content: Text('Confirmar a venda de ${ad.title}?'),
         actions: [
           ButtonDefault(
             onPressed: () => Navigator.pop(_),
-            child: Text('Não'),
             primaryColor: Colors.white,
             secondColor: Colors.black87,
+            child: const Text('Não'),
           ),
           ButtonDefault(
             onPressed: () {
               Navigator.pop(_);
               controller.soldAd(ad);
             },
-            child: Text('Sim'),
             secondColor: Colors.red,
             primaryColor: Colors.white,
+            child: const Text('Sim'),
           ),
         ],
       ),
@@ -179,23 +177,23 @@ class ActiveTile extends StatelessWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Excluir'),
+        title: const Text('Excluir'),
         content: Text('Confirmar a exclusão de ${ad.title}?'),
         actions: [
           ButtonDefault(
             onPressed: () => Navigator.pop(_),
-            child: Text('Não'),
             primaryColor: Colors.white,
             secondColor: Colors.black87,
+            child: const Text('Não'),
           ),
           ButtonDefault(
             onPressed: () {
               controller.deleteAd(ad);
               Navigator.pop(_);
             },
-            child: Text('Sim'),
             secondColor: Colors.red,
             primaryColor: Colors.white,
+            child: const Text('Sim'),
           ),
         ],
       ),

@@ -44,9 +44,7 @@ class UserModel extends UserEntity {
       phone: parseUser.get(keyUserPhone),
       type: UserType.values[parseUser.get(keyUserType) as int],
       createdAt: parseUser.get(keyUserCreatedAt),
-      image: parseUser.get(keyUserImage) != null
-          ? parseUser.get(keyUserImage).url
-          : null,
+      image: parseUser.get(keyUserImage) ?? parseUser.get(keyUserImage).url,
     );
   }
 
@@ -62,6 +60,6 @@ class UserModel extends UserEntity {
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, password: $password, type: $type, createdAt: $createdAt)';
+    return '''UserModel(name: $name, email: $email, phone: $phone, password: $password, type: $type, createdAt: $createdAt)''';
   }
 }

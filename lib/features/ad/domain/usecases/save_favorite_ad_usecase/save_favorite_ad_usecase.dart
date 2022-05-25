@@ -8,13 +8,14 @@ abstract class SaveFavoriteAdUseCase {
 }
 
 class SaveFavoriteAdUseCaseImp implements SaveFavoriteAdUseCase {
-  final SaveFavoriteAdRepository _repository;
-
   SaveFavoriteAdUseCaseImp(this._repository);
+
+  final SaveFavoriteAdRepository _repository;
 
   @override
   Future<Either<Failure, Unit>> call(
       {required String adId, required String userId}) async {
-    return await _repository.saveFavoriteAd(adId: adId, userId: userId);
+    final result = await _repository.saveFavoriteAd(adId: adId, userId: userId);
+    return result;
   }
 }

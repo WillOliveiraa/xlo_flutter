@@ -15,9 +15,9 @@ abstract class GetFilteredAdsUseCase {
 }
 
 class GetFilteredAdsUseCaseImp implements GetFilteredAdsUseCase {
-  final GetFilteredAdsRepository _repository;
-
   GetFilteredAdsUseCaseImp(this._repository);
+
+  final GetFilteredAdsRepository _repository;
 
   @override
   Future<Either<Failure, List<AdEntity>?>> call(
@@ -25,11 +25,12 @@ class GetFilteredAdsUseCaseImp implements GetFilteredAdsUseCase {
       String? search,
       CategoryEntity? category,
       required int page}) async {
-    return await _repository.getFilteredAds(
+    final result = await _repository.getFilteredAds(
       filter: filter,
       search: search,
       category: category,
       page: page,
     );
+    return result;
   }
 }

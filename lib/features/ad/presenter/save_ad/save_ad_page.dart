@@ -4,20 +4,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:xlo_flutter/core/shared/utils/constants.dart';
 import 'package:xlo_flutter/core/shared/widgets/button_default.dart';
 import 'package:xlo_flutter/core/shared/widgets/circular_progress_ind_default.dart';
-import 'package:xlo_flutter/core/shared/utils/constants.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/data/models/category_model.dart';
-import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/cep_field.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/components/hide_phone_field.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/components/images_field.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
 
-import 'components/cep_field/cep_field.dart';
-import 'components/hide_phone_field.dart';
-
 class SaveAdPage extends StatefulWidget {
-  SaveAdPage({this.ad});
+  const SaveAdPage({this.ad});
 
   final AdModel? ad;
 
@@ -26,8 +25,9 @@ class SaveAdPage extends StatefulWidget {
 }
 
 class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
-  var numberFormat = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
-  var alreadyUpdate = false;
+  NumberFormat numberFormat =
+      NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+  bool alreadyUpdate = false;
 
   @override
   void initState() {
@@ -93,12 +93,13 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
                 subtitle: adCategoryDesc,
               ),
               Observer(builder: (_) {
-                if (controller.loadingCategories)
-                  return Center(child: const CircularProgressIndDefault());
+                if (controller.loadingCategories) {
+                  return const Center(child: CircularProgressIndDefault());
+                }
 
                 return DropdownButton<CategoryModel>(
                   value: widget.ad != null && !alreadyUpdate
-                      ? widget.ad?.category as CategoryModel
+                      ? widget.ad!.category as CategoryModel
                       : controller.category,
                   onChanged: (value) => controller.setCategory(value),
                   items: controller.categories
@@ -144,10 +145,10 @@ class _SaveAdPageState extends ModularState<SaveAdPage, SaveAdController> {
               const SizedBox(height: 20),
               Observer(builder: (_) {
                 return ButtonDefault(
+                  onPressed: controller.saveAdPressed as Function()?,
                   child: controller.loading
                       ? const CircularProgressIndDefault(color: Colors.white)
                       : const Text(adSave, style: TextStyle(fontSize: 18.0)),
-                  onPressed: controller.saveAdPressed as Function()?,
                 );
               }),
               const SizedBox(height: 10),

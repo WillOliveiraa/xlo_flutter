@@ -8,12 +8,13 @@ abstract class FetchByCepUseCase {
 }
 
 class FetchByCepUseCaseImp implements FetchByCepUseCase {
-  final FetchByCepRepository _repository;
-
   FetchByCepUseCaseImp(this._repository);
+
+  final FetchByCepRepository _repository;
 
   @override
   Future<Either<Failure, AddressEntity>> call(String cep) async {
-    return await _repository.fetchByCep(cep);
+    final result = await _repository.fetchByCep(cep);
+    return result;
   }
 }

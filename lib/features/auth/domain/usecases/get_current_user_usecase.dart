@@ -8,12 +8,13 @@ abstract class GetCurrentUser {
 }
 
 class GetCurrentUserImp implements GetCurrentUser {
-  final GetCurrentUserRepository _repository;
-
   GetCurrentUserImp(this._repository);
+
+  final GetCurrentUserRepository _repository;
 
   @override
   Future<Either<Failure, UserEntity>> call() async {
-    return await _repository.getCurrentUser();
+    final result = await _repository.getCurrentUser();
+    return result;
   }
 }

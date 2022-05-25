@@ -8,12 +8,13 @@ abstract class SaveAdUseCase {
 }
 
 class SaveAdUseCaseImp implements SaveAdUseCase {
-  final SaveAdRepository _repository;
-
   SaveAdUseCaseImp(this._repository);
+
+  final SaveAdRepository _repository;
 
   @override
   Future<Either<Failure, Unit>> call(AdEntity adEntity) async {
-    return await _repository.saveAd(adEntity);
+    final result = await _repository.saveAd(adEntity);
+    return result;
   }
 }

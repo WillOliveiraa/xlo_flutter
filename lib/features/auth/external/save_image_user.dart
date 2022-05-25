@@ -1,7 +1,7 @@
 import 'dart:io';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:path/path.dart' as path;
 
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_flutter/core/errors/parse_errors.dart';
 
 class SaveImageUser {

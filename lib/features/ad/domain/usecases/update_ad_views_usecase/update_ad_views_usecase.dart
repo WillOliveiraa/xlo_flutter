@@ -8,13 +8,14 @@ abstract class UpdateAdViewsUseCase {
 }
 
 class UpdateAdViewsUseCaseImp implements UpdateAdViewsUseCase {
-  final UpdateAdViewsRepository _repository;
-
   UpdateAdViewsUseCaseImp(this._repository);
+
+  final UpdateAdViewsRepository _repository;
 
   @override
   Future<Either<Failure, Unit>> call(
       {required String adId, required int views}) async {
-    return await _repository.updateAdViews(adId: adId, views: views);
+    final result = await _repository.updateAdViews(adId: adId, views: views);
+    return result;
   }
 }

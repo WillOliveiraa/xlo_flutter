@@ -1,16 +1,15 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:xlo_flutter/core/shared/widgets/button_default.dart';
 import 'package:xlo_flutter/core/shared/widgets/circular_progress_ind_default.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
+import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/field_title.dart';
+import 'package:xlo_flutter/features/auth/presenter/sign_up_user/components/images_field.dart';
 import 'package:xlo_flutter/features/auth/presenter/sign_up_user/sign_up_user_controller.dart';
-
-import 'components/field_title.dart';
-import 'components/images_field.dart';
 
 class SignUpUserPage extends StatefulWidget {
   const SignUpUserPage(this.user, {Key? key}) : super(key: key);
@@ -71,7 +70,7 @@ class _SignUpUserPageState
                               builder: (_, constraints) {
                                 return ToggleSwitch(
                                   minWidth: constraints.biggest.width / 2.25,
-                                  labels: ['Particular', 'Profissional'],
+                                  labels: const ['Particular', 'Profissional'],
                                   totalSwitches: 2,
                                   cornerRadius: 20,
                                   activeBgColor: [

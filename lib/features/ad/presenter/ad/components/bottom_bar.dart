@@ -10,7 +10,7 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (ad.status == AdStatus.PENDING) return Container();
+    if (ad.status == AdStatus.pending) return Container();
 
     return Positioned(
       bottom: 0,
@@ -38,12 +38,12 @@ class BottomBar extends StatelessWidget {
                       child: Container(
                         height: 25,
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           border: Border(
                             right: BorderSide(color: Colors.black45),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Ligar',
                           style: TextStyle(
                             color: Colors.white,
@@ -60,7 +60,7 @@ class BottomBar extends StatelessWidget {
                     child: Container(
                       height: 25,
                       alignment: Alignment.center,
-                      child: Text(
+                      child: const Text(
                         'Chat',
                         style: TextStyle(
                           color: Colors.white,
@@ -88,7 +88,7 @@ class BottomBar extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               '${ad.owner.name} (anunciante)',
-              style: TextStyle(fontWeight: FontWeight.w300),
+              style: const TextStyle(fontWeight: FontWeight.w300),
             ),
           ),
         ],

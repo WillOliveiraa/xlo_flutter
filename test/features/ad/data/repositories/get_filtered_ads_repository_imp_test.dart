@@ -25,7 +25,7 @@ void main() {
       title: 'Novo anuncio',
       description: 'descrição do anuncio',
       price: 350.00,
-      status: AdStatus.ACTIVE,
+      status: AdStatus.active,
       images: [''],
       category: CategoryModel(description: 'new description'),
       owner: UserModel(name: '', email: ''),
@@ -37,10 +37,10 @@ void main() {
       ),
     ),
   ];
-  final filter = AdFilterModel(orderBy: OrderBy.DATE, vendorType: 1);
-  final search = '';
+  final filter = AdFilterModel(orderBy: OrderBy.date, vendorType: 1);
+  const search = '';
   final category = CategoryModel(description: 'description of category');
-  final page = 0;
+  const page = 0;
 
   test('should get Filtered Ads', () async {
     when(() => datasource.getFilteredAds(

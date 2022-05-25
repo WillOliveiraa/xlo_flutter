@@ -5,9 +5,9 @@ import 'package:xlo_flutter/features/auth/domain/errors/logout_save_user.dart';
 import 'package:xlo_flutter/features/auth/domain/repositories/logout_user_repository.dart';
 
 class LogoutUserRepositoryImp implements LogoutUserRepository {
-  final LogoutUserDatasource _datasource;
-
   LogoutUserRepositoryImp(this._datasource);
+
+  final LogoutUserDatasource _datasource;
 
   @override
   Future<Either<Failure, Unit>> logoutUser() async {

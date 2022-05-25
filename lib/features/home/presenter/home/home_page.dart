@@ -11,11 +11,10 @@ import 'package:xlo_flutter/core/shared/widgets/empty_card.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
 import 'package:xlo_flutter/features/home/presenter/home/components/ad_tile.dart';
-
-import 'components/create_ad_button.dart';
-import 'components/search_dialog.dart';
-import 'components/top_bar.dart';
-import 'home_controller.dart';
+import 'package:xlo_flutter/features/home/presenter/home/components/create_ad_button.dart';
+import 'package:xlo_flutter/features/home/presenter/home/components/search_dialog.dart';
+import 'package:xlo_flutter/features/home/presenter/home/components/top_bar.dart';
+import 'package:xlo_flutter/features/home/presenter/home/home_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -120,7 +119,8 @@ class _HomePageState extends ModularState<HomePage, HomeController>
                   }
 
                   if (!controller.loading && filteredAds.isEmpty) {
-                    return EmptyCard('Humm... Nenhum anúncio encontrado!');
+                    return const EmptyCard(
+                        'Humm... Nenhum anúncio encontrado!');
                   }
 
                   return RefreshIndicator(

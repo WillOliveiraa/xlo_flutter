@@ -8,13 +8,15 @@ abstract class RemoveFavoriteAdUseCase {
 }
 
 class RemoveFavoriteAdUseCaseImp implements RemoveFavoriteAdUseCase {
-  final RemoveFavoriteAdRepository _repository;
-
   RemoveFavoriteAdUseCaseImp(this._repository);
+
+  final RemoveFavoriteAdRepository _repository;
 
   @override
   Future<Either<Failure, Unit>> call(
       {required String adId, required String userId}) async {
-    return await _repository.removeFavoriteAd(adId: adId, userId: userId);
+    final result =
+        await _repository.removeFavoriteAd(adId: adId, userId: userId);
+    return result;
   }
 }

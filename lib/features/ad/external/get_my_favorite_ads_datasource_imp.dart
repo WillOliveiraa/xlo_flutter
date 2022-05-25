@@ -1,6 +1,6 @@
+import 'package:dartz/dartz.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
-import 'package:dartz/dartz.dart';
 import 'package:xlo_flutter/core/shared/utils/table_keys.dart';
 import 'package:xlo_flutter/features/ad/data/datasources/get_my_favorite_ads_datasource.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
@@ -23,9 +23,10 @@ class GetMyFavoriteAdsDatasourceImp implements GetMyFavoriteAdsDatasource {
               AdModel.fromParse(parseObj.get(keyFavoritesAd) as ParseObject))
           .toList());
     } else if (response.success && response.results == null) {
-      return Right([]);
-    } else
+      return const Right([]);
+    } else {
       return Left(ErrorGetMyAds(
           message: 'Ocorreu um erro ao tentar obter os meus anúncios'));
+    }
   }
 }

@@ -7,9 +7,9 @@ import 'package:xlo_flutter/features/auth/domain/errors/error_sign_up_user.dart'
 import 'package:xlo_flutter/features/auth/domain/repositories/sign_up_user_repository.dart';
 
 class SignUpUserRepositoryImp implements SignUpUserRepository {
-  final SignUpUserDatasource _datasource;
-
   SignUpUserRepositoryImp(this._datasource);
+
+  final SignUpUserDatasource _datasource;
 
   @override
   Future<Either<Failure, UserModel>> signUpUser(

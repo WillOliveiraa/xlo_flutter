@@ -1,7 +1,7 @@
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mobx/mobx.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/features/auth/data/models/sign_up_user_model.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
@@ -15,11 +15,11 @@ class SignUpUserController = _SignUpUserControllerBase
     with _$SignUpUserController;
 
 abstract class _SignUpUserControllerBase with Store {
+  _SignUpUserControllerBase(this._signUpUserUseCase, this._saveUserUseCase);
+
   final SignUpUserUseCaseImp _signUpUserUseCase;
   final SaveUserUseCaseImp _saveUserUseCase;
   final authController = Modular.get<AuthController>();
-
-  _SignUpUserControllerBase(this._signUpUserUseCase, this._saveUserUseCase);
 
   @observable
   UserType? _userType;
@@ -61,7 +61,7 @@ abstract class _SignUpUserControllerBase with Store {
   dynamic get image => _image;
 
   @action
-  setImage(dynamic value) => _image = value;
+  dynamic setImage(dynamic value) => _image = value;
 
   @computed
   SignUpUserModel get userModel => SignUpUserModel.signUpUser(
@@ -70,7 +70,7 @@ abstract class _SignUpUserControllerBase with Store {
         password: _password ?? '',
         passwordConf: _passwordConf ?? '',
         phone: _phone ?? '',
-        type: _userType ?? UserType.PARTICULAR,
+        type: _userType ?? UserType.particular,
         image: image,
       );
 
@@ -143,12 +143,13 @@ abstract class _SignUpUserControllerBase with Store {
 
   @computed
   bool get isValid {
-    if (_password != null && _password!.isNotEmpty || _userId == null)
+    if (_password != null && _password!.isNotEmpty || _userId == null) {
       return userModel.isValidName &&
           userModel.isValidEmail &&
           userModel.isValidPhone &&
           userModel.isValidPassword &&
           userModel.isValidPasswordsAreTheSame;
+    }
 
     return userModel.isValidName &&
         userModel.isValidEmail &&
@@ -169,8 +170,8 @@ abstract class _SignUpUserControllerBase with Store {
       asuka.showSnackBar(SnackBar(content: Text(failure.message!)));
       loading = false;
     }, (user) {
-      asuka
-          .showSnackBar(SnackBar(content: Text('Usuário criado com sucesso!')));
+      asuka.showSnackBar(
+          const SnackBar(content: Text('Usuário criado com sucesso!')));
       loading = false;
     });
   }
@@ -184,7 +185,7 @@ abstract class _SignUpUserControllerBase with Store {
       loading = false;
     }, (_) {
       asuka.showSnackBar(
-          SnackBar(content: Text('Usuário alterado com sucesso!')));
+          const SnackBar(content: Text('Usuário alterado com sucesso!')));
       loading = false;
       Modular.to.pop();
       authController.setUser(UserModel(
@@ -202,7 +203,7 @@ abstract class _SignUpUserControllerBase with Store {
   @action
   void initializeFields(UserModel user) {
     _userId = user.id;
-    _createAt = user.createdAt!;
+    _createAt = user.createdAt;
     setUserType(user.type.index);
     setName(user.name);
     setEmail(user.email);

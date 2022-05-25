@@ -10,7 +10,7 @@ class FilterController = _FilterControllerBase with _$FilterController;
 
 abstract class _FilterControllerBase with Store {
   @observable
-  OrderBy _orderBy = OrderBy.DATE;
+  OrderBy _orderBy = OrderBy.date;
 
   OrderBy get orderBy => _orderBy;
 
@@ -42,7 +42,7 @@ abstract class _FilterControllerBase with Store {
           : null;
 
   @observable
-  int _vendorType = VENDOR_TYPE_PARTICULAR;
+  int _vendorType = vendorTypeParticular;
 
   int get vendorType => _vendorType;
 
@@ -56,10 +56,10 @@ abstract class _FilterControllerBase with Store {
   void resetVendorType(int type) => _vendorType = _vendorType & ~type;
 
   @computed
-  bool get isTypeParticular => (_vendorType & VENDOR_TYPE_PARTICULAR) != 0;
+  bool get isTypeParticular => (_vendorType & vendorTypeParticular) != 0;
 
   @computed
-  bool get isTypeProfessional => (_vendorType & VENDOR_TYPE_PROFESSIONAL) != 0;
+  bool get isTypeProfessional => (_vendorType & vendorTypeProfessional) != 0;
 
   @computed
   bool get isFormValid => priceError == null;

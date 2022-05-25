@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
-import '../save_ad_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/save_ad/save_ad_controller.dart';
 
 class HidePhoneField extends StatelessWidget {
-  HidePhoneField(this.adController);
+  const HidePhoneField(this.adController);
 
   final SaveAdController adController;
 

@@ -1,11 +1,25 @@
+import 'package:xlo_flutter/features/ad/domain/entities/address_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/category_entity.dart';
 import 'package:xlo_flutter/features/auth/domain/entities/user_entity.dart';
 
-import 'address_entity.dart';
-
-enum AdStatus { PENDING, ACTIVE, SOLD, DELETED }
+enum AdStatus { pending, active, sold, deleted }
 
 class AdEntity {
+  AdEntity({
+    this.id,
+    required this.title,
+    required this.description,
+    required this.price,
+    this.views = 0,
+    required this.images,
+    this.status = AdStatus.pending,
+    required this.category,
+    required this.owner,
+    required this.address,
+    this.hidePhone = false,
+    this.createdAt,
+  });
+
   final String? id;
   final String title;
   final String description;
@@ -18,21 +32,6 @@ class AdEntity {
   final AddressEntity address;
   final bool? hidePhone;
   final DateTime? createdAt;
-
-  AdEntity({
-    this.id,
-    required this.title,
-    required this.description,
-    required this.price,
-    this.views = 0,
-    required this.images,
-    this.status = AdStatus.PENDING,
-    required this.category,
-    required this.owner,
-    required this.address,
-    this.hidePhone = false,
-    this.createdAt,
-  });
 
   bool get isValidTitle => title.isNotEmpty && title.length > 6;
 

@@ -8,12 +8,13 @@ abstract class GetAllUfsUseCase {
 }
 
 class GetAllUfsUseCaseImp implements GetAllUfsUseCase {
-  final GetAllUfsRepository _repository;
-
   GetAllUfsUseCaseImp(this._repository);
+
+  final GetAllUfsRepository _repository;
 
   @override
   Future<Either<Failure, List<UfEntity>>> call() async {
-    return await _repository.getAllUfs();
+    final result = await _repository.getAllUfs();
+    return result;
   }
 }

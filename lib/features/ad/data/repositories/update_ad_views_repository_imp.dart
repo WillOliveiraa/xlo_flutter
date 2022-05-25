@@ -5,9 +5,9 @@ import 'package:xlo_flutter/features/ad/domain/errors/error_update_ad_views.dart
 import 'package:xlo_flutter/features/ad/domain/repositories/update_ad_views_repository.dart';
 
 class UpdateAdViewsRepositoryImp implements UpdateAdViewsRepository {
-  final UpdateAdViewsDatasource _datasource;
-
   UpdateAdViewsRepositoryImp(this._datasource);
+
+  final UpdateAdViewsDatasource _datasource;
 
   @override
   Future<Either<Failure, Unit>> updateAdViews(

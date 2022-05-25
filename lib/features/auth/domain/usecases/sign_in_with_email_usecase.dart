@@ -8,13 +8,15 @@ abstract class SignInWithEmailUseCase {
 }
 
 class SignInWithEmailUseCaseImp implements SignInWithEmailUseCase {
-  final SignInWithEmailRepository _repository;
-
   SignInWithEmailUseCaseImp(this._repository);
+
+  final SignInWithEmailRepository _repository;
 
   @override
   Future<Either<Failure, UserEntity>> call(
       String email, String password) async {
-    return await _repository.signInWithEmail(email: email, password: password);
+    final result =
+        await _repository.signInWithEmail(email: email, password: password);
+    return result;
   }
 }

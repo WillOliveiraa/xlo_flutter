@@ -5,9 +5,8 @@ import 'package:xlo_flutter/features/ad/domain/usecases/get_my_ads_usecase/get_m
 import 'package:xlo_flutter/features/ad/domain/usecases/update_ad_status_usecase/update_ad_status_usecase.dart';
 import 'package:xlo_flutter/features/ad/external/get_my_ads_datasource_imp.dart';
 import 'package:xlo_flutter/features/ad/external/update_ad_status_datasource_imp.dart';
-
-import 'my_ads_controller.dart';
-import 'my_ads_page.dart';
+import 'package:xlo_flutter/features/ad/presenter/my_ads/my_ads_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/my_ads/my_ads_page.dart';
 
 class MyAdsModule extends Module {
   @override
@@ -27,6 +26,6 @@ class MyAdsModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(Modular.initialRoute, child: (_, args) => MyAdsPage()),
+    ChildRoute(Modular.initialRoute, child: (_, args) => const MyAdsPage()),
   ];
 }

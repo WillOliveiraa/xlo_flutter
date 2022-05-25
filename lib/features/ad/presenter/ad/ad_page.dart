@@ -56,7 +56,7 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                 );
               },
             ),
-          if (widget.ad.status == AdStatus.ACTIVE && authController.isLoggedIn)
+          if (widget.ad.status == AdStatus.active && authController.isLoggedIn)
             Observer(builder: (_) {
               return IconButton(
                 icon: Icon(favoriteController.checkIsFavorite(widget.ad.id!)
@@ -116,7 +116,7 @@ class _AdPageState extends ModularState<AdPage, AdController> {
                         Divider(color: Colors.grey[300]),
                         UserPanel(widget.ad),
                         SizedBox(
-                            height: widget.ad.status == AdStatus.PENDING
+                            height: widget.ad.status == AdStatus.pending
                                 ? 16
                                 : 120),
                       ],

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_filter_entity.dart';
+import 'package:xlo_flutter/features/home/presenter/filter/components/section_title.dart';
 import 'package:xlo_flutter/features/home/presenter/filter/filter_controller.dart';
-
-import 'section_title.dart';
 
 class OrderByFilter extends StatelessWidget {
   const OrderByFilter(this.filter);
@@ -42,13 +41,13 @@ class OrderByFilter extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionTitle('Ordenar por'),
+        const SectionTitle('Ordenar por'),
         Observer(builder: (_) {
           return Row(
             children: [
-              buildOption('Data', OrderBy.DATE),
+              buildOption('Data', OrderBy.date),
               const SizedBox(width: 12),
-              buildOption('Preço', OrderBy.PRICE),
+              buildOption('Preço', OrderBy.price),
             ],
           );
         })

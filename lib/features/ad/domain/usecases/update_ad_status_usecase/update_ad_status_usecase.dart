@@ -9,13 +9,15 @@ abstract class UpdateAdStatusUseCase {
 }
 
 class UpdateAdStatusUseCaseImp implements UpdateAdStatusUseCase {
-  final UpdateAdStatusRepository _repository;
-
   UpdateAdStatusUseCaseImp(this._repository);
+
+  final UpdateAdStatusRepository _repository;
 
   @override
   Future<Either<Failure, Unit>> call(
       {required String adId, required AdStatus adStatus}) async {
-    return await _repository.updateAdStatus(adId: adId, adStatus: adStatus);
+    final result =
+        await _repository.updateAdStatus(adId: adId, adStatus: adStatus);
+    return result;
   }
 }

@@ -6,9 +6,9 @@ import 'package:xlo_flutter/features/auth/domain/errors/error_save_user.dart';
 import 'package:xlo_flutter/features/auth/domain/repositories/save_user_repository.dart';
 
 class SaveUserRepositoryImp implements SaveUserRepository {
-  final SaveUserDatasource _datasource;
-
   SaveUserRepositoryImp(this._datasource);
+
+  final SaveUserDatasource _datasource;
 
   @override
   Future<Either<Failure, Unit>> saveUser(SignUpUserEntity userEntity) async {

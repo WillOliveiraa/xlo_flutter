@@ -1,7 +1,8 @@
+import 'package:asuka/asuka.dart' as asuka;
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:flutter/material.dart';
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
@@ -12,7 +13,6 @@ import 'package:xlo_flutter/features/ad/data/models/uf_model.dart';
 import 'package:xlo_flutter/features/ad/domain/entities/ad_entity.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_all_categories_usecase/get_all_categories_usecase.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/save_ad_usecase/save_ad_usecase.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:xlo_flutter/features/ad/presenter/save_ad/components/cep_field/cep_field_controller.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
 import 'package:xlo_flutter/features/home/presenter/home/home_controller.dart';
@@ -24,13 +24,13 @@ enum OperationAd { none, create, update }
 class SaveAdController = _SaveAdControllerBase with _$SaveAdController;
 
 abstract class _SaveAdControllerBase with Store {
+  _SaveAdControllerBase(this._saveAdUseCase, this._getAllCategoriesUseCase,
+      this._authController, this._cepFieldController);
+
   final SaveAdUseCaseImp _saveAdUseCase;
   final GetAllCategoriesUseCaseImp _getAllCategoriesUseCase;
   final AuthController _authController;
   final CepFieldController _cepFieldController;
-
-  _SaveAdControllerBase(this._saveAdUseCase, this._getAllCategoriesUseCase,
-      this._authController, this._cepFieldController);
 
   @observable
   String? _title;
@@ -87,7 +87,8 @@ abstract class _SaveAdControllerBase with Store {
   @action
   void setHidePhone(bool? value) => _hidePhone = value;
 
-  var numberFormat = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+  NumberFormat numberFormat =
+      NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
 
   @observable
   bool isUpdateAd = false;
@@ -100,7 +101,7 @@ abstract class _SaveAdControllerBase with Store {
         title: _title ?? '',
         description: _description ?? '',
         price: _price ?? 0,
-        status: AdStatus.ACTIVE,
+        status: AdStatus.active,
         hidePhone: _hidePhone,
         images: _images,
         createdAt: createdAt,
@@ -151,24 +152,27 @@ abstract class _SaveAdControllerBase with Store {
   String? get priceError {
     if (_price == null || adModel.isValidPrice) {
       return null;
-    } else
+    } else {
       return 'Campo obrigatório';
+    }
   }
 
   @computed
   String? get categoryError {
-    if (_category == null || adModel.isValidCategory)
+    if (_category == null || adModel.isValidCategory) {
       return null;
-    else
+    } else {
       return 'Campo obrigatório';
+    }
   }
 
   @computed
   String? get imagesError {
-    if (_images.length == 0 || adModel.isValidImages)
+    if (_images.isEmpty || adModel.isValidImages) {
       return null;
-    else
+    } else {
       return 'Insira images';
+    }
   }
 
   @computed
@@ -201,10 +205,11 @@ abstract class _SaveAdControllerBase with Store {
       // await Future.delayed(Duration(seconds: 2));
       // loading = false;
       isUpdateAd = true;
-      if (idAd != null)
+      if (idAd != null) {
         Modular.to.pop(true);
-      else
+      } else {
         Modular.to.popUntil(ModalRoute.withName(baseRouter));
+      }
     });
   }
 
@@ -219,14 +224,12 @@ abstract class _SaveAdControllerBase with Store {
     loadingCategories = true;
     final response = await _getAllCategoriesUseCase();
 
-    var result = response.fold((l) => l, (r) => r);
+    final result = response.fold((l) => l, (r) => r);
 
     if (result is List<CategoryModel>) {
       _categories = result;
       _categories.insert(0, CategoryModel(description: ''));
-      // category = categories.first;
-    } else
-      print(result);
+    }
 
     loadingCategories = false;
   }
@@ -248,7 +251,7 @@ abstract class _SaveAdControllerBase with Store {
 
     if (ad.isValidAddress) {
       _cepFieldController.setInitializeField(true);
-      await Future.delayed(Duration(milliseconds: 600));
+      await Future.delayed(const Duration(milliseconds: 600));
       _cepFieldController.setAddress(ad.address as AddressModel);
       _cepFieldController.setCep(ad.address.cep);
     }

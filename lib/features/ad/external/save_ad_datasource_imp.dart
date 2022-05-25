@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:dartz/dartz.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:path/path.dart' as path;
 import 'package:xlo_flutter/core/errors/failure.dart';
-import 'package:dartz/dartz.dart';
 import 'package:xlo_flutter/core/errors/parse_errors.dart';
 import 'package:xlo_flutter/core/shared/utils/table_keys.dart';
 import 'package:xlo_flutter/features/ad/data/datasources/save_ad_datasource.dart';
@@ -46,10 +46,11 @@ class SaveAdDatasourceImp implements SaveAdDatasource {
 
     final result = await ad.save();
 
-    if (result.success)
-      return Right(unit);
-    else
+    if (result.success) {
+      return const Right(unit);
+    } else {
       return Left(ErrorSaveAd(message: 'Erro ao tentar salvar o anúncio'));
+    }
   }
 
   Future<List<ParseFile>> _saveImages(List images) async {

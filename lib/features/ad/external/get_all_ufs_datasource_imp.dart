@@ -1,24 +1,24 @@
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xlo_flutter/core/errors/failure.dart';
-import 'package:dartz/dartz.dart';
 import 'package:xlo_flutter/features/ad/data/datasources/get_all_ufs_datasource.dart';
 import 'package:xlo_flutter/features/ad/data/models/uf_model.dart';
 import 'package:xlo_flutter/features/ad/domain/errors/error_get_all_ufs.dart';
 
 class GetAllUfsDatasourceImp implements GetAllUfsDatasource {
-  final Dio _dio;
-
   GetAllUfsDatasourceImp(this._dio);
+
+  final Dio _dio;
 
   @override
   Future<Either<Failure, List<UfModel>>> getAllUfs() async {
     final preferences = await SharedPreferences.getInstance();
 
     if (preferences.containsKey('UF_LIST')) {
-      final jsonJ = json.decode(preferences.get('UF_LIST') as String);
+      final jsonJ = json.decode(preferences.get('UF_LIST')! as String);
 
       return Right(jsonJ
           .map<UfModel>((j) => UfModel.fromJson(j as Map<String, dynamic>))

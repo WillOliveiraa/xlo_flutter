@@ -2,11 +2,10 @@ import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:xlo_flutter/core/shared/helpers/extensions.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
-
-import '../my_ads_controller.dart';
+import 'package:xlo_flutter/features/ad/presenter/my_ads/my_ads_controller.dart';
 
 class SoldTile extends StatelessWidget {
-  SoldTile({required this.ad, required this.controller});
+  const SoldTile({required this.ad, required this.controller});
 
   final AdModel ad;
   final MyAdsController controller;
@@ -14,11 +13,10 @@ class SoldTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedCard(
-      direction: AnimatedCardDirection.right,
       child: Card(
         clipBehavior: Clip.antiAlias,
         elevation: 4,
-        child: Container(
+        child: SizedBox(
           height: 80,
           child: Row(
             children: [
@@ -42,11 +40,11 @@ class SoldTile extends StatelessWidget {
                       Text(
                         ad.title,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
                       Text(
                         ad.price.formattedMoney(),
-                        style: TextStyle(fontWeight: FontWeight.w300),
+                        style: const TextStyle(fontWeight: FontWeight.w300),
                       ),
                     ],
                   ),
@@ -56,7 +54,7 @@ class SoldTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     iconSize: 20,
                     color: Theme.of(context).primaryColor,
                     onPressed: () {

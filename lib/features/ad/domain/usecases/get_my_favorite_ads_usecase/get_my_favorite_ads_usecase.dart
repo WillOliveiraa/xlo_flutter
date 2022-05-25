@@ -8,12 +8,13 @@ abstract class GetMyFavoriteAds {
 }
 
 class GetMyFavoriteAdsUseCaseImp implements GetMyFavoriteAds {
-  final GetMyFavoriteAdsRepository _repository;
-
   GetMyFavoriteAdsUseCaseImp(this._repository);
+
+  final GetMyFavoriteAdsRepository _repository;
 
   @override
   Future<Either<Failure, List<AdEntity>>> call(String userId) async {
-    return await _repository.getMyFavoriteAds(userId);
+    final result = await _repository.getMyFavoriteAds(userId);
+    return result;
   }
 }

@@ -1,7 +1,7 @@
+import 'package:asuka/asuka.dart' as asuka;
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:flutter/material.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/core/shared/router/routers.dart';
 import 'package:xlo_flutter/features/auth/data/models/user_model.dart';
@@ -12,10 +12,10 @@ part 'sign_in_controller.g.dart';
 class SignInController = _SignInControllerBase with _$SignInController;
 
 abstract class _SignInControllerBase with Store {
+  _SignInControllerBase(this._signInWithEmailUseCase, this._authController);
+
   final SignInWithEmailUseCaseImp _signInWithEmailUseCase;
   final AuthController _authController;
-
-  _SignInControllerBase(this._signInWithEmailUseCase, this._authController);
 
   @observable
   String? _email;

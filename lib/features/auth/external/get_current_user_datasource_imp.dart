@@ -11,8 +11,8 @@ class GetCurrentUserDatasourceImp implements GetCurrentUserDatasource {
   Future<Either<Failure, UserModel>> getCurrentUser() async {
     final ParseUser parseUser = await ParseUser.currentUser() as ParseUser;
 
-    final ParseResponse? response = await ParseUser.getCurrentUserFromServer(
-        parseUser.sessionToken as String);
+    final ParseResponse? response =
+        await ParseUser.getCurrentUserFromServer(parseUser.sessionToken!);
 
     if (response!.success) {
       return Right(UserModel.fromParse(parseUser));
@@ -21,6 +21,5 @@ class GetCurrentUserDatasourceImp implements GetCurrentUserDatasource {
       return Left(ErrorGetCurrentUser(
           message: ParseErrors.getDescription(response.error!.code)));
     }
-    return Left(ErrorGetCurrentUser(message: ParseErrors.getDescription(209)));
   }
 }

@@ -6,9 +6,9 @@ import 'package:xlo_flutter/features/auth/domain/errors/error_get_current_user.d
 import 'package:xlo_flutter/features/auth/domain/repositories/get_current_user_repository.dart';
 
 class GetCurrentUserRepositoryImp implements GetCurrentUserRepository {
-  final GetCurrentUserDatasource _datasource;
-
   GetCurrentUserRepositoryImp(this._datasource);
+
+  final GetCurrentUserDatasource _datasource;
 
   @override
   Future<Either<Failure, UserEntity>> getCurrentUser() async {

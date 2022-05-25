@@ -12,8 +12,8 @@ class DescriptionPanel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 18),
+        const Padding(
+          padding: EdgeInsets.only(top: 18),
           child: Text(
             'Descrição',
             style: TextStyle(
@@ -32,7 +32,7 @@ class DescriptionPanel extends StatelessWidget {
             trimExpandedText: '...menos',
             colorClickableText: Colors.purple,
             textAlign: TextAlign.justify,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w400,
             ),

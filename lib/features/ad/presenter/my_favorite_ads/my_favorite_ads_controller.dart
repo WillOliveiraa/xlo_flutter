@@ -1,6 +1,6 @@
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:xlo_flutter/core/pages/auth/auth_controller.dart';
 import 'package:xlo_flutter/features/ad/data/models/ad_model.dart';
 import 'package:xlo_flutter/features/ad/domain/usecases/get_my_favorite_ads_usecase/get_my_favorite_ads_usecase.dart';
@@ -13,17 +13,17 @@ class MyFavoriteAdsController = _MyFavoriteAdsControllerBase
     with _$MyFavoriteAdsController;
 
 abstract class _MyFavoriteAdsControllerBase with Store {
-  final GetMyFavoriteAdsUseCaseImp _getMyFavoriteAdsUseCase;
-  final AuthController _authController;
-  final SaveFavoriteAdUseCase _saveFavoriteAdUseCase;
-  final RemoveFavoriteAdUseCase _removeFavoriteAdUseCase;
-
   _MyFavoriteAdsControllerBase(
     this._getMyFavoriteAdsUseCase,
     this._authController,
     this._saveFavoriteAdUseCase,
     this._removeFavoriteAdUseCase,
   );
+
+  final GetMyFavoriteAdsUseCaseImp _getMyFavoriteAdsUseCase;
+  final AuthController _authController;
+  final SaveFavoriteAdUseCase _saveFavoriteAdUseCase;
+  final RemoveFavoriteAdUseCase _removeFavoriteAdUseCase;
 
   ObservableList<AdModel> myFavoriteAds = ObservableList<AdModel>();
 
@@ -63,7 +63,7 @@ abstract class _MyFavoriteAdsControllerBase with Store {
         myFavoriteAds.removeWhere((el) => el.id == ad.id);
 
         asuka.showSnackBar(
-            SnackBar(content: Text('Favorito removido com sucesso!')));
+            const SnackBar(content: Text('Favorito removido com sucesso!')));
       });
     } else {
       final response = await _saveFavoriteAdUseCase(
@@ -74,7 +74,7 @@ abstract class _MyFavoriteAdsControllerBase with Store {
       }, (_) {
         myFavoriteAds.add(ad);
 
-        asuka.showSnackBar(SnackBar(
+        asuka.showSnackBar(const SnackBar(
           content: Text('Favorito adicionado com sucesso!'),
           backgroundColor: Colors.green,
         ));

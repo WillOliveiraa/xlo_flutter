@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:xlo_flutter/core/shared/widgets/button_default.dart';
 
 class ImageDialog extends StatelessWidget {
+  const ImageDialog({required this.image, required this.onDelete});
+
   final dynamic image;
   final VoidCallback onDelete;
-
-  const ImageDialog({required this.image, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {

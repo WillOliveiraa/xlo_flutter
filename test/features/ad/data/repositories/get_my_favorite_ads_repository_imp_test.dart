@@ -18,13 +18,13 @@ class GetMyFavoriteAdsDatasourceMock extends Mock
 void main() {
   final datasource = GetMyFavoriteAdsDatasourceMock();
   final respository = GetMyFavoriteAdsRepositoryImp(datasource);
-  final userId = 'userID';
+  const userId = 'userID';
   final adList = [
     AdModel(
       title: 'Novo anuncio',
       description: 'descrição do anuncio',
       price: 350.00,
-      status: AdStatus.ACTIVE,
+      status: AdStatus.active,
       images: [''],
       category: CategoryModel(description: 'new description'),
       owner: UserModel(name: '', email: ''),

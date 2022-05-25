@@ -13,13 +13,13 @@ class ImageSourceModal extends StatelessWidget {
 
   final ImagePicker picker = ImagePicker();
 
-  Future<void> imageSelected(String path, BuildContext context) async {
+  Future<void> imageSelected(String path, Color color) async {
     final croppedFile = await ImageCropper().cropImage(
       sourcePath: path,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       androidUiSettings: AndroidUiSettings(
         toolbarTitle: 'Editar Imagem',
-        toolbarColor: Theme.of(context).primaryColor,
+        toolbarColor: color,
         toolbarWidgetColor: Colors.white,
       ),
       iosUiSettings: const IOSUiSettings(
@@ -33,7 +33,8 @@ class ImageSourceModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isAndroid)
+    final color = Theme.of(context).primaryColor;
+    if (Platform.isAndroid) {
       return BottomSheet(
         onClosing: () {},
         builder: (_) => Column(
@@ -48,7 +49,7 @@ class ImageSourceModal extends StatelessWidget {
                 final PickedFile file =
                     // ignore: deprecated_member_use
                     (await picker.getImage(source: ImageSource.camera))!;
-                imageSelected(file.path, context);
+                imageSelected(file.path, color);
               },
             ),
             ButtonDefault(
@@ -59,19 +60,19 @@ class ImageSourceModal extends StatelessWidget {
                 final PickedFile file =
                     // ignore: deprecated_member_use
                     (await picker.getImage(source: ImageSource.gallery))!;
-                imageSelected(file.path, context);
+                imageSelected(file.path, color);
               },
             ),
           ],
         ),
       );
-    else
+    } else {
       return CupertinoActionSheet(
         title: const Text('Selecionar foto para o anúncio'),
         message: const Text('Escolha a origem da foto'),
         cancelButton: CupertinoActionSheetAction(
-          child: const Text('Cancelar', style: TextStyle(color: Colors.red)),
           onPressed: Navigator.of(context).pop,
+          child: const Text('Cancelar', style: TextStyle(color: Colors.red)),
         ),
         actions: [
           CupertinoActionSheetAction(
@@ -81,7 +82,7 @@ class ImageSourceModal extends StatelessWidget {
               final PickedFile file =
                   // ignore: deprecated_member_use
                   (await picker.getImage(source: ImageSource.camera))!;
-              imageSelected(file.path, context);
+              imageSelected(file.path, color);
             },
           ),
           CupertinoActionSheetAction(
@@ -90,10 +91,11 @@ class ImageSourceModal extends StatelessWidget {
               final PickedFile file =
                   // ignore: deprecated_member_use
                   (await picker.getImage(source: ImageSource.gallery))!;
-              imageSelected(file.path, context);
+              imageSelected(file.path, color);
             },
           ),
         ],
       );
+    }
   }
 }
